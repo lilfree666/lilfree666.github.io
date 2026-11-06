@@ -122,26 +122,6 @@
         .status-released { background-color: rgba(46, 204, 113, 0.15); color: var(--status-released); border: 1px solid var(--status-released); }
         .status-deleted { background-color: rgba(231, 76, 60, 0.15); color: var(--status-deleted); border: 1px solid var(--status-deleted); }
         .status-unreleased { background-color: rgba(241, 196, 15, 0.15); color: var(--status-unreleased); border: 1px solid var(--status-unreleased); }
-
-        .play-btn {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.8rem;
-        }
-
-        .play-btn.disabled {
-            background: #222;
-            color: #555;
-            cursor: not-allowed;
-            border: 1px solid #333;
-        }
     </style>
 </head>
 <body>
@@ -157,12 +137,10 @@
         <button class="tab-btn" onclick="switchTab('features')">Участие</button>
     </div>
 
-    <!-- Раздел Альбомов -->
     <div id="albums" class="content-section active">
-        <div id="albums-list">Загрузка релизов из базы данных...</div>
+        <div id="albums-list">Загрузка релизов...</div>
     </div>
 
-    <!-- Раздел Синглов -->
     <div id="singles" class="content-section">
         <div class="album-block">
             <div class="album-header">Все официальные синглы</div>
@@ -181,7 +159,6 @@
         </div>
     </div>
 
-    <!-- Раздел Участия -->
     <div id="features" class="content-section">
         <div class="album-block">
             <div class="album-header">Гостевые участия и коллаборации</div>
@@ -200,84 +177,77 @@
         </div>
     </div>
     <script>
-        // Твой новый актуальный идентификатор Google таблицы
-        const SHEET_ID = 'e/2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
-;
+        // Твой персональный ключ публикации Google Таблицы
+        const SHEET_ID = '1sTsOAYhRZPGscsrzeo0UjdSj2200WehO3vI9g8d6CFw';
         
-               // Магия для последовательного чтения отдельных листов опубликованной таблицы в формате CSV
+        // Надежный парсер CSV строк, который не боится кавычек и запятых внутри ячеек
+        function parseCSVLine(text) {
+            let p = '', r = [];
+            let q = false;
+            for (let i = 0; i < text.length; i++) {
+                let c = text[i];
+                if (c === '"') { q = !q; }
+                else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
+                else { p += c; }
+            }
+            r.push(p.trim());
+            return r.map(v => v.replace(/^"|"$/g, '').trim());
+        }
+
         async function loadAllTabsData() {
             try {
-                // Загружаем вкладку 1 (Альбомы и EP)
+                // Подгружаем вкладку 1 (Album)
                 const albumUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Album`;
                 const albumResponse = await fetch(albumUrl);
                 const albumText = await albumResponse.text();
                 
-                // Загружаем вкладку 2 (Синглы)
+                // Подгружаем вкладку 2 (Singles)
                 const singlesUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Singles`;
                 const singlesResponse = await fetch(singlesUrl);
                 const singlesText = await singlesResponse.text();
 
-                // Загружаем вкладку 3 (Участие)
+                // Подгружаем вкладку 3 (Features)
                 const featuresUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Features`;
                 const featuresResponse = await fetch(featuresUrl);
                 const featuresText = await featuresResponse.text();
 
-                // Простой парсер CSV в массив, чтобы робот понял строки
-                const parseCSV = (text) => {
-                    const lines = text.split('\n');
-                    return lines.map(line => {
-                        // Режем строку по запятым, учитывая кавычки
-                        const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
-                        const cleanCells = matches.map(val => ({ v: val.replace(/^"|"$/g, '').trim() }));
-                        return { c: cleanCells };
-                    });
-                };
+                // Превращаем текст в чистые массивы строк
+                const processRows = (text) => text.split('\n').map(line => parseCSVLine(line)).filter(row => row.length > 1);
 
-                processAlbums(parseCSV(albumText));
-                processSingles(parseCSV(singlesText));
-                processFeatures(parseCSV(featuresText));
+                renderAlbums(processRows(albumText));
+                renderSingles(processRows(singlesText));
+                renderFeatures(processRows(featuresText));
 
             } catch (error) {
-                console.error("Ошибка загрузки данных из таблицы:", error);
-                document.getElementById('albums-list').innerText = "Не удалось подгрузить данные. Проверь настройки публикации.";
+                console.error("Критическая ошибка разбора данных:", error);
+                document.getElementById('albums-list').innerText = "Ошибка загрузки структуры. Убедись, что документ опубликован как веб-страница.";
             }
         }
 
-        // Вспомогательная функция безопасного извлечения текста из ячеек
-        function getCellVal(cells, idx) {
-            if (!cells || !cells[idx]) return '';
-            if (cells[idx].f) return cells[idx].f; // Форматированный текст
-            return cells[idx].v !== null && cells[idx].v !== undefined ? cells[idx].v : '';
-        }
-
-        // Разбор первой вкладки (Альбомы)
-        function processAlbums(rows) {
+        function renderAlbums(rows) {
             const container = document.getElementById('albums-list');
             container.innerHTML = '';
             let currentAlbum = '';
             let currentTableBody = null;
 
             rows.forEach((row, index) => {
-                if (index === 0) return; // Скипаем шапку
-                const cells = row.c;
-                if (!cells) return;
+                if (index === 0) return; // Пропуск шапки
 
-                const albumName = getCellVal(cells, 0);
-                const num = getCellVal(cells, 1);
-                const songName = getCellVal(cells, 2);
-                const artists = getCellVal(cells, 3) || 'Lil Free';
-                const producers = getCellVal(cells, 4) || 'Unknown';
-                const info = getCellVal(cells, 5);
-                const date = getCellVal(cells, 6) || 'N/A';
-                const status = (getCellVal(cells, 7) || 'Released').trim().toLowerCase();
+                const albumName = row[0];
+                const num = row[1];
+                const songName = row[2];
+                const artists = row[3] || 'Lil Free';
+                const producers = row[4] || 'Unknown';
+                const info = row[5];
+                const date = row[6] || 'N/A';
+                const status = (row[7] || 'Released').toLowerCase();
 
                 if (!songName) return;
 
                 let statusClass = 'status-released';
-                if (status === 'deleted') statusClass = 'status-deleted';
-                if (status === 'unreleased' || status === 'lost') statusClass = 'status-unreleased';
+                if (status.includes('delete')) statusClass = 'status-deleted';
+                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
 
-                // Если начался новый релиз — создаем блок
                 if (currentAlbum !== albumName && albumName) {
                     currentAlbum = albumName;
                     const block = document.createElement('div');
@@ -319,31 +289,27 @@
                     `;
                 }
             });
-            if (container.innerHTML === '') container.innerText = 'Список альбомов пуст.';
+            if (container.innerHTML === '') container.innerText = 'Список релизов пуст.';
         }
 
-        // Разбор второй вкладки (Синглы)
-        function processSingles(rows) {
+        function renderSingles(rows) {
             const container = document.getElementById('singles-rows');
             container.innerHTML = '';
 
             rows.forEach((row, index) => {
                 if (index === 0) return;
-                const cells = row.c;
-                if (!cells) return;
-
-                const num = getCellVal(cells, 1);
-                const songName = getCellVal(cells, 2);
-                const producers = getCellVal(cells, 4) || 'Unknown';
-                const info = getCellVal(cells, 5);
-                const date = getCellVal(cells, 6) || 'N/A';
-                const status = (getCellVal(cells, 7) || 'Released').trim().toLowerCase();
-
+                const songName = row[2];
                 if (!songName) return;
 
+                const num = row[1];
+                const producers = row[4] || 'Unknown';
+                const info = row[5];
+                const date = row[6] || 'N/A';
+                const status = (row[7] || 'Released').toLowerCase();
+
                 let statusClass = 'status-released';
-                if (status === 'deleted') statusClass = 'status-deleted';
-                if (status === 'unreleased' || status === 'lost') statusClass = 'status-unreleased';
+                if (status.includes('delete')) statusClass = 'status-deleted';
+                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
 
                 let nameDisplay = `<strong>${songName}</strong>`;
                 if (info && info !== '—') {
@@ -360,30 +326,25 @@
                     </tr>
                 `;
             });
-            if (container.innerHTML === '') container.innerHTML = '<tr><td colspan="5" style="text-align:center">Список синглов пуст.</td></tr>';
         }
 
-        // Разбор третьей вкладки (Участие)
-        function processFeatures(rows) {
+        function renderFeatures(rows) {
             const container = document.getElementById('features-rows');
             container.innerHTML = '';
 
             rows.forEach((row, index) => {
                 if (index === 0) return;
-                const cells = row.c;
-                if (!cells) return;
-
-                const num = getCellVal(cells, 1);
-                const songName = getCellVal(cells, 2);
-                const artists = getCellVal(cells, 3) || 'Unknown';
-                const info = getCellVal(cells, 5) || '—';
-                const status = (getCellVal(cells, 7) || 'Released').trim().toLowerCase();
-
+                const songName = row[2];
                 if (!songName) return;
 
+                const num = row[1];
+                const artists = row[3] || 'Unknown';
+                const info = row[5] || '—';
+                const status = (row[7] || 'Released').toLowerCase();
+
                 let statusClass = 'status-released';
-                if (status === 'deleted') statusClass = 'status-deleted';
-                if (status === 'unreleased' || status === 'lost') statusClass = 'status-unreleased';
+                if (status.includes('delete')) statusClass = 'status-deleted';
+                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
 
                 container.innerHTML += `
                     <tr>
@@ -395,7 +356,6 @@
                     </tr>
                 `;
             });
-            if (container.innerHTML === '') container.innerHTML = '<tr><td colspan="5" style="text-align:center">Список участий пуст.</td></tr>';
         }
 
         function switchTab(tabId) {
