@@ -176,11 +176,12 @@
             </table>
         </div>
     </div>
-    <script>
-        // Ключ публикации таблицы Lil Free
+    
+           <script>
+        // Чистый, проверенный ключ публикации твоей таблицы
         const PUB_KEY = '2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
         
-        // Исправленная функция разбора CSV с очисткой от скрытых символов \r
+        // Исправленный парсер CSV с полной очисткой от скрытого мусора \r
         function parseCSV(text) {
             let lines = text.split(/\r?\n/);
             return lines.map(line => {
@@ -192,14 +193,13 @@
                     else p += c;
                 }
                 r.push(p.trim());
-                // Добавлена очистка .replace(/\r$/) для каждого значения
                 return r.map(v => v.replace(/^"|"$/g, '').replace(/\r$/, '').trim());
             }).filter(row => row.length > 1 && row[0] !== '');
         }
 
         async function loadAllTabsData() {
             try {
-                // Запросы напрямую к листам опубликованной таблицы
+                // Восстановленные прямые адреса потоков данных
                 const albumResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Album`);
                 const albumText = await albumResponse.text();
                 
@@ -226,7 +226,7 @@
             let currentTableBody = null;
 
             rows.forEach((row, index) => {
-                if (index === 0) return; // Пропуск шапки
+                if (index === 0) return;
 
                 const albumName = row[0];
                 const num = row[1];
@@ -267,7 +267,7 @@
 
                 if (currentTableBody) {
                     let nameDisplay = `<strong>${songName}</strong>`;
-                    if (info && info !== '—') {
+                    if (info && info !== '—' && info !== '-') {
                         nameDisplay += `<br><small style="color: #c5a059aa; font-size:0.8rem">${info}</small>`;
                     }
                     if (artists !== 'Lil Free') {
@@ -307,7 +307,7 @@
                 if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
 
                 let nameDisplay = `<strong>${songName}</strong>`;
-                if (info && info !== '—') {
+                if (info && info !== '—' && info !== '-') {
                     nameDisplay += `<br><small style="color: #c5a059aa; font-size:0.8rem">${info}</small>`;
                 }
 
