@@ -15,7 +15,6 @@
             --status-deleted: #e74c3c;
             --status-unreleased: #f1c40f;
         }
-
         body {
             font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
@@ -24,14 +23,12 @@
             padding: 20px;
             padding-bottom: 40px;
         }
-
         header {
             text-align: center;
             padding: 40px 0;
             border-bottom: 2px dashed var(--accent-color);
             margin-bottom: 30px;
         }
-
         header h1 {
             color: var(--text-color);
             font-size: 2.5rem;
@@ -39,14 +36,12 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
         .tabs {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-bottom: 30px;
         }
-
         .tab-btn {
             background: transparent;
             border: 2px solid var(--accent-color);
@@ -58,23 +53,19 @@
             text-transform: uppercase;
             transition: all 0.3s;
         }
-
         .tab-btn.active, .tab-btn:hover {
             background: var(--accent-color);
             color: var(--bg-color);
             font-weight: bold;
         }
-
         .content-section {
             display: none;
             max-width: 1000px;
             margin: 0 auto;
         }
-
         .content-section.active {
             display: block;
         }
-
         .album-block {
             background-color: var(--container-bg);
             border: 1px solid #c5a05922;
@@ -82,7 +73,6 @@
             margin-bottom: 30px;
             padding: 20px;
         }
-
         .album-header {
             font-size: 1.4rem;
             color: var(--text-color);
@@ -91,25 +81,21 @@
             padding-bottom: 5px;
             text-transform: uppercase;
         }
-
         .track-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-
         .track-table th, .track-table td {
             text-align: left;
             padding: 12px 10px;
             border-bottom: 1px solid #c5a05911;
         }
-
         .track-table th {
             color: var(--text-color);
             text-transform: uppercase;
             font-size: 0.9rem;
         }
-
         .status-badge {
             display: inline-block;
             padding: 2px 6px;
@@ -118,7 +104,6 @@
             font-weight: bold;
             text-transform: uppercase;
         }
-
         .status-released { background-color: rgba(46, 204, 113, 0.15); color: var(--status-released); border: 1px solid var(--status-released); }
         .status-deleted { background-color: rgba(231, 76, 60, 0.15); color: var(--status-deleted); border: 1px solid var(--status-deleted); }
         .status-unreleased { background-color: rgba(241, 196, 15, 0.15); color: var(--status-unreleased); border: 1px solid var(--status-unreleased); }
@@ -137,10 +122,12 @@
         <button class="tab-btn" onclick="switchTab('features')">Участие</button>
     </div>
 
+    <!-- Раздел Альбомов -->
     <div id="albums" class="content-section active">
-        <div id="albums-list">Загрузка релизов...</div>
+        <div id="albums-list">Загрузка релизов из базы данных...</div>
     </div>
 
+    <!-- Раздел Синглов -->
     <div id="singles" class="content-section">
         <div class="album-block">
             <div class="album-header">Все официальные синглы</div>
@@ -159,6 +146,7 @@
         </div>
     </div>
 
+    <!-- Раздел Участия -->
     <div id="features" class="content-section">
         <div class="album-block">
             <div class="album-header">Гостевые участия и коллаборации</div>
@@ -176,47 +164,39 @@
             </table>
         </div>
     </div>
-    
-           <script>
-        // Чистый, проверенный ключ публикации твоей таблицы
-        const PUB_KEY = '2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
-        
-        // Исправленный парсер CSV с полной очисткой от скрытого мусора \r
-        function parseCSV(text) {
-            let lines = text.split(/\r?\n/);
-            return lines.map(line => {
-                let r = [], p = '', q = false;
-                for (let i = 0; i < line.length; i++) {
-                    let c = line[i];
-                    if (c === '"') q = !q;
-                    else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
-                    else p += c;
-                }
-                r.push(p.trim());
-                return r.map(v => v.replace(/^"|"$/g, '').replace(/\r$/, '').trim());
-            }).filter(row => row.length > 1 && row[0] !== '');
+        <script>
+        // Идентификатор таблицы базы данных
+        const SPREADSHEET_ID = '1sTsOAYhRZPGscsrzeo0UjdSj2200WehO3vI9g8d6CFw';
+
+        // Безопасный запрос к JSON-коннектору Google API без CORS-конфликтов
+        async function fetchSheetTab(sheetName) {
+            const url = `https://google.com{SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+            const response = await fetch(url);
+            const text = await response.text();
+            // Вырезаем чистый JSON-массив из обертки Google API
+            const jsonText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+            const data = JSON.parse(jsonText);
+            return data.table.rows;
         }
 
         async function loadAllTabsData() {
             try {
-                // Восстановленные прямые адреса потоков данных
-                const albumResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Album`);
-                const albumText = await albumResponse.text();
-                
-                const singlesResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Singles`);
-                const singlesText = await singlesResponse.text();
+                const albumRows = await fetchSheetTab('Album');
+                const singlesRows = await fetchSheetTab('Singles');
+                const featuresRows = await fetchSheetTab('Features');
 
-                const featuresResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Features`);
-                const featuresText = await featuresResponse.text();
-
-                renderAlbums(parseCSV(albumText));
-                renderSingles(parseCSV(singlesText));
-                renderFeatures(parseCSV(featuresText));
-
+                renderAlbums(albumRows);
+                renderSingles(singlesRows);
+                renderFeatures(featuresRows);
             } catch (error) {
-                console.error("Ошибка загрузки данных:", error);
-                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру треков. Проверь статус публикации.";
+                console.error("Технический сбой загрузки структуры:", error);
+                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру треков. Проверь настройки общего доступа в таблице.";
             }
+        }
+
+        function extractValue(cells, index) {
+            if (!cells || !cells[index]) return '';
+            return cells[index].f || (cells[index].v !== null && cells[index].v !== undefined ? String(cells[index].v) : '');
         }
 
         function renderAlbums(rows) {
@@ -226,16 +206,18 @@
             let currentTableBody = null;
 
             rows.forEach((row, index) => {
-                if (index === 0) return;
+                if (index === 0) return; // Пропуск заголовков
+                const cells = row.c;
+                if (!cells) return;
 
-                const albumName = row[0];
-                const num = row[1];
-                const songName = row[2];
-                const artists = row[3] || 'Lil Free';
-                const producers = row[4] || 'Unknown';
-                const info = row[5];
-                const date = row[6] || 'N/A';
-                const status = (row[7] || 'Released').toLowerCase();
+                const albumName = extractValue(cells, 0);
+                const num = extractValue(cells, 1);
+                const songName = extractValue(cells, 2);
+                const artists = extractValue(cells, 3) || 'Lil Free';
+                const producers = extractValue(cells, 4) || 'Unknown';
+                const info = extractValue(cells, 5);
+                const date = extractValue(cells, 6) || 'N/A';
+                const status = extractValue(cells, 7).toLowerCase().trim();
 
                 if (!songName) return;
 
@@ -293,14 +275,17 @@
 
             rows.forEach((row, index) => {
                 if (index === 0) return;
-                const songName = row[2];
-                if (!songName) return;
+                const cells = row.c;
+                if (!cells) return;
 
-                const num = row[1];
-                const producers = row[4] || 'Unknown';
-                const info = row[5];
-                const date = row[6] || 'N/A';
-                const status = (row[7] || 'Released').toLowerCase();
+                const num = extractValue(cells, 1);
+                const songName = extractValue(cells, 2);
+                const producers = extractValue(cells, 4) || 'Unknown';
+                const info = extractValue(cells, 5);
+                const date = extractValue(cells, 6) || 'N/A';
+                const status = extractValue(cells, 7).toLowerCase().trim();
+
+                if (!songName) return;
 
                 let statusClass = 'status-released';
                 if (status.includes('delete')) statusClass = 'status-deleted';
@@ -329,13 +314,16 @@
 
             rows.forEach((row, index) => {
                 if (index === 0) return;
-                const songName = row[2];
-                if (!songName) return;
+                const cells = row.c;
+                if (!cells) return;
 
-                const num = row[1];
-                const artists = row[3] || 'Unknown';
-                const info = row[5] || '—';
-                const status = (row[7] || 'Released').toLowerCase();
+                const num = extractValue(cells, 1);
+                const songName = extractValue(cells, 2);
+                const artists = extractValue(cells, 3) || 'Unknown';
+                const info = extractValue(cells, 5) || '—';
+                const status = extractValue(cells, 7).toLowerCase().trim();
+
+                if (!songName) return;
 
                 let statusClass = 'status-released';
                 if (status.includes('delete')) statusClass = 'status-deleted';
