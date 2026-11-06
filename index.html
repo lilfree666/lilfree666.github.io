@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lil Free Discography Wiki</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --container-bg: #141414;
+            --text-color: #c5a059;
+            --text-secondary: #ffffff;
+            --accent-color: #c5a059;
+            --status-released: #2ecc71;
+            --status-deleted: #e74c3c;
+            --status-unreleased: #f1c40f;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-secondary);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 40px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px dashed var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--text-color);
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+        }
+
+        .content-section {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .album-block {
+            background-color: var(--container-bg);
+            border: 1px solid #c5a05922;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .album-header {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c5a05922;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .track-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .track-table th, .track-table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #c5a05911;
+        }
+
+        .track-table th {
+            color: var(--text-color);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-released { background-color: rgba(46, 204, 113, 0.15); color: var(--status-released); border: 1px solid var(--status-released); }
+        .status-deleted { background-color: rgba(231, 76, 60, 0.15); color: var(--status-deleted); border: 1px solid var(--status-deleted); }
+        .status-unreleased { background-color: rgba(241, 196, 15, 0.15); color: var(--status-unreleased); border: 1px solid var(--status-unreleased); }
+
+        .play-btn {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.8rem;
+        }
+
+        .play-btn.disabled {
+            background: #222;
+            color: #555;
+            cursor: not-allowed;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Lil Free</h1>
+        <div style="color: #888;">Официальный архив треков и дискографии</div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('albums')">Альбомы и EP</button>
+        <button class="tab-btn" onclick="switchTab('singles')">Синглы</button>
+        <button class="tab-btn" onclick="switchTab('features')">Участие</button>
+    </div>
+
+    <!-- Раздел Альбомов -->
+    <div id="albums" class="content-section active">
+        <div id="albums-list">Загрузка релизов из базы данных...</div>
+    </div>
+
+    <!-- Раздел Синглов -->
+    <div id="singles" class="content-section">
+        <div class="album-block">
+            <div class="album-header">Все официальные синглы</div>
+            <table class="track-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">№</th>
+                        <th style="width: 30%">Название</th>
+                        <th style="width: 25%">Исполнитель</th>
+                        <th style="width: 20%">Продюсер</th>
+                        <th style="width: 10%">Дата</th>
+                        <th style="width: 10%">Статус</th>
+                    </tr>
+                </thead>
+                <tbody id="singles-rows"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Раздел Участия -->
+    <div id="features" class="content-section">
+        <div class="album-block">
+            <div class="album-header">Гостевые участия и коллаборации</div>
+            <table class="track-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">№</th>
+                        <th style="width: 25%">Название</th>
+                        <th style="width: 25%">Исполнитель</th>
+                        <th style="width: 15%">Продюсер</th>
+                        <th style="width: 20%">Информация</th>
+                        <th style="width: 10%">Статус</th>
+                    </tr>
+                </thead>
+                <tbody id="features-rows"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Идентификатор твоей Google таблицы из ссылки
+        const SHEET_ID = '11J8gBM6gVB29Z-no8lt0gZiB1VnYmcXNTsdH1X4Tyls';
+        
+        // Магия для чтения Google Таблицы напрямую через её встроенный JSON API
+        async function loadSheetData() {
+            try {
+                // Подтягиваем данные первого листа («Все треки / Альбомы»)
+                const url = `https://google.com{SHEET_ID}/gviz/tq?tqx=out:json`;
+                const response = await fetch(url);
+                const text = await response.text();
+                
+                // Очищаем JSON от технической обертки Google API
+                const data = JSON.parse(text.substr(47).slice(0, -2));
+                const googleRows = data.table.rows;
+                
+                processMusicData(googleRows);
+            } catch (error) {
+                console.error("Ошибка загрузки данных из таблицы:", error);
+                document.getElementById('albums-list').innerText = "Не удалось загрузить данные из Google Таблицы. Проверь настройки общего доступа.";
+            }
+        }
+
+        function processMusicData(googleRows) {
+            const albumsContainer = document.getElementById('albums-list');
+            const singlesContainer = document.getElementById('singles-rows');
+            const featuresContainer = document.getElementById('features-rows');
+            
+            albumsContainer.innerHTML = '';
+            singlesContainer.innerHTML = '';
+            featuresContainer.innerHTML = '';
+
+            let currentAlbum = '';
+            let currentAlbumTable = null;
+
+            googleRows.forEach((row, index) => {
+                // Пропускаем шапку таблицы (строка 1)
+                if (index === 0) return;
+
+                const cells = row.c;
+                if (!cells) return; // Пропуск пустых строк
+
+                // Функция безопасного извлечения значений из ячеек
+                const getVal = (idx) => {
+                    if (!cells[idx]) return '';
+                    if (cells[idx].f) return cells[idx].f; // Форматированный текст
+                    return cells[idx].v !== null && cells[idx].v !== undefined ? cells[idx].v : '';
+                };
+
+                // Привязка к твоим столбцам (A - эра, B - №, C - название, D - исполнитель, E - продюсер, F - альбом)
+                const era = getVal(0);
+                const num = getVal(1);
+                const songName = getVal(2);
+                const artists = getVal(3) || 'Lil Free';
+                const producers = getVal(4) || 'неизвестно';
+                const albumName = getVal(5);
+
+                // Если строка техническая или пустая — скипаем
+                if (!songName || songName.includes('заблокирован') || songName.includes('января')) return;
+
+                // Проверяем статус (для синглов и фитов используем условный Released, так как база чистая)
+                let statusText = 'Released';
+                let statusClass = 'status-released';
+
+                // Если в названии альбома или песни есть метки скрытия/удаления
+                if (albumName.toLowerCase() === 'неизвестно' || songName.toLowerCase().includes('unknown')) {
+                    statusText = 'Unreleased';
+                    statusClass = 'status-unreleased';
+                }
+
+                // Кнопка прослушивания (пока ссылки пустые — ставим заглушку N/A)
+                const playBtn = `<span class="play-btn disabled">N/A</span>`;
+
+                // ЛОГИКА СОРТИРОВКИ ПО ВКЛАДКАМ:
+
+                // 1. СИНГЛЫ (если в поле «альбом» написано Single)
+                if (albumName.toLowerCase() === 'single') {
+                    singlesContainer.innerHTML += `
+                        <tr>
+                            <td>${num}</td>
+                            <td><strong>${songName}</strong></td>
+                            <td>${artists}</td>
+                            <td>${producers}</td>
+                            <td>${era}</td>
+                            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        </tr>
+                    `;
+                } 
+                // 2. УЧАСТИЕ / ФИТЫ (если в поле «альбом» написано Manhunt, Hometown, Tears pt.2 или фиты)
+                else if (albumName.toLowerCase() === 'manhunt' || albumName.toLowerCase() === 'hometown' || albumName.toLowerCase() === 'features') {
+                    featuresContainer.innerHTML += `
+                        <tr>
+                            <td>${num}</td>
+                            <td><strong>${songName}</strong></td>
+                            <td>${artists}</td>
+                            <td>${producers}</td>
+                            <td><small>Участие в релизе ${albumName}</small></td>
+                            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        </tr>
+                    `;
+                } 
+                // 3. АЛЬБОМЫ И EP (все остальные крупные релизы: Milky Way, Just In Case, Hate Me и т.д.)
+                else if (albumName) {
+                    // Если начался новый альбом — создаем для него отдельный красивый блок
+                    if (currentAlbum !== albumName) {
+                        currentAlbum = albumName;
+                        
+                        const albumBlock = document.createElement('div');
+                        albumBlock.className = 'album-block';
+                        albumBlock.innerHTML = `
+                            <div class="album-header">${currentAlbum} (${era})</div>
+                            <table class="track-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%">№</th>
+                                        <th style="width: 45%">Название трека</th>
+                                        <th style="width: 30%">Продюсер</th>
+                                        <th style="width: 20%">Статус</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="album-table-${index}"></tbody>
+                            </table>
+                        `;
+                        albumsContainer.appendChild(albumBlock);
+                        currentAlbumTable = document.getElementById(`album-table-${index}`);
+                    }
+
+                    // Добавляем трек внутрь созданного блока альбома
+                    if (currentAlbumTable) {
+                        currentAlbumTable.innerHTML += `
+                            <tr>
+                                <td>${num}</td>
+                                <td><strong>${songName}</strong><br><small style="color:#666">${artists}</small></td>
+                                <td>${producers}</td>
+                                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                            </tr>
+                        `;
+                    }
+                }
+            });
+
+            // Если какая-то вкладка осталась пустой после обработки
+            if (albumsContainer.innerHTML === '') albumsContainer.innerText = 'Нет доступных альбомов.';
+            if (singlesContainer.innerHTML === '') singlesContainer.innerHTML = '<tr><td colspan="6" style="text-align:center">Список синглов пуст.</td></tr>';
+            if (featuresContainer.innerHTML === '') featuresContainer.innerHTML = '<tr><td colspan="6" style="text-align:center">Список участий пуст.</td></tr>';
+        }
+
+        // Переключение между вкладками сайта
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Автоматический старт загрузки данных при открытии страницы
+        loadSheetData();
+    </script>
+</body>
+</html>
