@@ -137,10 +137,12 @@
         <button class="tab-btn" onclick="switchTab('features')">Участие</button>
     </div>
 
+    <!-- Вкладка 1 -->
     <div id="albums" class="content-section active">
         <div id="albums-list">Загрузка релизов...</div>
     </div>
 
+    <!-- Вкладка 2 -->
     <div id="singles" class="content-section">
         <div class="album-block">
             <div class="album-header">Все официальные синглы</div>
@@ -159,6 +161,7 @@
         </div>
     </div>
 
+    <!-- Вкладка 3 -->
     <div id="features" class="content-section">
         <div class="album-block">
             <div class="album-header">Гостевые участия и коллаборации</div>
@@ -177,50 +180,44 @@
         </div>
     </div>
     <script>
-        // Твой персональный ключ публикации Google Таблицы
-        const SHEET_ID = '1sTsOAYhRZPGscsrzeo0UjdSj2200WehO3vI9g8d6CFw';
+        // Длинный неизменяемый ключ публикации твоей таблицы
+        const PUB_KEY = '2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
         
-        // Надежный парсер CSV строк, который не боится кавычек и запятых внутри ячеек
-        function parseCSVLine(text) {
-            let p = '', r = [];
-            let q = false;
-            for (let i = 0; i < text.length; i++) {
-                let c = text[i];
-                if (c === '"') { q = !q; }
-                else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
-                else { p += c; }
-            }
-            r.push(p.trim());
-            return r.map(v => v.replace(/^"|"$/g, '').trim());
+        // Встроенная функция разбора CSV-строк с защитой от кавычек
+        function parseCSV(text) {
+            let lines = text.split(/\r?\n/);
+            return lines.map(line => {
+                let r = [], p = '', q = false;
+                for (let i = 0; i < line.length; i++) {
+                    let c = line[i];
+                    if (c === '"') q = !q;
+                    else if (c === ',' && !q) { r.push(p.trim()); p = ''; }
+                    else p += c;
+                }
+                r.push(p.trim());
+                return r.map(v => v.replace(/^"|"$/g, '').trim());
+            }).filter(row => row.length > 1);
         }
 
         async function loadAllTabsData() {
             try {
-                // Подгружаем вкладку 1 (Album)
-                const albumUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Album`;
-                const albumResponse = await fetch(albumUrl);
+                // Прямой запрос к CSV каждого отдельного листа опубликованного документа
+                const albumResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Album`);
                 const albumText = await albumResponse.text();
                 
-                // Подгружаем вкладку 2 (Singles)
-                const singlesUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Singles`;
-                const singlesResponse = await fetch(singlesUrl);
+                const singlesResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Singles`);
                 const singlesText = await singlesResponse.text();
 
-                // Подгружаем вкладку 3 (Features)
-                const featuresUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Features`;
-                const featuresResponse = await fetch(featuresUrl);
+                const featuresResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Features`);
                 const featuresText = await featuresResponse.text();
 
-                // Превращаем текст в чистые массивы строк
-                const processRows = (text) => text.split('\n').map(line => parseCSVLine(line)).filter(row => row.length > 1);
-
-                renderAlbums(processRows(albumText));
-                renderSingles(processRows(singlesText));
-                renderFeatures(processRows(featuresText));
+                renderAlbums(parseCSV(albumText));
+                renderSingles(parseCSV(singlesText));
+                renderFeatures(parseCSV(featuresText));
 
             } catch (error) {
-                console.error("Критическая ошибка разбора данных:", error);
-                document.getElementById('albums-list').innerText = "Ошибка загрузки структуры. Убедись, что документ опубликован как веб-страница.";
+                console.error("Ошибка загрузки потока:", error);
+                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру. Убедись, что публикация в Google Таблицах активна.";
             }
         }
 
@@ -231,7 +228,7 @@
             let currentTableBody = null;
 
             rows.forEach((row, index) => {
-                if (index === 0) return; // Пропуск шапки
+                if (index === 0) return; // Пропуск заголовков
 
                 const albumName = row[0];
                 const num = row[1];
