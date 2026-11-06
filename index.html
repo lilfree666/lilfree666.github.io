@@ -204,34 +204,42 @@
         const SHEET_ID = 'e/2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
 ;
         
-        // Магия для последовательного чтения отдельных листов через Google API
+               // Магия для последовательного чтения отдельных листов опубликованной таблицы в формате CSV
         async function loadAllTabsData() {
             try {
-                // Загружаем вкладку 1 (Альбомы и EP) — первый лист по умолчанию
-                const albumUrl = `https://google.com{SHEET_ID}/gviz/tq?tqx=out:json&sheet=Album`;
+                // Загружаем вкладку 1 (Альбомы и EP)
+                const albumUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Album`;
                 const albumResponse = await fetch(albumUrl);
                 const albumText = await albumResponse.text();
-                const albumData = JSON.parse(albumText.substr(47).slice(0, -2));
                 
-                // Загружаем вкладку 2 (Синглы) по названию листа
-                const singlesUrl = `https://google.com{SHEET_ID}/gviz/tq?tqx=out:json&sheet=Singles`;
+                // Загружаем вкладку 2 (Синглы)
+                const singlesUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Singles`;
                 const singlesResponse = await fetch(singlesUrl);
                 const singlesText = await singlesResponse.text();
-                const singlesData = JSON.parse(singlesText.substr(47).slice(0, -2));
 
-                // Загружаем вкладку 3 (Участие) по названию листа
-                const featuresUrl = `https://google.com{SHEET_ID}/gviz/tq?tqx=out:json&sheet=Features`;
+                // Загружаем вкладку 3 (Участие)
+                const featuresUrl = `https://google.com{SHEET_ID}/pub?output=csv&sheet=Features`;
                 const featuresResponse = await fetch(featuresUrl);
                 const featuresText = await featuresResponse.text();
-                const featuresData = JSON.parse(featuresText.substr(47).slice(0, -2));
 
-                processAlbums(albumData.table.rows);
-                processSingles(singlesData.table.rows);
-                processFeatures(featuresData.table.rows);
+                // Простой парсер CSV в массив, чтобы робот понял строки
+                const parseCSV = (text) => {
+                    const lines = text.split('\n');
+                    return lines.map(line => {
+                        // Режем строку по запятым, учитывая кавычки
+                        const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
+                        const cleanCells = matches.map(val => ({ v: val.replace(/^"|"$/g, '').trim() }));
+                        return { c: cleanCells };
+                    });
+                };
+
+                processAlbums(parseCSV(albumText));
+                processSingles(parseCSV(singlesText));
+                processFeatures(parseCSV(featuresText));
 
             } catch (error) {
                 console.error("Ошибка загрузки данных из таблицы:", error);
-                document.getElementById('albums-list').innerText = "Не удалось подгрузить данные. Пожалуйста, убедись, что в новой таблице открыт доступ по ссылке (Читатель) и обновлена страница.";
+                document.getElementById('albums-list').innerText = "Не удалось подгрузить данные. Проверь настройки публикации.";
             }
         }
 
