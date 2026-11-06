@@ -137,12 +137,10 @@
         <button class="tab-btn" onclick="switchTab('features')">Участие</button>
     </div>
 
-    <!-- Вкладка 1 -->
     <div id="albums" class="content-section active">
         <div id="albums-list">Загрузка релизов...</div>
     </div>
 
-    <!-- Вкладка 2 -->
     <div id="singles" class="content-section">
         <div class="album-block">
             <div class="album-header">Все официальные синглы</div>
@@ -161,7 +159,6 @@
         </div>
     </div>
 
-    <!-- Вкладка 3 -->
     <div id="features" class="content-section">
         <div class="album-block">
             <div class="album-header">Гостевые участия и коллаборации</div>
@@ -180,10 +177,10 @@
         </div>
     </div>
     <script>
-        // Длинный неизменяемый ключ публикации твоей таблицы
+        // Ключ публикации таблицы Lil Free
         const PUB_KEY = '2PACX-1vTUmADHVuVWOPKxRf7wowfpGKMlsqsQYJjrLLE8X2BS9f4ap7ISavkcONHrI6JtOF83QoHro1zNoWzv';
         
-        // Встроенная функция разбора CSV-строк с защитой от кавычек
+        // Исправленная функция разбора CSV с очисткой от скрытых символов \r
         function parseCSV(text) {
             let lines = text.split(/\r?\n/);
             return lines.map(line => {
@@ -195,13 +192,14 @@
                     else p += c;
                 }
                 r.push(p.trim());
-                return r.map(v => v.replace(/^"|"$/g, '').trim());
-            }).filter(row => row.length > 1);
+                // Добавлена очистка .replace(/\r$/) для каждого значения
+                return r.map(v => v.replace(/^"|"$/g, '').replace(/\r$/, '').trim());
+            }).filter(row => row.length > 1 && row[0] !== '');
         }
 
         async function loadAllTabsData() {
             try {
-                // Прямой запрос к CSV каждого отдельного листа опубликованного документа
+                // Запросы напрямую к листам опубликованной таблицы
                 const albumResponse = await fetch(`https://google.com{PUB_KEY}/pub?output=csv&sheet=Album`);
                 const albumText = await albumResponse.text();
                 
@@ -216,8 +214,8 @@
                 renderFeatures(parseCSV(featuresText));
 
             } catch (error) {
-                console.error("Ошибка загрузки потока:", error);
-                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру. Убедись, что публикация в Google Таблицах активна.";
+                console.error("Ошибка загрузки данных:", error);
+                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру треков. Проверь статус публикации.";
             }
         }
 
@@ -228,7 +226,7 @@
             let currentTableBody = null;
 
             rows.forEach((row, index) => {
-                if (index === 0) return; // Пропуск заголовков
+                if (index === 0) return; // Пропуск шапки
 
                 const albumName = row[0];
                 const num = row[1];
