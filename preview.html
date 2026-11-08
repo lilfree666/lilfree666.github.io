@@ -181,20 +181,11 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
   font-size:clamp(54px,6vw,72px)!important;
   line-height:1!important;
   text-shadow:
-    -2px 0 #ff315f,
-    2px 0 #25eaff,
-    0 0 5px var(--year-glow),
-    0 0 13px var(--year-glow),
-    0 0 28px var(--year-glow),
-    0 0 48px color-mix(in srgb,var(--year-glow) 72%,transparent)!important;
-  animation:lf-vhs-year 3.2s steps(1,end) infinite;
-}
-#music #years.grid>.tile:nth-child(2n)>strong{animation-delay:-1.1s}
-#music #years.grid>.tile:nth-child(3n)>strong{animation-delay:-2.2s}
-@keyframes lf-vhs-year{
-  0%, 8%, 10%, 46%, 48%, 100%{opacity:1;transform:translateX(0);filter:none}
-  9%{opacity:.82;transform:translateX(1px);filter:hue-rotate(24deg)}
-  47%{opacity:.9;transform:translateX(-1px);filter:hue-rotate(-18deg)}
+    -1px 0 #ff315f,
+    1px 0 #25eaff,
+    0 0 3px var(--year-glow),
+    0 0 8px var(--year-glow),
+    0 0 15px color-mix(in srgb,var(--year-glow) 55%,transparent)!important;
 }
 
 
