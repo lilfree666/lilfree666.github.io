@@ -464,6 +464,46 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
  }
 }
 
+
+/* MOBILE NAVIGATION: HORIZONTAL SWIPE */
+@media(max-width:760px){
+ .sidebar{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+  overflow:hidden!important;
+ }
+ .sidebar-top{flex:0 0 auto!important;min-width:0!important}
+ .sidebar-brand{min-width:0!important}
+ .sidebar-brand .brand{white-space:nowrap!important}
+ .sidebar nav{
+  display:flex!important;
+  flex:1 1 0!important;
+  min-width:0!important;
+  width:0!important;
+  margin:0!important;
+  gap:4px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  white-space:nowrap!important;
+  flex-wrap:nowrap!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+  touch-action:pan-x!important;
+  overscroll-behavior-x:contain!important;
+  padding:2px 1px!important;
+ }
+ .sidebar nav::-webkit-scrollbar{display:none!important}
+ .sidebar nav button{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  min-width:max-content!important;
+  padding:9px 8px!important;
+ }
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
