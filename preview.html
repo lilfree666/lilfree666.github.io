@@ -205,6 +205,15 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 }
 
 
+/* MOBILE HOME BACKGROUND VIDEO — autoplay without native pause overlay */
+#home .home-bg-video{pointer-events:none!important;user-select:none!important;-webkit-user-select:none!important;}
+#home .home-bg-video::-webkit-media-controls,
+#home .home-bg-video::-webkit-media-controls-enclosure,
+#home .home-bg-video::-webkit-media-controls-panel,
+#home .home-bg-video::-webkit-media-controls-play-button,
+#home .home-bg-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none!important;opacity:0!important;}
+@media(max-width:760px){#home .home-bg-video{object-fit:cover!important;-webkit-transform:translateZ(0);transform:translateZ(0);}}
+
 /* HOME background fills the entire viewport, matching MUSIC ARCHIVE */
 body.home-view #home{
   isolation:auto!important;
@@ -973,7 +982,7 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
 </nav>
 <div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
 <main>
-<section id="home" class="page active"><video class="home-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/home.mp4" type="video/mp4"></video><div class="hero"><div class="hero-copy"><h1>Lil Free</h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
+<section id="home" class="page active"><video class="home-bg-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/home.mp4" type="video/mp4"></video><div class="hero"><div class="hero-copy"><h1>Lil Free</h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
 <section id="music" class="page"><video class="music-archive-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/music-archive.mp4" type="video/mp4"></video><div class="sectionhead music-archive-heading"><div><h1><span>MUSIC</span> ARCHIVE</h1></div></div><div class="archive-search" id="archive-search-wrap"><button class="search-toggle" type="button" aria-label="Открыть поиск" aria-expanded="false" onclick="toggleArchiveSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m15.7 15.7 5 5"/><path d="m7.8 8.4 1.1-.9" opacity=".55"/></svg></button><input id="archive-search" type="search" placeholder="НАЙТИ РЕЛИЗ…" autocomplete="off" aria-label="Поиск по музыкальному архиву"></div><div id="search-results" hidden></div><div class="grid" id="years"></div></section>
 <section id="era" class="page"><button class="back" onclick="showPage('music')">← BACK TO YEARS</button><div class="sectionhead"><div><h1><span id="era-title">2019</span> / RELEASES</h1></div></div><div class="filters" id="filters"></div><div class="grid" id="releases"></div><div class="sectionhead"><div><h2>TRACKS / SINGLES / FEATURES</h2></div></div><div class="grid" id="songs"></div></section>
 <section id="videos" class="page"><div class="sectionhead"><div><h1><span>VIDEO</span> ARCHIVE</h1><p>MUSIC VIDEOS / VISUALS</p></div></div><div class="notice">Раздел подготовлен. Добавим сюда клипы, визуализаторы и видеоинтервью с проверенными ссылками.</div></section>
@@ -1030,8 +1039,26 @@ function toggleSidebar(){
   button.querySelector(".toggle-label").textContent=collapsed?"ОТКРЫТЬ":"СВЕРНУТЬ";
  }
 }
+function startHomeBackground(){
+ const video=document.querySelector('#home .home-bg-video');
+ if(!video)return;
+ video.muted=true;
+ video.defaultMuted=true;
+ video.playsInline=true;
+ video.setAttribute('muted','');
+ video.setAttribute('playsinline','');
+ video.setAttribute('webkit-playsinline','');
+ if(video.paused){
+  const play=()=>{if(document.body.classList.contains('home-view')||document.querySelector('#home.page.active'))video.play().catch(()=>{});};
+  requestAnimationFrame(play);
+  setTimeout(play,180);
+ }
+}
 function openGroup(slug){showPage('group-'+slug)}
-function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
+function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='home')startHomeBackground();if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
+window.addEventListener('pageshow',startHomeBackground);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&document.querySelector('#home.page.active'))startHomeBackground();});
+document.addEventListener('touchstart',function resumeHomeVideo(){if(document.querySelector('#home.page.active'))startHomeBackground();},{once:true,passive:true});
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
 function parseRows(raw){const json=JSON.parse(raw.slice(raw.indexOf('{'),raw.lastIndexOf('}')+1));return (json.table.rows||[]).filter(r=>r.c&&r.c.some(c=>c&&c.v!==null)).map(r=>Array.from({length:11},(_,i)=>String(cell(r,i)??'').trim())).filter(r=>r.some(Boolean)).filter(r=>!/^album$/i.test(r[0]));}
@@ -1068,6 +1095,7 @@ $('progress').oninput=()=>{const a=$('audio');if(Number.isFinite(a.duration))a.c
 $('volume').oninput=()=>{$('audio').volume=Number($('volume').value);$('volume').style.setProperty('--progress',(Number($('volume').value)*100)+'%')};
 $('audio').volume=.65;$('backward').onclick=()=>{$('audio').currentTime=Math.max(0,$('audio').currentTime-10)};$('forward').onclick=()=>{const a=$('audio');a.currentTime=Math.min(Number.isFinite(a.duration)?a.duration:Infinity,a.currentTime+10)};
 $('archive-search').addEventListener('input',renderSearch);
+startHomeBackground();
 $('years').innerHTML='<div class="notice">Загружаем музыкальный архив из Google Sheets…</div>';$('home-stats').innerHTML='<div class="notice">Подключаем базу релизов…</div>';
 let archiveLoading=false;
 async function loadArchive(){if(archiveLoading)return;archiveLoading=true;$('years').innerHTML='<div class="notice">Подключаем музыкальный архив…</div>';$('home-stats').innerHTML='<div class="notice">Загружаем базу релизов…</div>';try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears();renderSearch()}catch(e){$('years').innerHTML='<div class="notice">Не удалось подключиться к Google Sheets: '+esc(e.message)+'.<br><button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>';$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
