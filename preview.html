@@ -1197,7 +1197,7 @@ function renderArtistCredits(value){
   'xvnkvr':'artist-red',
   'young freak':'artist-red',
   'young dipperx':'artist-orange',
-  'ддипперпенис':'artist-orange',
+  
   'дипперпенис':'artist-orange',
   'никотиновая кома':'artist-blue'
  };
@@ -1208,7 +1208,7 @@ function renderArtistCredits(value){
   'xvnkvr':'SHIMURA',
   'young freak':'SHIMURA',
   'young dipperx':'YOUNG DIPPERX',
-  'ддипперпенис':'YOUNG DIPPERX',
+  
   'дипперпенис':'YOUNG DIPPERX',
   'никотиновая кома':'Никотиновая кома'
  };
@@ -1219,7 +1219,7 @@ function renderArtistCredits(value){
   return '<a class="artist-credit '+cls+'" href="#artist-bio" data-artist="'+esc(profile)+'" onclick="event.preventDefault();event.stopPropagation();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>';
  }).join('<span class="artist-credit-separator"> &amp; </span>');
 }
-function renderPlayerArtists(value){const colors={'lil free':'artist-lime','lil cryver':'artist-purple','shimura':'artist-red','xvnkvr':'artist-red','young freak':'artist-red','young dipperx':'artist-orange','ддипперпенис':'artist-orange','дипперпенис':'artist-orange','никотиновая кома':'artist-blue'};const profiles={'lil free':'Lil Free','lil cryver':'Lil Cryver','shimura':'SHIMURA','xvnkvr':'SHIMURA','young freak':'SHIMURA','young dipperx':'YOUNG DIPPERX','ддипперпенис':'YOUNG DIPPERX','дипперпенис':'YOUNG DIPPERX','никотиновая кома':'Никотиновая кома'};const names=artistParts(value);$('now-artist').innerHTML=names.map(name=>{const key=name.trim().toLocaleLowerCase();const cls=colors[key]||'artist-other';const profile=profiles[key]||name;return '<a class="player-artist-link '+cls+'" href="#artist-bio" data-artist="'+esc(profile)+'" onclick="event.preventDefault();event.stopPropagation();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>'}).join('<span class="player-artist-separator"> · </span>')}
+function renderPlayerArtists(value){const colors={'lil free':'artist-lime','lil cryver':'artist-purple','shimura':'artist-red','xvnkvr':'artist-red','young freak':'artist-red','young dipperx':'artist-orange','дипперпенис':'artist-orange','никотиновая кома':'artist-blue'};const profiles={'lil free':'Lil Free','lil cryver':'Lil Cryver','shimura':'SHIMURA','xvnkvr':'SHIMURA','young freak':'SHIMURA','young dipperx':'YOUNG DIPPERX','дипперпенис':'YOUNG DIPPERX','никотиновая кома':'Никотиновая кома'};const names=artistParts(value);$('now-artist').innerHTML=names.map(name=>{const key=name.trim().toLocaleLowerCase();const cls=colors[key]||'artist-other';const profile=profiles[key]||name;return '<a class="player-artist-link '+cls+'" href="#artist-bio" data-artist="'+esc(profile)+'" onclick="event.preventDefault();event.stopPropagation();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>'}).join('<span class="player-artist-separator"> · </span>')}
 const artistWikiOriginalArticle=$('artist-wiki-article').innerHTML;
 const artistWikiOriginalInfobox=$('artist-wiki-infobox').innerHTML;
 const artistWikiProfiles={
