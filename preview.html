@@ -42,9 +42,12 @@ main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1
 
 /* MUSIC ARCHIVE ambient video background */
 #music{position:relative;isolation:isolate;overflow:hidden;border-radius:12px;padding:1px 0 24px}
-#music .music-archive-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:.58;pointer-events:none}
-#music:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,6,.72),rgba(5,8,6,.66) 45%,rgba(5,8,6,.82)),linear-gradient(90deg,rgba(5,8,6,.35),rgba(5,8,6,.08),rgba(5,8,6,.35))}
+#music .music-archive-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:1;filter:brightness(1.22) contrast(1.08) saturate(1.12);pointer-events:none}
+#music:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,6,.22),rgba(5,8,6,.12) 45%,rgba(5,8,6,.28)),linear-gradient(90deg,rgba(5,8,6,.12),rgba(5,8,6,0),rgba(5,8,6,.12))}
 #music>*:not(.music-archive-video){position:relative;z-index:2}
+
+/* Let the video show through year tiles without sacrificing text contrast */
+#years .tile{background-color:rgba(10,14,10,.22)!important;background-blend-mode:normal!important}
 /* Keep archive video visible even when reduced-motion is enabled; playback starts on opening MUSIC. */
 </style>
 </head>
