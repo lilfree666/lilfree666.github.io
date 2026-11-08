@@ -649,6 +649,52 @@ html body aside.sidebar nav button{
  background:linear-gradient(to right,currentColor 0 4px,transparent 4px 8px,currentColor 8px 12px)!important;
 }
 
+
+/* Modern archive navigation controls */
+.back{
+ display:inline-flex!important;align-items:center;justify-content:center;gap:9px;
+ min-height:42px!important;padding:0 18px!important;margin:18px 0 12px!important;
+ border:1px solid #ffffff24!important;border-radius:999px!important;
+ background:linear-gradient(135deg,#ffffff0d,#ffffff04)!important;
+ color:#e8eee8!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important;
+ font-size:11px!important;font-weight:650!important;letter-spacing:1.25px!important;
+ line-height:1!important;text-transform:uppercase!important;
+ box-shadow:0 4px 16px #0003,inset 0 1px 0 #ffffff0a!important;
+ transition:transform .22s ease,border-color .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease!important;
+}
+.back:hover,.back:focus-visible{
+ transform:translateY(-2px)!important;border-color:var(--era-accent,var(--lime))!important;
+ color:var(--era-accent,var(--lime))!important;
+ background:color-mix(in srgb,var(--era-accent,var(--lime)) 10%,#101411)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--era-accent,var(--lime)) 25%,transparent),0 5px 22px color-mix(in srgb,var(--era-accent,var(--lime)) 18%,transparent)!important;
+ outline:none!important;
+}
+.filters{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:9px!important;margin:18px 0 24px!important}
+.filters button{
+ position:relative!important;min-height:39px!important;min-width:68px!important;
+ padding:0 16px!important;border:1px solid #ffffff20!important;border-radius:999px!important;
+ background:rgba(255,255,255,.035)!important;color:#aeb7ae!important;
+ font-family:Inter,"Segoe UI",Arial,sans-serif!important;font-size:10px!important;
+ font-weight:650!important;letter-spacing:1.15px!important;line-height:1!important;
+ transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease!important;
+}
+.filters button:hover,.filters button:focus-visible{
+ transform:translateY(-1px)!important;border-color:color-mix(in srgb,var(--era-accent,var(--lime)) 65%,transparent)!important;
+ color:#f2f5ef!important;background:color-mix(in srgb,var(--era-accent,var(--lime)) 9%,#111)!important;
+ outline:none!important;
+}
+.filters button.active{
+ border-color:var(--era-accent,var(--lime))!important;
+ color:var(--era-accent,var(--lime))!important;
+ background:color-mix(in srgb,var(--era-accent,var(--lime)) 13%,#101410)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--era-accent,var(--lime)) 18%,transparent),0 0 18px color-mix(in srgb,var(--era-accent,var(--lime)) 17%,transparent),inset 0 1px 0 #ffffff12!important;
+}
+@media(max-width:600px){
+ .back{min-height:39px!important;padding:0 15px!important;font-size:10px!important}
+ .filters{gap:7px!important;margin:15px 0 20px!important}
+ .filters button{min-height:36px!important;min-width:0!important;padding:0 13px!important;font-size:9px!important;letter-spacing:.9px!important}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
