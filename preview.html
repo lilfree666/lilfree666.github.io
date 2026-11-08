@@ -1597,6 +1597,8 @@ function playItem(url,title,artist,cover){
 $('toggle').onclick=()=>{if($('audio').paused){$('audio').play().catch(()=>{})}else $('audio').pause()};
 $('audio').onplay=()=>{document.body.classList.add('player-active');setPlayerToggle('pause')};
 $('audio').onpause=()=>setPlayerToggle('play');
+['loadedmetadata','durationchange','timeupdate','seeked','ended'].forEach(event=>$('audio').addEventListener(event,setPlayerProgress));
+setPlayerProgress();
 $('progress').oninput=()=>{const a=$('audio');if(Number.isFinite(a.duration))a.currentTime=Number($('progress').value)/1000*a.duration};
 $('volume').oninput=()=>{$('audio').volume=Number($('volume').value);$('volume').style.setProperty('--progress',(Number($('volume').value)*100)+'%')};
 $('audio').volume=.65;$('backward').onclick=()=>{$('audio').currentTime=Math.max(0,$('audio').currentTime-10)};$('forward').onclick=()=>{const a=$('audio');a.currentTime=Math.min(Number.isFinite(a.duration)?a.duration:Infinity,a.currentTime+10)};
