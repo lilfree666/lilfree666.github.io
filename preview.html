@@ -8,7 +8,7 @@
 :root{--bg:#080a09;--panel:#111512;--panel2:#171d18;--lime:#b8ff28;--text:#f0f1eb;--muted:#929b91;--line:#293129;--side:220px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,Helvetica,sans-serif}button{font:inherit;color:inherit;cursor:pointer}a{color:inherit}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.09;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff1 4px,transparent 5px)}
-.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);padding:28px 18px;background:#090c0aee;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:10}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);padding:28px 18px;background:#090c0aee;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:1000;pointer-events:auto}.sidebar nav,.sidebar nav button{position:relative;z-index:1001;pointer-events:auto}
 .brand{font-weight:900;letter-spacing:5px;font-size:22px;margin:0 0 8px}.tag{font:10px monospace;color:var(--lime);letter-spacing:2px}
 nav{display:grid;gap:8px;margin-top:58px}nav button{border:1px solid transparent;background:none;text-align:left;padding:13px 14px;color:#9da69d;letter-spacing:2px;font:12px monospace}nav button:hover,nav button.active{color:var(--lime);background:#b8ff2810;border-color:#b8ff2830}
 .sidefoot{margin-top:auto;color:#69736b;font:10px/2 monospace;letter-spacing:1px}
