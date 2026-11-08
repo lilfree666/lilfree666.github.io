@@ -1422,6 +1422,8 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
 </style>
 
 <style id="spotify-now-playing-style">
+body.spotify-player-open .player{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(24px)!important;}
+
 #spotify-now-playing{position:fixed;inset:0;z-index:2147483000;display:none;overflow:auto;color:#f7f7f7;background:radial-gradient(ellipse at 50% 5%,color-mix(in srgb,var(--track-accent,#66745e) 30%,#151515),#101010 58%,#080808);font-family:Arial, sans-serif}
 #spotify-now-playing.open{display:flex;flex-direction:column}
 #spotify-now-playing .snp-top{display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
