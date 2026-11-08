@@ -518,6 +518,36 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
  #music .archive-search{margin-top:-34px!important}
 }
 
+/* RESTORE PLAY / PAUSE GLYPH ON THE DESKTOP PLAYER */
+#toggle.player-toggle{
+ position:relative!important;
+ font-size:0!important;
+ line-height:0!important;
+ color:#111!important;
+ -webkit-appearance:none!important;
+ appearance:none!important;
+}
+#toggle.player-toggle::before{
+ content:""!important;
+ position:absolute!important;
+ left:50%!important;
+ top:50%!important;
+ transform:translate(-35%,-50%)!important;
+ width:0!important;
+ height:0!important;
+ border-top:8px solid transparent!important;
+ border-bottom:8px solid transparent!important;
+ border-left:12px solid currentColor!important;
+ background:none!important;
+}
+#toggle.player-toggle[data-state="pause"]::before{
+ width:12px!important;
+ height:15px!important;
+ transform:translate(-50%,-50%)!important;
+ border:0!important;
+ background:linear-gradient(to right,currentColor 0 4px,transparent 4px 8px,currentColor 8px 12px)!important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
