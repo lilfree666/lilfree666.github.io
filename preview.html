@@ -766,6 +766,51 @@ html body aside.sidebar nav button .nav-icon{display:block!important;flex:0 0 25
 html body aside.sidebar nav button span{display:inline-block!important;}
 @media(max-width:600px){html body aside.sidebar nav button{gap:7px!important;}html body aside.sidebar nav button .nav-icon{width:21px!important;height:21px!important;flex-basis:21px!important;}}
 </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style id="archive-controls-color-refresh">
+/* Consistent modern archive controls on every page */
+html body .back{
+ font-family:"Space Grotesk",sans-serif!important;
+ color:#ff626c!important;
+ border:1px solid #ff465866!important;
+ background:linear-gradient(135deg,#ff46581c,#ff465806)!important;
+ letter-spacing:1.35px!important;
+ font-weight:700!important;
+ box-shadow:0 0 0 1px #ff465815,inset 0 1px 0 #ffffff10!important;
+}
+html body .back:hover,html body .back:focus-visible{
+ color:#fff!important;border-color:#ff4658!important;
+ background:linear-gradient(135deg,#ff46583d,#ff465815)!important;
+ box-shadow:0 0 18px #ff46584d!important;
+}
+html body .filters button{
+ font-family:"Space Grotesk",sans-serif!important;
+ font-weight:700!important;letter-spacing:1.15px!important;
+ border-width:1px!important;border-style:solid!important;
+ background:rgba(255,255,255,.025)!important;
+ transition:all .22s ease!important;
+}
+html body .filters button:nth-child(1){--filter-color:#63e7ff;color:#63e7ff!important;border-color:#63e7ff55!important}
+html body .filters button:nth-child(2){--filter-color:#b995ff;color:#b995ff!important;border-color:#b995ff55!important}
+html body .filters button:nth-child(3){--filter-color:#ff82c8;color:#ff82c8!important;border-color:#ff82c855!important}
+html body .filters button:nth-child(4){--filter-color:#ffbd66;color:#ffbd66!important;border-color:#ffbd6655!important}
+html body .filters button:nth-child(5){--filter-color:#a9e879;color:#a9e879!important;border-color:#a9e87955!important}
+html body .filters button:hover,html body .filters button:focus-visible{
+ color:#fff!important;border-color:var(--filter-color)!important;
+ background:color-mix(in srgb,var(--filter-color) 13%,#101010)!important;
+ box-shadow:0 0 13px color-mix(in srgb,var(--filter-color) 30%,transparent)!important;
+ transform:translateY(-2px)!important;outline:none!important;
+}
+html body .filters button.active{
+ color:var(--filter-color)!important;border-color:var(--filter-color)!important;
+ background:color-mix(in srgb,var(--filter-color) 17%,#101010)!important;
+ box-shadow:0 0 0 1px color-mix(in srgb,var(--filter-color) 30%,transparent),0 0 17px color-mix(in srgb,var(--filter-color) 25%,transparent),inset 0 1px 0 #ffffff12!important;
+}
+</style>
+
 </head>
 <body class="home-view">
 <aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
