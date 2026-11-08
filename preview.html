@@ -179,6 +179,43 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 }
 
 
+/* FIX: keep MUSIC ARCHIVE year tabs visible above its ambient video */
+body.music-view #music #years{
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+ gap:16px!important;
+ min-height:180px!important;
+ position:relative!important;
+ z-index:5!important;
+ visibility:visible!important;
+ opacity:1!important;
+}
+body.music-view #music #years>.tile{
+ display:flex!important;
+ visibility:visible!important;
+ opacity:1!important;
+ position:relative!important;
+ z-index:1!important;
+ flex:0 0 180px!important;
+ width:100%!important;
+ min-height:180px!important;
+ color:#fff!important;
+ background-color:#111!important;
+}
+body.music-view #music #years>.tile>strong{
+ display:block!important;
+ visibility:visible!important;
+ opacity:1!important;
+}
+@media(max-width:600px){
+ body.music-view #music #years>.tile{
+  flex-basis:145px!important;
+  min-height:145px!important;
+  height:145px!important;
+ }
+}
+
 /* VHS NEON YEAR LABELS — only the year text on the photo cards */
 #music #years.grid>.tile>strong{
   color:var(--year-glow)!important;
