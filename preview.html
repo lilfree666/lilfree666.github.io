@@ -197,6 +197,22 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 }
 
 
+/* Let the MUSIC archive video continue underneath the transparent sidebar */
+body.music-view #music .music-archive-video{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100vh!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  z-index:-1!important;
+}
+body.music-view #music:before{
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+}
+
 /* SIDEBAR TRANSPARENCY — blend the navigation into each page */
 .sidebar,
 body.sidebar-collapsed .sidebar{
@@ -284,7 +300,7 @@ function toggleSidebar(){
   button.querySelector(".toggle-label").textContent=collapsed?"ОТКРЫТЬ":"СВЕРНУТЬ";
  }
 }
-function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
+function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
 function parseRows(raw){const json=JSON.parse(raw.slice(raw.indexOf('{'),raw.lastIndexOf('}')+1));return (json.table.rows||[]).filter(r=>r.c&&r.c.some(c=>c&&c.v!==null)).map(r=>Array.from({length:11},(_,i)=>String(cell(r,i)??'').trim())).filter(r=>r.some(Boolean)).filter(r=>!/^album$/i.test(r[0]));}
