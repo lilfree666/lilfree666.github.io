@@ -95,6 +95,31 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 @media(prefers-reduced-motion:reduce){
  #music .music-archive-heading h1,#music .music-archive-heading p{animation:none!important}
 }
+/* HIGH-CONTRAST NEON TEXT — solid glyphs, animated glow */
+#music .music-archive-heading h1,
+#music .music-archive-heading h1 span{
+ background:none!important;
+ -webkit-background-clip:border-box!important;
+ background-clip:border-box!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+ opacity:1!important;
+ filter:none!important;
+ text-shadow:0 0 2px #fff,0 0 8px #fff,0 0 16px #ff55e8,0 0 32px #ff22cc,0 0 58px #9b42ff!important;
+ animation:lf-neon-pulse 3.2s ease-in-out infinite!important;
+}
+#music .music-archive-heading h1 span{animation:lf-neon-pulse 3.2s ease-in-out infinite!important}
+@keyframes lf-neon-pulse{
+ 0%,100%{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:0 0 2px #fff,0 0 8px #fff,0 0 16px #ff55e8,0 0 32px #ff22cc,0 0 58px #9b42ff!important}
+ 33%{color:#e9ffff!important;-webkit-text-fill-color:#e9ffff!important;text-shadow:0 0 2px #fff,0 0 9px #fff,0 0 18px #4dfcff,0 0 36px #00cfff,0 0 62px #315bff!important}
+ 66%{color:#fff5d9!important;-webkit-text-fill-color:#fff5d9!important;text-shadow:0 0 2px #fff,0 0 9px #fff,0 0 18px #ffe66d,0 0 36px #ff9d32,0 0 62px #ff4d6d!important}
+}
+#music .music-archive-heading p{
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ text-shadow:0 0 5px #fff,0 0 12px #ff65e8,0 0 26px #b94cff,0 0 42px #7b35ff!important;
+ animation:lf-neon-sub 2.4s ease-in-out infinite!important;
+}
+
 </style>
 </head>
 <body>
