@@ -763,6 +763,8 @@ html body aside.sidebar nav button{
 #songs .producer-credit{display:block;margin-top:5px;color:#aeb9c2!important;font:10px/1.45 "Share Tech Mono",monospace!important;letter-spacing:1.2px;text-transform:uppercase;text-shadow:0 0 8px #63cfff35}
 
 #songs .artist-credit{font-weight:700;text-shadow:0 0 7px currentColor,0 0 15px currentColor}
+#songs a.artist-credit{display:inline-block;text-decoration:none;cursor:pointer;transition:filter .18s ease,transform .18s ease}
+#songs a.artist-credit:hover,#songs a.artist-credit:focus-visible{filter:brightness(1.35);transform:translateY(-1px);text-decoration:underline;text-underline-offset:3px;outline:none}
 #songs .artist-lime{color:#baff38}
 #songs .artist-purple{color:#c58aff}
 #songs .artist-red{color:#ff465c}
@@ -1136,9 +1138,19 @@ function renderArtistCredits(value){
   'young freak':'artist-red',
   'никотиновая кома':'artist-blue'
  };
+ const profiles={
+  'lil free':'Lil Free',
+  'lil cryver':'Lil Cryver',
+  'shimura':'SHIMURA',
+  'xvnkvr':'SHIMURA',
+  'young freak':'SHIMURA',
+  'никотиновая кома':'Никотиновая кома'
+ };
  return artistParts(value).map(name=>{
-  const cls=colors[name.trim().toLocaleLowerCase()]||'artist-other';
-  return '<span class="artist-credit '+cls+'">'+esc(name)+'</span>';
+  const key=name.trim().toLocaleLowerCase();
+  const cls=colors[key]||'artist-other';
+  const profile=profiles[key]||name;
+  return '<a class="artist-credit '+cls+'" href="#artist-bio" data-artist="'+esc(profile)+'" onclick="event.preventDefault();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>';
  }).join('<span class="artist-credit-separator"> &amp; </span>');
 }
 function renderPlayerArtists(value){const names=artistParts(value);$('now-artist').innerHTML=names.map(name=>'<a class="player-artist-link" href="#" data-artist="'+esc(name)+'" onclick="event.preventDefault();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>').join('<span class="player-artist-separator"> · </span>')}
