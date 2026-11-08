@@ -45,7 +45,7 @@ main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1
 #music .music-archive-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:.58;pointer-events:none}
 #music:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,6,.72),rgba(5,8,6,.66) 45%,rgba(5,8,6,.82)),linear-gradient(90deg,rgba(5,8,6,.35),rgba(5,8,6,.08),rgba(5,8,6,.35))}
 #music>*:not(.music-archive-video){position:relative;z-index:2}
-@media(prefers-reduced-motion:reduce){#music .music-archive-video{display:none}}
+/* Keep archive video visible even when reduced-motion is enabled; playback starts on opening MUSIC. */
 </style>
 </head>
 <body>
@@ -66,8 +66,7 @@ const TABS={albums:'Album',singles:'Singles',features:'Features'};
 const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
 let data={albums:[],singles:[],features:[]},era=2019,filter='all',queue=[];
 const $=id=>document.getElementById(id);
-function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0)}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
 function parseRows(raw){const json=JSON.parse(raw.slice(raw.indexOf('{'),raw.lastIndexOf('}')+1));return (json.table.rows||[]).filter(r=>r.c&&r.c.some(c=>c&&c.v!==null)).map(r=>Array.from({length:11},(_,i)=>String(cell(r,i)??'').trim())).filter(r=>r.some(Boolean)).filter(r=>!/^album$/i.test(r[0]));}
