@@ -714,10 +714,21 @@ html body aside.sidebar nav button[data-page="groups"].active{filter:brightness(
  html body aside.sidebar nav button{font-size:13px!important;letter-spacing:.11em!important}
 }
 </style>
+<style id="sidebar-mp4-icons">
+html body aside.sidebar nav button{display:flex!important;align-items:center!important;gap:10px!important;}
+html body aside.sidebar nav button .nav-icon{display:block!important;flex:0 0 25px!important;width:25px!important;height:25px!important;object-fit:contain!important;pointer-events:none!important;background:transparent!important;border:0!important;}
+html body aside.sidebar nav button span{display:inline-block!important;}
+@media(max-width:600px){html body aside.sidebar nav button{gap:7px!important;}html body aside.sidebar nav button .nav-icon{width:21px!important;height:21px!important;flex-basis:21px!important;}}
+</style>
 </head>
 <body class="home-view">
 <aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
-<nav aria-label="Основная навигация"><button type="button" class="active" data-page="home" onclick="showPage('home')">⌂ <span>HOME</span></button><button type="button" data-page="music" onclick="showPage('music')">◉ <span>MUSIC</span></button><button type="button" data-page="videos" onclick="showPage('videos')">▣ <span>VIDEOS</span></button><button type="button" data-page="groups" onclick="showPage('groups')">⌘ <span>GROUPS</span></button></nav>
+<nav aria-label="Основная навигация">
+<button type="button" class="active" data-page="home" onclick="showPage('home')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/HOME.mp4" type="video/mp4"></video><span>HOME</span></button>
+<button type="button" data-page="music" onclick="showPage('music')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/MUSIC.mp4" type="video/mp4"></video><span>MUSIC</span></button>
+<button type="button" data-page="videos" onclick="showPage('videos')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/VIDEO.mp4" type="video/mp4"></video><span>VIDEOS</span></button>
+<button type="button" data-page="groups" onclick="showPage('groups')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/GROUP.mp4" type="video/mp4"></video><span>GROUPS</span></button>
+</nav>
 <div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
 <main><div class="topline"><span>LIL FREE / ARCHIVE DATABASE</span><span id="counter">001 — HOME</span></div>
 <section id="home" class="page active"><video class="home-bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/home.mp4" type="video/mp4"></video><div class="hero"><div class="hero-copy"><h1>Lil Free</h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
