@@ -1517,6 +1517,29 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 }
 @keyframes snp-art-arrive{from{opacity:0;transform:translateY(12px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes snp-info-arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Keep the mobile play/pause glyph identical and crisp */
+@media(max-width:760px){
+ #toggle.player-toggle{
+  position:relative!important;font-size:0!important;line-height:0!important;
+  color:#151815!important;-webkit-appearance:none!important;appearance:none!important;
+  overflow:visible!important
+ }
+ #toggle.player-toggle::before{
+  content:""!important;position:absolute!important;display:block!important;
+  left:50%!important;top:50%!important;width:14px!important;height:16px!important;
+  transform:translate(-38%,-50%)!important;border:0!important;border-radius:0!important;
+  background:currentColor!important;
+  clip-path:polygon(12% 0,100% 50%,12% 100%)!important;
+  -webkit-clip-path:polygon(12% 0,100% 50%,12% 100%)!important
+ }
+ #toggle.player-toggle[data-state="pause"]::before{
+  width:14px!important;height:16px!important;transform:translate(-50%,-50%)!important;
+  background:linear-gradient(to right,currentColor 0 4px,transparent 4px 10px,currentColor 10px 14px)!important;
+  clip-path:none!important;-webkit-clip-path:none!important
+ }
+ #toggle.player-toggle::after{content:none!important;display:none!important}
+}
 </style>
 </head>
 <body class="home-view">
