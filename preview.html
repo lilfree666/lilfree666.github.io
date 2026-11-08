@@ -197,6 +197,13 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
   47%{opacity:.9;transform:translateX(-1px);filter:hue-rotate(-18deg)}
 }
 
+
+/* Hide subtitles and track counts under the year numbers */
+#music #years.grid>.tile>small,
+#music #years.grid>.tile>.count{
+  display:none!important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
