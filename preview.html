@@ -69,6 +69,7 @@ const TABS={albums:'Album',singles:'Singles',features:'Features'};
 const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
 let data={albums:[],singles:[],features:[]},era=2019,filter='all',queue=[];
 const $=id=>document.getElementById(id);
+document.querySelectorAll('nav button[data-page]').forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
 function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
