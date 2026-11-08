@@ -1019,6 +1019,41 @@ html body aside.sidebar nav button{
   #home #home-stats>.tile small{font-size:9px!important;letter-spacing:.14em!important;margin-top:18px!important}
 }
 
+
+/* HOME ARCHIVE STATS: same Bodoni italic neon typography as THE ARCHIVE heading */
+#home #home-stats>.tile strong,
+#home #home-stats>.tile small{
+  font-family:"Bodoni 72",Didot,"Times New Roman",serif!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  text-transform:uppercase!important;
+}
+#home #home-stats>.tile strong{
+  font-size:clamp(42px,5.4vw,62px)!important;
+  line-height:1!important;
+  letter-spacing:.025em!important;
+  text-shadow:0 0 3px currentColor,0 0 12px currentColor,0 0 28px color-mix(in srgb,currentColor 72%,transparent)!important;
+}
+#home #home-stats>.tile small{
+  margin:18px 0 0!important;
+  font-size:clamp(11px,1.15vw,14px)!important;
+  line-height:1.4!important;
+  letter-spacing:.2em!important;
+  text-shadow:0 0 5px currentColor,0 0 14px color-mix(in srgb,currentColor 75%,transparent)!important;
+}
+#home #home-stats>.tile:nth-child(1) strong,
+#home #home-stats>.tile:nth-child(1) small{color:#8edcff!important;-webkit-text-fill-color:#8edcff!important}
+#home #home-stats>.tile:nth-child(2) strong,
+#home #home-stats>.tile:nth-child(2) small{color:#ff9bd8!important;-webkit-text-fill-color:#ff9bd8!important}
+#home #home-stats>.tile:nth-child(3) strong,
+#home #home-stats>.tile:nth-child(3) small{color:#c5a3ff!important;-webkit-text-fill-color:#c5a3ff!important}
+#home #home-stats>.tile:nth-child(4) strong,
+#home #home-stats>.tile:nth-child(4) small{color:#c9ef86!important;-webkit-text-fill-color:#c9ef86!important}
+@media(max-width:760px){
+  #home #home-stats>.tile strong{font-size:clamp(36px,9vw,50px)!important}
+  #home #home-stats>.tile small{font-size:10px!important;letter-spacing:.13em!important}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
