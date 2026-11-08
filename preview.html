@@ -761,6 +761,15 @@ html body aside.sidebar nav button{
 @media(max-width:380px){#groups .groups-grid{grid-template-columns:1fr;max-width:300px}#groups .group-card-info strong{font-size:22px}}
 
 #songs .producer-credit{display:block;margin-top:5px;color:#aeb9c2!important;font:10px/1.45 "Share Tech Mono",monospace!important;letter-spacing:1.2px;text-transform:uppercase;text-shadow:0 0 8px #63cfff35}
+
+#songs .artist-credit{font-weight:700;text-shadow:0 0 7px currentColor,0 0 15px currentColor}
+#songs .artist-lime{color:#baff38}
+#songs .artist-purple{color:#c58aff}
+#songs .artist-red{color:#ff465c}
+#songs .artist-blue{color:#55baff}
+#songs .artist-other{color:#62e6d2}
+#songs .artist-credit-separator{color:#9ba6a8;margin:0 3px}
+#songs .producer-credit{color:#ffd84a!important;text-shadow:0 0 7px #ffd84a,0 0 15px #ffd84a!important}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
@@ -1109,7 +1118,7 @@ function renderSearch(){const q=$('archive-search').value.trim().toLocaleLowerCa
 function openEra(y){era=y;filter='all';const yearAccent={2019:'#35e7ff',2020:'#b56bff',2021:'#4d8dff',2022:'#ff4fc8',2023:'#ff8a3d',2024:'#ff4d5d',2025:'#b8ff28',2026:'#ffd45a'}[y]||'#b8ff28';$('era').style.setProperty('--era-accent',yearAccent);$('era-title').textContent=y;showPage('era');renderEra()}
 function renderEra(){const fs=[['all','ALL'],['album','ALBUMS'],['ep','EP'],['single','SINGLES'],['feature','FEATURES']];$('filters').innerHTML=fs.map(([k,v])=>'<button class="'+(filter===k?'active':'')+'" onclick="setFilter(\''+k+'\')">'+v+'</button>').join('');let albums=data.albums.filter(x=>x.year===era);let groups=new Map();albums.forEach(x=>{let k=x.album||'Untitled release';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(x)});let cards=[];if(filter==='all'||filter==='album'||filter==='ep')for(const [name,tracks] of groups){const isep=/\b(ep|mixtape)\b/i.test(name)||/^milky\s*way$/i.test(name);if(filter==='ep'&&!isep||filter==='album'&&isep)continue;const cover=tracks[0].coverFile?'<img crossorigin="anonymous" src="'+coverUrl(tracks[0].coverFile)+'" alt="'+esc(name)+' cover" loading="lazy" onerror="this.parentElement.textContent=\'COVER UNAVAILABLE\'">':'L/F';cards.push('<article class="release" data-cover-file="'+esc(tracks[0].coverFile)+'" onclick="this.classList.toggle(\'open\')"><div class="cover">'+cover+'<button class="playtrack" data-track-title="'+esc(tracks[0].title)+'" aria-label="Play '+esc(name)+'" onclick="event.stopPropagation();playItem('+jsArg(tracks[0].link)+','+jsArg(tracks[0].title)+','+jsArg(tracks[0].artists)+','+jsArg(tracks[0].coverFile)+')">▶</button></div><div class="releasebody"><h3>'+esc(name)+'</h3><small>'+esc(tracks[0].date||era)+' · '+tracks.length+' TRACKS</small></div><div class="tracklist">'+tracks.map(t=>'<div class="track"><span>'+esc(t.number)+' · '+esc(t.title)+' — '+esc(t.artists)+'</span><button data-track-title="'+esc(t.title)+'" onclick="event.stopPropagation();playItem('+jsArg(t.link)+','+jsArg(t.title)+','+jsArg(t.artists)+','+jsArg(t.coverFile)+')">▶</button></div>').join('')+'</div></article>')}
 $('releases').innerHTML=cards.join('')||((filter==='all'||filter==='album'||filter==='ep')?'<div class="notice">Нет альбомных релизов за этот год.</div>':'');applyCardAccents();
-let rows=[];if(filter==='all'||filter==='single')rows=rows.concat(data.singles.filter(x=>x.year===era).map(x=>({...x,kind:'SINGLE'})));if(filter==='all'||filter==='feature')rows=rows.concat(data.features.filter(x=>x.year===era).map(x=>({...x,kind:'FEATURE'})));$('songs').innerHTML=rows.length?rows.map(x=>'<article class="release songcard" data-cover-file="'+esc(x.coverFile)+'"><div class="cover">'+(x.coverFile?'<img crossorigin="anonymous" src="'+coverUrl(x.coverFile)+'" alt="'+esc(x.title)+' cover" loading="lazy" onerror="this.parentElement.textContent=\'COVER UNAVAILABLE\'">':'L/F')+'<button class="playtrack" data-track-title="'+esc(x.title)+'" aria-label="Play '+esc(x.title)+'" onclick="playItem('+jsArg(x.link)+','+jsArg(x.title)+','+jsArg(x.artists)+','+jsArg(x.coverFile)+')">▶</button></div><div class="releasebody"><h3>'+esc(x.title)+'</h3><small>'+esc(x.kind+' · '+(x.artists||'Lil Free')+' · '+(x.date||''))+'</small>'+(x.producer&&x.producer.trim()?'<small class="producer-credit">PROD. '+esc(x.producer)+'</small>':'')+'</div></article>').join(''):'<div class="notice">Нет отдельных треков в выбранной категории.</div>'};applyCardAccents()
+let rows=[];if(filter==='all'||filter==='single')rows=rows.concat(data.singles.filter(x=>x.year===era).map(x=>({...x,kind:'SINGLE'})));if(filter==='all'||filter==='feature')rows=rows.concat(data.features.filter(x=>x.year===era).map(x=>({...x,kind:'FEATURE'})));$('songs').innerHTML=rows.length?rows.map(x=>'<article class="release songcard" data-cover-file="'+esc(x.coverFile)+'"><div class="cover">'+(x.coverFile?'<img crossorigin="anonymous" src="'+coverUrl(x.coverFile)+'" alt="'+esc(x.title)+' cover" loading="lazy" onerror="this.parentElement.textContent=\'COVER UNAVAILABLE\'">':'L/F')+'<button class="playtrack" data-track-title="'+esc(x.title)+'" aria-label="Play '+esc(x.title)+'" onclick="playItem('+jsArg(x.link)+','+jsArg(x.title)+','+jsArg(x.artists)+','+jsArg(x.coverFile)+')">▶</button></div><div class="releasebody"><h3>'+esc(x.title)+'</h3><small>'+esc(x.kind)+' · '+renderArtistCredits(x.artists||'Lil Free')+' · '+esc(x.date||'')+'</small>'+(x.producer&&x.producer.trim()?'<small class="producer-credit">PROD. '+esc(x.producer)+'</small>':'')+'</div></article>').join(''):'<div class="notice">Нет отдельных треков в выбранной категории.</div>'};applyCardAccents()
 function setFilter(k){filter=k;renderEra()}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function jsArg(s){return JSON.stringify(String(s??'')).replace(/&/g,'\\u0026').replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/"/g,'&quot;')}
@@ -1117,6 +1126,21 @@ function coverUrl(path){const value=String(path??'').trim().replace(/^\/+/, '');
 function formatTime(seconds){if(!Number.isFinite(seconds)||seconds<0)return'0:00';const m=Math.floor(seconds/60),s=Math.floor(seconds%60);return m+':'+String(s).padStart(2,'0')}
 function setPlayerProgress(){const a=$('audio'),p=a.duration?Math.min(100,a.currentTime/a.duration*100):0;$('progress').value=Math.round(p*10);$('progress').style.setProperty('--progress',p+'%');$('current-time').textContent=formatTime(a.currentTime);$('duration').textContent=formatTime(a.duration)}
 function artistParts(value){return [...new Set(String(value||'Lil Free').split(/\s*,\s*|\s*;\s*|\s+feat\.?\s+|\s+ft\.?\s+|\s*&\s*|\s+x\s+/i).map(x=>x.trim()).filter(Boolean))]}
+
+function renderArtistCredits(value){
+ const colors={
+  'lil free':'artist-lime',
+  'lil cryver':'artist-purple',
+  'shimura':'artist-red',
+  'xvnkver':'artist-red',
+  'young freak':'artist-red',
+  'никотиновая кома':'artist-blue'
+ };
+ return artistParts(value).map(name=>{
+  const cls=colors[name.trim().toLocaleLowerCase()]||'artist-other';
+  return '<span class="artist-credit '+cls+'">'+esc(name)+'</span>';
+ }).join('<span class="artist-credit-separator"> &amp; </span>');
+}
 function renderPlayerArtists(value){const names=artistParts(value);$('now-artist').innerHTML=names.map(name=>'<a class="player-artist-link" href="#" data-artist="'+esc(name)+'" onclick="event.preventDefault();showArtistBio(this.dataset.artist)">'+esc(name)+'</a>').join('<span class="player-artist-separator"> · </span>')}
 function showArtistBio(name){$('artist-bio-name').textContent=name;$('artist-bio-description').textContent=name.toLowerCase()==='lil free'?'Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.':'Биография этого исполнителя появится здесь позже.';showPage('artist-bio')}
 let activeAccentRequest=0;
