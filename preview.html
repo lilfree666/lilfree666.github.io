@@ -1262,6 +1262,86 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
 #group-start-walking-away .swa-members-note{background:transparent!important}
 
 </style>
+<style id="swa-participants-fire-v1">
+/* Start Walking Away — burning participants panel */
+#group-start-walking-away .swa-members{
+  position:relative!important;
+  isolation:isolate;
+  overflow:visible!important;
+  border:1px solid rgba(255,91,35,.38)!important;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(255,102,25,.19),transparent 48%),
+    linear-gradient(160deg,rgba(28,10,8,.78),rgba(8,6,7,.76))!important;
+  box-shadow:
+    0 0 10px rgba(255,72,18,.22),
+    0 0 28px rgba(255,48,12,.17),
+    0 0 58px rgba(255,118,24,.10),
+    inset 0 0 28px rgba(255,72,12,.10)!important;
+  animation:swa-panel-fire 3.8s ease-in-out infinite alternate;
+}
+#group-start-walking-away .swa-members:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-9px -7px -5px;
+  border-radius:5px;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 15% 0%,rgba(255,78,16,.48),transparent 43%),
+    radial-gradient(ellipse at 85% 5%,rgba(255,151,26,.34),transparent 42%),
+    radial-gradient(ellipse at 50% 100%,rgba(255,35,12,.25),transparent 55%);
+  filter:blur(13px);
+  opacity:.85;
+  animation:swa-flame-breathe 2.1s ease-in-out infinite alternate;
+}
+#group-start-walking-away .swa-members-heading{
+  position:relative;
+  border-bottom-color:rgba(255,105,35,.42)!important;
+}
+#group-start-walking-away .swa-members-heading h2{
+  display:inline-block;
+  color:#ffe1bd!important;
+  background:linear-gradient(180deg,#fff4d6 0%,#ffc078 38%,#ff7137 72%,#e83a20 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 12px rgba(255,89,30,.35);
+  filter:drop-shadow(0 0 8px rgba(255,77,20,.55));
+}
+#group-start-walking-away .swa-members-heading:after{
+  content:"";
+  position:absolute;
+  height:9px;
+  left:0;right:0;bottom:-5px;
+  background:linear-gradient(90deg,transparent,rgba(255,69,18,.95),rgba(255,177,55,.9),rgba(255,69,18,.75),transparent);
+  filter:blur(5px);
+  transform-origin:center;
+  animation:swa-flame-line 1.7s ease-in-out infinite alternate;
+}
+#group-start-walking-away .swa-member-card{
+  border-bottom-color:rgba(255,107,48,.19)!important;
+}
+#group-start-walking-away .swa-members-note{
+  color:#c18b75!important;
+}
+@keyframes swa-panel-fire{
+  0%{box-shadow:0 0 8px rgba(255,72,18,.16),0 0 22px rgba(255,48,12,.12),inset 0 0 22px rgba(255,72,12,.07)}
+  100%{box-shadow:0 0 16px rgba(255,102,24,.31),0 0 42px rgba(255,48,12,.23),0 0 64px rgba(255,118,24,.12),inset 0 0 34px rgba(255,72,12,.14)}
+}
+@keyframes swa-flame-breathe{
+  0%{opacity:.48;transform:scaleX(.97) translateY(2px)}
+  100%{opacity:1;transform:scaleX(1.035) translateY(-2px)}
+}
+@keyframes swa-flame-line{
+  0%{opacity:.55;transform:scaleX(.82) skewX(-3deg)}
+  100%{opacity:1;transform:scaleX(1) skewX(3deg)}
+}
+@media(prefers-reduced-motion:reduce){
+ #group-start-walking-away .swa-members,
+ #group-start-walking-away .swa-members:before,
+ #group-start-walking-away .swa-members-heading:after{animation:none!important}
+}
+</style>
 </head>
 <body class="home-view">
 <aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><img class="sidebar-logo" src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/Lil%20Free%20-%20LOGO.PNG" alt="Lil Free"></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">←</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
