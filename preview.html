@@ -931,6 +931,11 @@ html body aside.sidebar nav button{
   -webkit-backdrop-filter:blur(8px);
 }
 
+
+/* Keep the three HOME menu cards in one vertical column on every screen */
+#home .home-select{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;width:min(920px,calc(100% - 48px))!important}
+#home .home-select>.home-select-item{display:grid!important;flex:0 0 auto!important;width:100%!important;max-width:none!important}
+@media(max-width:600px){#home .home-select{width:calc(100% - 28px)!important}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
