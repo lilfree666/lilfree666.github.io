@@ -1199,7 +1199,7 @@ html body aside.sidebar nav button{
 #home .home-select-news .home-select-bg-video{
   position:absolute!important;
   inset:0!important;
-  z-index:-1!important;
+  z-index:0!important;
   display:block!important;
   width:100%!important;
   height:100%!important;
@@ -1210,14 +1210,19 @@ html body aside.sidebar nav button{
 #home .home-select-news .home-select-video-overlay{
   position:absolute!important;
   inset:0!important;
-  z-index:0!important;
+  z-index:1!important;
   display:block!important;
   background:linear-gradient(180deg,rgba(4,5,9,.16) 0%,rgba(4,5,9,.2) 42%,rgba(4,5,9,.88) 100%)!important;
   pointer-events:none!important;
 }
 #home .home-select-news>.home-select-copy{
   position:relative!important;
-  z-index:1!important;
+  z-index:2!important;
+}
+#home .home-select-news>.home-select-index,
+#home .home-select-news>.home-select-arrow{
+  position:relative!important;
+  z-index:2!important;
 }
 
 </style>
