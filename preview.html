@@ -465,25 +465,29 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
 }
 
 
-/* MOBILE NAVIGATION: HORIZONTAL SWIPE */
+/* MOBILE NAVIGATION: CENTERED MENU WITH HORIZONTAL SWIPE */
 @media(max-width:760px){
  .sidebar{
   display:flex!important;
   flex-direction:row!important;
   align-items:center!important;
-  justify-content:flex-start!important;
-  gap:10px!important;
+  justify-content:center!important;
+  gap:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:12px 10px!important;
   overflow:hidden!important;
  }
- .sidebar-top{flex:0 0 auto!important;min-width:0!important}
- .sidebar-brand{min-width:0!important}
- .sidebar-brand .brand{white-space:nowrap!important}
+ .sidebar-top{display:none!important}
  .sidebar nav{
   display:flex!important;
-  flex:1 1 0!important;
+  flex:0 1 auto!important;
   min-width:0!important;
-  width:0!important;
-  margin:0!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0 auto!important;
+  justify-content:center!important;
+  align-items:center!important;
   gap:4px!important;
   overflow-x:auto!important;
   overflow-y:hidden!important;
