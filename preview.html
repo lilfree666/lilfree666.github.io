@@ -8,7 +8,7 @@
 :root{--bg:#080a09;--panel:#111512;--panel2:#171d18;--lime:#b8ff28;--text:#f0f1eb;--muted:#929b91;--line:#293129;--side:220px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,Helvetica,sans-serif}button{font:inherit;color:inherit;cursor:pointer}a{color:inherit}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.09;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff1 4px,transparent 5px)}
-.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);padding:28px 18px;background:#090c0aee;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:1000;pointer-events:auto}.sidebar nav,.sidebar nav button{position:relative;z-index:1001;pointer-events:auto}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);padding:28px 18px;background:#090c0aee;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:2147483000;pointer-events:auto;isolation:isolate}.sidebar *{pointer-events:auto}.sidebar nav{position:relative;z-index:2147483000;pointer-events:auto}.sidebar nav button{position:relative;z-index:2147483000;pointer-events:auto;touch-action:manipulation}
 .brand{font-weight:900;letter-spacing:5px;font-size:22px;margin:0 0 8px}.tag{font:10px monospace;color:var(--lime);letter-spacing:2px}
 nav{display:grid;gap:8px;margin-top:58px}nav button{border:1px solid transparent;background:none;text-align:left;padding:13px 14px;color:#9da69d;letter-spacing:2px;font:12px monospace}nav button:hover,nav button.active{color:var(--lime);background:#b8ff2810;border-color:#b8ff2830}
 .sidefoot{margin-top:auto;color:#69736b;font:10px/2 monospace;letter-spacing:1px}
@@ -53,7 +53,7 @@ main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1
 </head>
 <body>
 <aside class="sidebar"><div><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div>
-<nav><button class="active" data-page="home">⌂ HOME</button><button data-page="music">◉ MUSIC</button><button data-page="videos">▣ VIDEOS</button><button data-page="groups">⌘ GROUPS</button></nav>
+<nav aria-label="Основная навигация"><button type="button" class="active" data-page="home" onclick="showPage('home')">⌂ HOME</button><button type="button" data-page="music" onclick="showPage('music')">◉ MUSIC</button><button type="button" data-page="videos" onclick="showPage('videos')">▣ VIDEOS</button><button type="button" data-page="groups" onclick="showPage('groups')">⌘ GROUPS</button></nav>
 <div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
 <main><div class="topline"><span>LIL FREE / ARCHIVE DATABASE</span><span id="counter">001 — HOME</span></div>
 <section id="home" class="page active"><div class="hero"><div class="hero-copy"><div class="eyebrow">INDEPENDENT ARTIST · 2019—2026</div><h1>LIL<br><span>FREE</span></h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p><button class="cta" onclick="showPage('music')">ОТКРЫТЬ МУЗЫКАЛЬНЫЙ АРХИВ ↗</button></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
@@ -69,7 +69,7 @@ const TABS={albums:'Album',singles:'Singles',features:'Features'};
 const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
 let data={albums:[],singles:[],features:[]},era=2019,filter='all',queue=[];
 const $=id=>document.getElementById(id);
-document.querySelectorAll('nav button[data-page]').forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
+document.addEventListener('click',event=>{const button=event.target.closest('.sidebar nav button[data-page]');if(button){event.preventDefault();showPage(button.dataset.page)}},true);
 function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
