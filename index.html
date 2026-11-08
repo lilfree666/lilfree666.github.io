@@ -64,6 +64,7 @@ function jsArg(s){return JSON.stringify(String(s??'')).replace(/&/g,'\\u0026').r
 function coverUrl(path){const value=String(path??'').trim().replace(/^\/+/, '');const relative=/^covers\//i.test(value)?value:'covers/'+value;return relative.split('/').map(part=>encodeURIComponent(part)).join('/')}
 function playItem(url,title,artist){if(!url||!/^https?:\/\//i.test(url)){ $('now-title').textContent=title+' — ссылка на аудио не указана';return}$('audio').src=url;$('now-title').textContent=title;$('now-artist').textContent=artist||'Lil Free';$('audio').play().catch(()=>{});$('toggle').textContent='Ⅱ'}
 $('toggle').onclick=()=>{if($('audio').paused){$('audio').play().catch(()=>{})}else $('audio').pause()};$('audio').onplay=()=>$('toggle').textContent='Ⅱ';$('audio').onpause=()=>$('toggle').textContent='▶';
+$('years').innerHTML='<div class="notice">Загружаем музыкальный архив из Google Sheets…</div>';$('home-stats').innerHTML='<div class="notice">Подключаем базу релизов…</div>';
 (async()=>{try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears()}catch(e){$('years').innerHTML='<div class="notice">Не удалось загрузить Google Sheets: '+esc(e.message)+'. Проверьте, что таблица опубликована для просмотра.</div>';$('home-stats').innerHTML='<div class="notice">Архив ожидает подключения таблицы.</div>'}})();
 </script>
 </body></html>
