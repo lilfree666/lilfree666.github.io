@@ -42,9 +42,9 @@ main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1
 
 /* MUSIC ARCHIVE ambient video background */
 #music{position:relative;isolation:isolate;overflow:hidden;border-radius:12px;padding:1px 0 24px}
-#music .music-archive-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;opacity:.42;pointer-events:none}
-#music:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,6,.78),rgba(5,8,6,.72) 45%,rgba(5,8,6,.88)),linear-gradient(90deg,rgba(5,8,6,.45),rgba(5,8,6,.15),rgba(5,8,6,.45))}
-#music>*:not(.music-archive-video){position:relative;z-index:1}
+#music .music-archive-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:.58;pointer-events:none}
+#music:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(5,8,6,.72),rgba(5,8,6,.66) 45%,rgba(5,8,6,.82)),linear-gradient(90deg,rgba(5,8,6,.35),rgba(5,8,6,.08),rgba(5,8,6,.35))}
+#music>*:not(.music-archive-video){position:relative;z-index:2}
 @media(prefers-reduced-motion:reduce){#music .music-archive-video{display:none}}
 </style>
 </head>
