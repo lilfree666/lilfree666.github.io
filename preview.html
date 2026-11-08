@@ -982,7 +982,7 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
 </nav>
 <div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
 <main>
-<section id="home" class="page active"><video class="home-bg-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/home.mp4" type="video/mp4"></video><div class="hero"><div class="hero-copy"><h1>Lil Free</h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
+<section id="home" class="page active"><video class="home-bg-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" fetchpriority="high" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/home.mp4" type="video/mp4"></video><div class="hero"><div class="hero-copy"><h1>Lil Free</h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
 <section id="music" class="page"><video class="music-archive-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/music-archive.mp4" type="video/mp4"></video><div class="sectionhead music-archive-heading"><div><h1><span>MUSIC</span> ARCHIVE</h1></div></div><div class="archive-search" id="archive-search-wrap"><button class="search-toggle" type="button" aria-label="Открыть поиск" aria-expanded="false" onclick="toggleArchiveSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m15.7 15.7 5 5"/><path d="m7.8 8.4 1.1-.9" opacity=".55"/></svg></button><input id="archive-search" type="search" placeholder="НАЙТИ РЕЛИЗ…" autocomplete="off" aria-label="Поиск по музыкальному архиву"></div><div id="search-results" hidden></div><div class="grid" id="years"></div></section>
 <section id="era" class="page"><button class="back" onclick="showPage('music')">← BACK TO YEARS</button><div class="sectionhead"><div><h1><span id="era-title">2019</span> / RELEASES</h1></div></div><div class="filters" id="filters"></div><div class="grid" id="releases"></div><div class="sectionhead"><div><h2>TRACKS / SINGLES / FEATURES</h2></div></div><div class="grid" id="songs"></div></section>
 <section id="videos" class="page"><div class="sectionhead"><div><h1><span>VIDEO</span> ARCHIVE</h1><p>MUSIC VIDEOS / VISUALS</p></div></div><div class="notice">Раздел подготовлен. Добавим сюда клипы, визуализаторы и видеоинтервью с проверенными ссылками.</div></section>
@@ -1044,15 +1044,31 @@ function startHomeBackground(){
  if(!video)return;
  video.muted=true;
  video.defaultMuted=true;
+ video.autoplay=true;
+ video.loop=true;
  video.playsInline=true;
  video.setAttribute('muted','');
+ video.setAttribute('autoplay','');
+ video.setAttribute('loop','');
  video.setAttribute('playsinline','');
  video.setAttribute('webkit-playsinline','');
- if(video.paused){
-  const play=()=>{if(document.body.classList.contains('home-view')||document.querySelector('#home.page.active'))video.play().catch(()=>{});};
-  requestAnimationFrame(play);
-  setTimeout(play,180);
+ video.setAttribute('preload','auto');
+ const isHome=()=>document.body.classList.contains('home-view')||document.querySelector('#home.page.active');
+ const playNow=()=>{
+  if(!isHome()||!video.paused)return;
+  const attempt=video.play();
+  if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{});
+ };
+ if(!video.dataset.autoplayRecovery){
+  video.dataset.autoplayRecovery='1';
+  ['loadedmetadata','loadeddata','canplay','canplaythrough'].forEach(eventName=>{
+   video.addEventListener(eventName,playNow,{passive:true});
+  });
+  video.addEventListener('pause',()=>{
+   if(isHome()&&!document.hidden)requestAnimationFrame(playNow);
+  });
  }
+ playNow();
 }
 function openGroup(slug){showPage('group-'+slug)}
 function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='home')startHomeBackground();if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
