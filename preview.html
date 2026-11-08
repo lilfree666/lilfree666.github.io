@@ -1102,6 +1102,27 @@ html body aside.sidebar nav button{
   #home #home-stats>.tile small{font-size:10px!important;letter-spacing:.13em!important}
 }
 
+
+/* HOME poster cards: remove numbering/arrows and add a subtle hover zoom */
+#home .home-select>.home-select-item{
+  transition:transform .28s cubic-bezier(.2,.75,.25,1),filter .28s ease!important;
+  transform:scale(1)!important;
+  transform-origin:center center!important;
+  z-index:1;
+}
+#home .home-select>.home-select-item .home-select-index,
+#home .home-select>.home-select-item .home-select-arrow{
+  display:none!important;
+}
+#home .home-select>.home-select-item:hover{
+  transform:scale(1.025)!important;
+  filter:brightness(1.08);
+  z-index:3;
+}
+@media(hover:none){
+  #home .home-select>.home-select-item:hover{transform:scale(1)!important;filter:none}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
