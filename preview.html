@@ -667,6 +667,10 @@ body #home.page .hero .hero-copy h1{
  line-height:.82!important;
 }
 </style>
+<style id="hide-home-topline-final">
+body.home-view main>.topline,
+body:has(#home.page.active) main>.topline{display:none!important}
+</style>
 </head>
 <body class="home-view">
 <aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
