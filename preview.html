@@ -860,9 +860,31 @@ html body.sidebar-collapsed aside.sidebar nav button{
 }
 </style>
 
+
+<style id="sidebar-logo-image-sizing">
+html body aside.sidebar .sidebar-brand{
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ min-width:0!important;width:100%!important;min-height:54px!important;
+}
+html body aside.sidebar .sidebar-logo{
+ display:block!important;width:min(100%,190px)!important;height:54px!important;
+ object-fit:contain!important;object-position:left center!important;
+ margin:0!important;padding:0!important;border:0!important;background:transparent!important;
+}
+html body.sidebar-collapsed aside.sidebar .sidebar-brand{justify-content:center!important;width:100%!important}
+html body.sidebar-collapsed aside.sidebar .sidebar-logo{
+ width:42px!important;height:42px!important;object-fit:contain!important;object-position:center!important;
+}
+@media(max-width:760px){
+ html body aside.sidebar .sidebar-brand{width:auto!important;min-height:40px!important;flex:1 1 auto!important}
+ html body aside.sidebar .sidebar-logo{width:min(100%,150px)!important;height:40px!important;object-position:left center!important}
+ html body.sidebar-collapsed aside.sidebar .sidebar-brand{display:none!important}
+}
+</style>
+
 </head>
 <body class="home-view">
-<aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
+<aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><img class="sidebar-logo" src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/Lil%20Free%20-%20LOGO.PNG" alt="Lil Free"></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
 <nav aria-label="Основная навигация">
 <button type="button" class="active" data-page="home" onclick="showPage('home')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/HOME.mp4" type="video/mp4"></video><span>HOME</span></button>
 <button type="button" data-page="music" onclick="showPage('music')"><video class="nav-icon" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/MUSIC.mp4" type="video/mp4"></video><span>MUSIC</span></button>
