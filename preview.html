@@ -696,23 +696,27 @@ html body aside.sidebar nav button{
 }
 
 
-/* GROUPS — editorial collective cards and wiki-style profiles */
+/* GROUPS — retro character select screen */
 #groups .groups-heading{align-items:center;margin-top:42px}
 #groups .groups-count{color:#aeb8b0;font:10px monospace;letter-spacing:2px;border:1px solid #ffffff24;padding:9px 12px;border-radius:3px}
-#groups .groups-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:28px}
-#groups .group-card{display:block;min-width:0;padding:0;overflow:hidden;text-align:left;border:1px solid #ffffff24;border-radius:13px;background:linear-gradient(145deg,#171b1b,#0c100f);color:#f4f4f0;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
-#groups .group-card:hover,#groups .group-card:focus-visible{transform:translateY(-5px);border-color:#d7b8e8;box-shadow:0 0 0 1px #d7b8e844,0 12px 40px #0009,0 0 24px #c28ce322;outline:none}
-#groups .group-card-image{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:#171b1c}
-#groups .group-card-image img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.72);transition:transform .55s ease,filter .4s ease}
-#groups .group-card:hover .group-card-image img{transform:scale(1.055);filter:brightness(.88) saturate(.95)}
-#groups .group-card-shade{position:absolute;inset:0;background:linear-gradient(180deg,#05060622 0%,transparent 35%,#050606d9 100%)}
-#groups .group-card-index{position:absolute;top:17px;left:18px;color:#fff;font:10px monospace;letter-spacing:2px;text-shadow:0 1px 8px #000}
-#groups .group-card-open{position:absolute;right:17px;bottom:16px;color:#fff;font:10px monospace;letter-spacing:1.5px;text-shadow:0 1px 8px #000;opacity:.85}
-#groups .group-card-info{display:flex;flex-direction:column;gap:7px;padding:19px 20px 22px}
+#groups .groups-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:30px auto 0;max-width:980px}
+#groups .group-card{display:flex;flex-direction:column;min-width:0;padding:10px;overflow:hidden;text-align:left;border:1px solid #ffffff35;border-radius:5px;background:linear-gradient(145deg,#1b2020,#090c0c);color:#f4f4f0;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;cursor:pointer}
+#groups .group-card:hover,#groups .group-card:focus-visible{transform:translateY(-4px);border-color:#d9c0ec;box-shadow:0 0 0 1px #d9c0ec66,0 0 25px #b68bdb38,0 14px 36px #000a;outline:none}
+#groups .group-card-image{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:#151a1a;border:1px solid #ffffff24}
+#groups .group-card-image img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(.7);transition:transform .35s ease,filter .3s ease;image-rendering:auto}
+#groups .group-card:hover .group-card-image img{transform:scale(1.04);filter:brightness(.9) saturate(.95)}
+#groups .group-card-shade{position:absolute;inset:0;background:linear-gradient(180deg,#05060635 0%,transparent 35%,#050606c9 100%)}
+#groups .group-card-index{position:absolute;top:12px;left:12px;color:#fff;font:10px monospace;letter-spacing:2px;text-shadow:0 1px 8px #000}
+#groups .group-card-open{position:absolute;right:12px;bottom:12px;color:#fff;font:10px monospace;letter-spacing:1.5px;text-shadow:0 1px 8px #000;opacity:.9}
+#groups .group-card-info{display:flex;flex-direction:column;gap:7px;padding:15px 8px 10px}
 #groups .group-card-kicker,.wiki-kicker{color:#c8a8dc;font:10px monospace;letter-spacing:2.5px}
-#groups .group-card-info strong{font-size:clamp(19px,2.3vw,29px);line-height:1.12;letter-spacing:-.8px;overflow-wrap:anywhere}
-#groups .group-card-description{color:#929b99;font:11px monospace;letter-spacing:.4px}
-#groups .groups-footnote{margin:20px 0;color:#79827d;font:10px monospace;letter-spacing:1.4px}
+#groups .group-card-info strong{font-size:clamp(18px,2.2vw,26px);line-height:1.12;letter-spacing:-.6px;overflow-wrap:anywhere}
+#groups .group-card-description{color:#929b99;font:10px monospace;letter-spacing:.4px}
+#groups .groups-footnote{margin:20px 0;color:#9aa39d;text-align:center;font:10px monospace;letter-spacing:2px}
+#groups .groups-footnote:before{content:'▲  ';color:#c8a8dc}
+#groups .groups-footnote:after{content:'  ▲';color:#c8a8dc}
+#groups .group-card:after{content:'PLAYER SELECT';display:block;padding:8px 8px 4px;color:#77817b;border-top:1px solid #ffffff19;font:9px monospace;letter-spacing:2px;text-align:center}
+#groups .group-card:hover:after{color:#e4c9f5;text-shadow:0 0 9px #c28ce3}
 .group-profile>.back{margin-top:12px}
 .group-profile .group-profile-hero{position:relative;min-height:300px;height:clamp(300px,42vw,490px);overflow:hidden;border:1px solid #ffffff22;border-radius:12px;background:#101413}
 .group-profile-hero>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:brightness(.55) saturate(.72)}
@@ -731,7 +735,8 @@ html body aside.sidebar nav button{
 .group-profile .wiki-facts dl{margin:20px 0 0}
 .group-profile .wiki-facts dt{margin-top:15px;color:#858f88;font:9px monospace;letter-spacing:2px}
 .group-profile .wiki-facts dd{margin:4px 0 0;color:#e1e5df;font-size:12px}
-@media(max-width:760px){#groups .groups-heading{align-items:flex-start;flex-direction:column;gap:10px}#groups .groups-grid{grid-template-columns:1fr;gap:16px;margin-top:20px}#groups .group-card-image{aspect-ratio:16/9}#groups .group-card-info{padding:16px}#groups .group-card-info strong{font-size:23px}.group-profile .group-profile-hero{height:340px;min-height:300px}.group-profile-overlay h1{font-size:clamp(34px,10vw,52px)}.group-profile .wiki-layout{grid-template-columns:1fr;gap:18px;margin-top:20px}.group-profile .wiki-facts{order:-1}}
+@media(max-width:760px){#groups .groups-heading{align-items:flex-start;flex-direction:column;gap:10px}#groups .groups-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}#groups .group-card{padding:7px}#groups .group-card-image{aspect-ratio:1/1}#groups .group-card-info{padding:12px 5px 8px}#groups .group-card-info strong{font-size:clamp(14px,3.8vw,20px)}#groups .group-card-description{font-size:9px;line-height:1.5}#groups .group-card-index{font-size:8px;left:8px;top:8px}#groups .group-card-open{font-size:8px;right:8px;bottom:8px}.group-profile .group-profile-hero{height:340px;min-height:300px}.group-profile-overlay h1{font-size:clamp(34px,10vw,52px)}.group-profile .wiki-layout{grid-template-columns:1fr;gap:18px;margin-top:20px}.group-profile .wiki-facts{order:-1}}
+@media(max-width:380px){#groups .groups-grid{grid-template-columns:1fr;max-width:300px}#groups .group-card-info strong{font-size:22px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
