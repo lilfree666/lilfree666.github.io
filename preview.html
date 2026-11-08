@@ -197,6 +197,24 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 }
 
 
+/* SIDEBAR TRANSPARENCY — blend the navigation into each page */
+.sidebar,
+body.sidebar-collapsed .sidebar{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border-right:0!important;
+}
+.sidebar-top,
+.sidebar-brand,
+.sidebar nav,
+.sidebar .sidefoot{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
 /* COLLAPSIBLE SIDEBAR */
 .sidebar{transition:width .28s ease,padding .28s ease}
 .sidebar-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
