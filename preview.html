@@ -1123,6 +1123,52 @@ html body aside.sidebar nav button{
   #home .home-select>.home-select-item:hover{transform:scale(1)!important;filter:none}
 }
 
+
+/* HOME cards: replace neon outlines with delicate floral corner details */
+#home .home-select>.home-select-item{
+  border:0!important;
+  outline:0!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.24)!important;
+  overflow:hidden!important;
+}
+#home .home-select>.home-select-item::before{
+  content:"✿  ❀"!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:14px 16px auto auto!important;
+  width:auto!important;
+  height:auto!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  -webkit-mask:none!important;
+  mask:none!important;
+  color:rgba(238,211,220,.78)!important;
+  font:26px/1 Georgia,serif!important;
+  letter-spacing:7px!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.55)!important;
+  opacity:.82!important;
+  animation:none!important;
+  pointer-events:none!important;
+}
+#home .home-select>.home-select-item::after{
+  content:"❀  ✿"!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:auto auto 14px 16px!important;
+  width:auto!important;
+  height:auto!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  color:rgba(190,218,190,.78)!important;
+  font:25px/1 Georgia,serif!important;
+  letter-spacing:7px!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.55)!important;
+  pointer-events:none!important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
