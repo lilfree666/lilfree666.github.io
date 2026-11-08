@@ -1588,8 +1588,10 @@ function playItem(url,title,artist,cover){
  const art=$('now-cover');
  if(cover){art.innerHTML=`<img src="${coverUrl(cover)}" alt="" onerror="this.parentElement.textContent='LF'">`;}
  else{art.textContent='LF';}
- if(!url||!String(url).startsWith('http'))url=audioUrlForTrack(title);
- if(!url||!String(url).startsWith('http')){setPlayerToggle('play');return;}
+ const mappedAudio=audioUrlForTrack(title);
+ if(mappedAudio)url=mappedAudio;
+ else if(!url||!String(url).startsWith('http'))url='';
+ if(!url){setPlayerToggle('play');return;}
  $('audio').src=url;
  $('audio').play().catch(()=>{});
  setPlayerToggle('pause');
