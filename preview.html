@@ -196,12 +196,49 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
   display:none!important;
 }
 
+
+/* COLLAPSIBLE SIDEBAR */
+.sidebar{transition:width .28s ease,padding .28s ease}
+.sidebar-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.sidebar-brand{min-width:0}
+.sidebar-toggle{display:flex;align-items:center;justify-content:center;gap:7px;min-height:32px;padding:5px 8px;border:1px solid #293129;border-radius:5px;background:#111512;color:#aeb8aa;font:10px monospace;letter-spacing:1px;white-space:nowrap;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+.sidebar-toggle:hover{color:var(--lime);border-color:#b8ff2866;background:#b8ff2810}
+.sidebar-toggle .toggle-glyph{font-size:18px;line-height:1}
+.sidebar nav button{display:flex;align-items:center;gap:11px}
+.sidebar nav button span{display:inline}
+body.sidebar-collapsed{--side:76px}
+body.sidebar-collapsed .sidebar{width:var(--side);padding:22px 10px}
+body.sidebar-collapsed .sidebar-top{flex-direction:column;align-items:center}
+body.sidebar-collapsed .sidebar-brand .brand{font-size:0;letter-spacing:0;margin:0}
+body.sidebar-collapsed .sidebar-brand .brand:after{content:"LF";font-size:19px;letter-spacing:2px;color:var(--lime)}
+body.sidebar-collapsed .sidebar-brand .tag,
+body.sidebar-collapsed .sidebar .sidefoot,
+body.sidebar-collapsed .sidebar nav button span,
+body.sidebar-collapsed .sidebar-toggle .toggle-label{display:none}
+body.sidebar-collapsed .sidebar-toggle{width:42px;padding:5px}
+body.sidebar-collapsed .sidebar-toggle .toggle-glyph{transform:rotate(180deg)}
+body.sidebar-collapsed .sidebar nav{margin-top:48px}
+body.sidebar-collapsed .sidebar nav button{justify-content:center;padding:13px 5px;font-size:16px;letter-spacing:0}
+@media(max-width:760px){
+ .sidebar-top{align-items:center;gap:8px}
+ .sidebar-toggle{min-height:34px;padding:5px 8px}
+ body.sidebar-collapsed .sidebar{width:100%;padding:10px 14px}
+ body.sidebar-collapsed .sidebar-top{flex-direction:row;align-items:center}
+ body.sidebar-collapsed .sidebar-brand .brand{font-size:17px;letter-spacing:5px;margin:0 0 8px}
+ body.sidebar-collapsed .sidebar-brand .brand:after{content:none}
+ body.sidebar-collapsed .sidebar-brand .tag{display:block}
+ body.sidebar-collapsed .sidebar nav{display:none}
+ body.sidebar-collapsed .sidebar-toggle{width:auto;padding:5px 9px}
+ body.sidebar-collapsed .sidebar-toggle .toggle-label{display:none}
+}
+@media(prefers-reduced-motion:reduce){.sidebar,.sidebar-toggle{transition:none!important}}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-<aside class="sidebar"><div><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div>
-<nav aria-label="Основная навигация"><button type="button" class="active" data-page="home" onclick="showPage('home')">⌂ HOME</button><button type="button" data-page="music" onclick="showPage('music')">◉ MUSIC</button><button type="button" data-page="videos" onclick="showPage('videos')">▣ VIDEOS</button><button type="button" data-page="groups" onclick="showPage('groups')">⌘ GROUPS</button></nav>
+<aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
+<nav aria-label="Основная навигация"><button type="button" class="active" data-page="home" onclick="showPage('home')">⌂ <span>HOME</span></button><button type="button" data-page="music" onclick="showPage('music')">◉ <span>MUSIC</span></button><button type="button" data-page="videos" onclick="showPage('videos')">▣ <span>VIDEOS</span></button><button type="button" data-page="groups" onclick="showPage('groups')">⌘ <span>GROUPS</span></button></nav>
 <div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
 <main><div class="topline"><span>LIL FREE / ARCHIVE DATABASE</span><span id="counter">001 — HOME</span></div>
 <section id="home" class="page active"><div class="hero"><div class="hero-copy"><div class="eyebrow">INDEPENDENT ARTIST · 2019—2026</div><h1>LIL<br><span>FREE</span></h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p><button class="cta" onclick="showPage('music')">ОТКРЫТЬ МУЗЫКАЛЬНЫЙ АРХИВ ↗</button></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
@@ -218,6 +255,17 @@ const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
 let data={albums:[],singles:[],features:[]},era=2019,filter='all',queue=[];
 const $=id=>document.getElementById(id);
 document.addEventListener('click',event=>{const button=event.target.closest('.sidebar nav button[data-page]');if(button){event.preventDefault();showPage(button.dataset.page)}},true);
+function toggleSidebar(){
+ const collapsed=document.body.classList.toggle("sidebar-collapsed");
+ const button=document.querySelector(".sidebar-toggle");
+ if(button){
+  button.setAttribute("aria-expanded",String(!collapsed));
+  button.setAttribute("aria-label",collapsed?"Открыть меню":"Свернуть меню");
+  button.title=collapsed?"Открыть меню":"Свернуть меню";
+  button.querySelector(".toggle-glyph").textContent=collapsed?"»":"«";
+  button.querySelector(".toggle-label").textContent=collapsed?"ОТКРЫТЬ":"СВЕРНУТЬ";
+ }
+}
 function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
