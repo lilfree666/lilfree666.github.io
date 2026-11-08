@@ -1,449 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lil Free Discography Wiki</title>
-    <style>
-        :root {
-            --bg-color: #0d0d0d;
-            --container-bg: #141414;
-            --text-color: #c5a059;
-            --text-secondary: #ffffff;
-            --accent-color: #c5a059;
-            --status-released: #2ecc71;
-            --status-deleted: #e74c3c;
-            --status-unreleased: #f1c40f;
-        }
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-color);
-            color: var(--text-secondary);
-            margin: 0;
-            padding: 20px;
-            padding-bottom: 40px;
-        }
-        header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px dashed var(--accent-color);
-            margin-bottom: 30px;
-        }
-        header h1 {
-            color: var(--text-color);
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .tab-btn {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-family: inherit;
-            text-transform: uppercase;
-            transition: all 0.3s;
-        }
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: bold;
-        }
-        .content-section {
-            display: none;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .content-section.active {
-            display: block;
-        }
-        .album-block {
-            background-color: var(--container-bg);
-            border: 1px solid #c5a05922;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            padding: 20px;
-        }
-        .album-header {
-            font-size: 1.4rem;
-            color: var(--text-color);
-            margin-bottom: 15px;
-            border-bottom: 1px solid #c5a05922;
-            padding-bottom: 5px;
-            text-transform: uppercase;
-        }
-        .track-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .track-table th, .track-table td {
-            text-align: left;
-            padding: 12px 10px;
-            border-bottom: 1px solid #c5a05911;
-        }
-        .track-table th {
-            color: var(--text-color);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .status-released { background-color: rgba(46, 204, 113, 0.15); color: var(--status-released); border: 1px solid var(--status-released); }
-        .status-deleted { background-color: rgba(231, 76, 60, 0.15); color: var(--status-deleted); border: 1px solid var(--status-deleted); }
-        .status-unreleased { background-color: rgba(241, 196, 15, 0.15); color: var(--status-unreleased); border: 1px solid var(--status-unreleased); }
-/* LIL FREE — DARK EMO / RAW VHS */
-
-body {
-    background: #080908 !important;
-    color: #e5e5dc !important;
-    font-family: "Courier New", monospace !important;
-}
-
-/* Шапка */
-header {
-    text-align: left !important;
-    border: none !important;
-    border-bottom: 1px dashed #444 !important;
-}
-
-header h1 {
-    color: #d83a42 !important;
-    text-shadow: 2px 2px #351016;
-}
-
-/* Вкладки */
-.tabs {
-    justify-content: flex-start !important;
-    flex-wrap: wrap;
-    gap: 25px !important;
-}
-
-.tab-btn {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    color: #aaa !important;
-}
-
-.tab-btn.active {
-    background: transparent !important;
-    color: #d83a42 !important;
-    border-bottom: 2px solid #d83a42 !important;
-}
-
-/* Контент */
-.content-section {
-    max-width: 1100px !important;
-}
-
-.album-block {
-    background: transparent !important;
-    border: none !important;
-    border-bottom: 1px dashed #444 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
-
-/* Названия альбомов */
-.album-header {
-    color: #b9e36b !important;
-    border-bottom: 1px dashed #444 !important;
-}
-
-/* Таблицы песен */
-.track-table {
-    border-collapse: collapse;
-}
-
-.track-table th {
-    color: #d83a42 !important;
-}
-
-.track-table th,
-.track-table td {
-    border-bottom: 1px dashed #333 !important;
-}
-
-/* Статусы */
-.status-badge {
-    border-radius: 0 !important;
-}
-
-/* VHS-эффект */
-body {
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            rgba(255,255,255,.015) 2px,
-            transparent 4px
-        ) !important;
-}
-    </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lil Free — Official Archive</title>
+<meta name="description" content="Lil Free — official music archive, videos and collectives.">
+<style>
+:root{--bg:#080a09;--panel:#111512;--panel2:#171d18;--lime:#b8ff28;--text:#f0f1eb;--muted:#929b91;--line:#293129;--side:220px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Arial,Helvetica,sans-serif}button{font:inherit;color:inherit;cursor:pointer}a{color:inherit}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.09;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff1 4px,transparent 5px)}
+.sidebar{position:fixed;inset:0 auto 0 0;width:var(--side);padding:28px 18px;background:#090c0aee;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:10}
+.brand{font-weight:900;letter-spacing:5px;font-size:22px;margin:0 0 8px}.tag{font:10px monospace;color:var(--lime);letter-spacing:2px}
+nav{display:grid;gap:8px;margin-top:58px}nav button{border:1px solid transparent;background:none;text-align:left;padding:13px 14px;color:#9da69d;letter-spacing:2px;font:12px monospace}nav button:hover,nav button.active{color:var(--lime);background:#b8ff2810;border-color:#b8ff2830}
+.sidefoot{margin-top:auto;color:#69736b;font:10px/2 monospace;letter-spacing:1px}
+main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1600px}.topline{display:flex;justify-content:space-between;gap:12px;color:#798279;font:10px monospace;letter-spacing:2px;border-bottom:1px solid var(--line);padding:0 0 16px;margin-bottom:24px}
+.page{display:none}.page.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:.5;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{min-height:64vh;display:flex;align-items:flex-end;padding:clamp(24px,5vw,68px);border:1px solid var(--line);position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 30%,#31432d 0,#131b15 35%,#090c0a 75%)}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#060907e8,#06090755 70%),repeating-linear-gradient(0deg,transparent 0 3px,#fff1 4px,transparent 5px)}
+.hero-copy{position:relative;max-width:760px}.eyebrow{font:11px monospace;color:var(--lime);letter-spacing:4px}.hero h1{font-size:clamp(64px,12vw,160px);line-height:.8;letter-spacing:-.09em;margin:22px 0}.hero h1 span{color:var(--lime)}.hero p{max-width:520px;color:#c1c9bf}.cta{margin-top:20px;background:var(--lime);color:#080a08;border:0;padding:13px 18px;font: bold 11px monospace;letter-spacing:2px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:34px 0 18px}.sectionhead h1{font-size:clamp(28px,5vw,54px);line-height:1;margin:0;letter-spacing:-2px}.sectionhead h1 span{color:var(--lime)}.sectionhead p,.muted{color:var(--muted);font:11px monospace;letter-spacing:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}.tile,.release{background:var(--panel);border:1px solid var(--line);padding:18px;text-align:left;min-height:150px;transition:.2s}.tile:hover,.release:hover{border-color:var(--lime);transform:translateY(-2px)}.tile strong{display:block;font-size:28px;letter-spacing:-1px}.tile small{display:block;color:var(--lime);font:10px monospace;letter-spacing:2px;margin-top:8px}.tile .count{color:var(--muted);font:11px monospace;margin-top:22px}
+.back{background:none;border:1px solid var(--line);padding:9px 13px;color:var(--lime);font:11px monospace;margin:20px 0}.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.filters button{background:none;border:1px solid var(--line);padding:8px 12px;color:var(--muted);font:10px monospace}.filters button.active{border-color:var(--lime);color:var(--lime)}
+.release{min-height:unset;padding:0;overflow:hidden}.cover{aspect-ratio:1;background:linear-gradient(135deg,#263126,#0a0d0b);display:grid;place-items:center;color:#b8ff2860;font-size:40px}.releasebody{padding:14px}.releasebody h3{margin:0 0 5px;font-size:17px}.releasebody small{color:var(--muted);font:10px monospace}.tracklist{display:none;border-top:1px solid var(--line);padding:8px 14px 14px}.release.open .tracklist{display:block}.track{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #ffffff0c;font-size:12px}.track span{color:var(--muted);flex:1}.track button{background:none;border:1px solid var(--line);color:var(--lime);padding:4px 8px}
+.rows{display:grid;gap:8px}.songrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:12px 14px}.songrow small{display:block;color:var(--muted);font:10px monospace}.songrow button{background:none;border:1px solid var(--line);color:var(--lime);padding:7px 10px}
+.notice{border:1px dashed var(--line);padding:28px;color:var(--muted);font:12px monospace}
+.player{position:fixed;z-index:15;bottom:0;left:var(--side);right:0;background:#0d110fee;border-top:1px solid #35402f;backdrop-filter:blur(16px);padding:12px 22px;display:flex;align-items:center;gap:14px}.player button{background:var(--lime);color:#080a08;border:0;width:36px;height:36px}.now{min-width:0;flex:1}.now strong,.now small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now small{color:var(--muted);font:10px monospace}.player audio{max-width:36%;height:28px}
+@media(max-width:760px){:root{--side:0px}.sidebar{position:sticky;top:0;width:100%;height:auto;padding:12px 14px;display:flex;flex-direction:row;align-items:center;justify-content:space-between}.brand{font-size:17px}nav{display:flex;gap:2px;margin:0}nav button{padding:9px 7px;font-size:9px}.sidefoot{display:none}main{margin:0;padding:14px 14px 110px}.topline{font-size:8px}.hero{min-height:58vh;padding:24px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.player{left:0;padding:9px 12px}.player audio{max-width:34%}}
+</style>
 </head>
 <body>
-
-    <header>
-        <h1>Lil Free</h1>
-        <div style="color: #888;">Официальный архив треков и дискографии</div>
-    </header>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('albums', this)">Альбомы и EP</button>
-        <button class="tab-btn" onclick="switchTab('singles', this)">Синглы</button>
-        <button class="tab-btn" onclick="switchTab('features', this)">Участие</button>
-    </div>
-
-    <!-- Раздел Альбомов -->
-    <div id="albums" class="content-section active">
-        <div id="albums-list">Загрузка релизов из базы данных...</div>
-    </div>
-
-    <!-- Раздел Синглов -->
-    <div id="singles" class="content-section">
-        <div class="album-block">
-            <div class="album-header">Все официальные синглы</div>
-            <table class="track-table">
-                <thead>
-                    <tr>
-                        <th style="width: 5%">№</th>
-                        <th style="width: 35%">Название трека</th>
-                        <th style="width: 25%">Продюсер</th>
-                        <th style="width: 20%">Дата релиза</th>
-                        <th style="width: 15%">Статус</th>
-                    </tr>
-                </thead>
-                <tbody id="singles-rows"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Раздел Участия -->
-    <div id="features" class="content-section">
-        <div class="album-block">
-            <div class="album-header">Гостевые участия и коллаборации</div>
-            <table class="track-table">
-                <thead>
-                    <tr>
-                        <th style="width: 5%">№</th>
-                        <th style="width: 30%">Название трека</th>
-                        <th style="width: 25%">Исполнитель</th>
-                        <th style="width: 25%">Информация</th>
-                        <th style="width: 15%">Статус</th>
-                    </tr>
-                </thead>
-                <tbody id="features-rows"></tbody>
-            </table>
-        </div>
-    </div>
-    <script>
-        // Идентификатор таблицы базы данных
-        const SPREADSHEET_ID = '1sTsOAYhRZPGscsrzeo0UjdSj2200WehO3vI9g8d6CFw';
-
-        // Профессиональная функция запроса к JSON-коннектору с проверкой ошибок
-        async function fetchSheetTab(sheetName) {
-          const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;;
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                throw new Error(`Google Sheets вернул ошибку HTTP ${response.status}`);
-            }
-
-            const text = await response.text();
-            // Вырезаем чистый JSON-массив из обертки Google API
-            const jsonText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
-            const data = JSON.parse(jsonText);
-            return data.table.rows;
-        }
-
-        async function loadAllTabsData() {
-            try {
-                const albumRows = await fetchSheetTab('Album');
-                const singlesRows = await fetchSheetTab('Singles');
-                const featuresRows = await fetchSheetTab('Features');
-
-                renderAlbums(albumRows);
-                renderSingles(singlesRows);
-                renderFeatures(featuresRows);
-            } catch (error) {
-                console.error("Технический сбой загрузки структуры:", error);
-                document.getElementById('albums-list').innerText = "Не удалось загрузить структуру треков. Убедись, что настройки общего доступа в таблице открыты.";
-            }
-        }
-
-        function extractValue(cells, index) {
-            if (!cells || !cells[index]) return '';
-            return cells[index].f || (cells[index].v !== null && cells[index].v !== undefined ? String(cells[index].v) : '');
-        }
-
-        function renderAlbums(rows) {
-            const container = document.getElementById('albums-list');
-            container.innerHTML = '';
-            let currentAlbum = '';
-            let currentTableBody = null;
-
-            rows.forEach((row, index) => {
-                if (index === 0) return; // Пропуск заголовков
-                const cells = row.c;
-                if (!cells) return;
-
-                const albumName = extractValue(cells, 0);
-                const num = extractValue(cells, 1);
-                const songName = extractValue(cells, 2);
-                const artists = extractValue(cells, 3) || 'Lil Free';
-                const producers = extractValue(cells, 4) || 'Unknown';
-                const info = extractValue(cells, 5);
-                const date = extractValue(cells, 6) || 'N/A';
-                const status = extractValue(cells, 7).toLowerCase().trim();
-
-                if (!songName) return;
-
-                let statusClass = 'status-released';
-                if (status.includes('delete')) statusClass = 'status-deleted';
-                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
-
-                if (currentAlbum !== albumName && albumName) {
-                    currentAlbum = albumName;
-                    const block = document.createElement('div');
-                    block.className = 'album-block';
-                    block.innerHTML = `
-                        <div class="album-header">${currentAlbum} (${date})</div>
-                        <table class="track-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 5%">№</th>
-                                    <th style="width: 45%">Название трека</th>
-                                    <th style="width: 30%">Продюсер</th>
-                                    <th style="width: 20%">Статус</th>
-                                </tr>
-                            </thead>
-                            <tbody id="album-tbody-${index}"></tbody>
-                        </table>
-                    `;
-                    container.appendChild(block);
-                    currentTableBody = document.getElementById(`album-tbody-${index}`);
-                }
-
-                if (currentTableBody) {
-                    let nameDisplay = `<strong>${songName}</strong>`;
-                    if (info && info !== '—' && info !== '-') {
-                        nameDisplay += `<br><small style="color: #c5a059aa; font-size:0.8rem">${info}</small>`;
-                    }
-                    if (artists !== 'Lil Free') {
-                        nameDisplay += `<br><small style="color: #666; font-size:0.75rem">${artists}</small>`;
-                    }
-
-                    currentTableBody.innerHTML += `
-                        <tr>
-                            <td>${num}</td>
-                            <td>${nameDisplay}</td>
-                            <td>${producers}</td>
-                            <td><span class="status-badge ${statusClass}">${status}</span></td>
-                        </tr>
-                    `;
-                }
-            });
-            if (container.innerHTML === '') container.innerText = 'Список релизов пуст.';
-        }
-
-        function renderSingles(rows) {
-            const container = document.getElementById('singles-rows');
-            container.innerHTML = '';
-
-            rows.forEach((row, index) => {
-                if (index === 0) return;
-                const cells = row.c;
-                if (!cells) return;
-
-                const num = extractValue(cells, 1);
-                const songName = extractValue(cells, 2);
-                const producers = extractValue(cells, 4) || 'Unknown';
-                const info = extractValue(cells, 5);
-                const date = extractValue(cells, 6) || 'N/A';
-                const status = extractValue(cells, 7).toLowerCase().trim();
-
-                if (!songName) return;
-
-                let statusClass = 'status-released';
-                if (status.includes('delete')) statusClass = 'status-deleted';
-                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
-
-                let nameDisplay = `<strong>${songName}</strong>`;
-                if (info && info !== '—' && info !== '-') {
-                    nameDisplay += `<br><small style="color: #c5a059aa; font-size:0.8rem">${info}</small>`;
-                }
-
-                container.innerHTML += `
-                    <tr>
-                        <td>${num}</td>
-                        <td>${nameDisplay}</td>
-                        <td>${producers}</td>
-                        <td>${date}</td>
-                        <td><span class="status-badge ${statusClass}">${status}</span></td>
-                    </tr>
-                `;
-            });
-        }
-
-        function renderFeatures(rows) {
-            const container = document.getElementById('features-rows');
-            container.innerHTML = '';
-
-            rows.forEach((row, index) => {
-                if (index === 0) return;
-                const cells = row.c;
-                if (!cells) return;
-
-                const num = extractValue(cells, 1);
-                const songName = extractValue(cells, 2);
-                const artists = extractValue(cells, 3) || 'Unknown';
-                const info = extractValue(cells, 5) || '—';
-                const status = extractValue(cells, 7).toLowerCase().trim();
-
-                if (!songName) return;
-
-                let statusClass = 'status-released';
-                if (status.includes('delete')) statusClass = 'status-deleted';
-                if (status.includes('unrelease') || status.includes('lost')) statusClass = 'status-unreleased';
-
-                container.innerHTML += `
-                    <tr>
-                        <td>${num}</td>
-                        <td><strong>${songName}</strong></td>
-                        <td>${artists}</td>
-                        <td><small>${info}</small></td>
-                        <td><span class="status-badge ${statusClass}">${status}</span></td>
-                    </tr>
-                `;
-            });
-        }
-
-        // Новая, надежная функция переключения вкладок от Джипи
-        function switchTab(tabId, button) {
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            button.classList.add('active');
-        }
-
-        loadAllTabsData();
-    </script>
-</body>
-</html>
+<aside class="sidebar"><div><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div>
+<nav><button class="active" data-page="home">⌂ HOME</button><button data-page="music">◉ MUSIC</button><button data-page="videos">▣ VIDEOS</button><button data-page="groups">⌘ GROUPS</button></nav>
+<div class="sidefoot">INDEPENDENT ARTIST<br>EMO RAP / ALT ROCK<br>EVERY SONG. EVERY ERA.</div></aside>
+<main><div class="topline"><span>LIL FREE / ARCHIVE DATABASE</span><span id="counter">001 — HOME</span></div>
+<section id="home" class="page active"><div class="hero"><div class="hero-copy"><div class="eyebrow">INDEPENDENT ARTIST · 2019—2026</div><h1>LIL<br><span>FREE</span></h1><p>Музыка как личный дневник без цензуры. Эмоции, одиночество, преданность и всё, что невозможно оставить внутри.</p><button class="cta" onclick="showPage('music')">ОТКРЫТЬ МУЗЫКАЛЬНЫЙ АРХИВ ↗</button></div></div><div class="sectionhead"><div><h1><span>THE</span> ARCHIVE</h1><p>ALL RELEASES / ONE PLACE</p></div></div><div class="grid" id="home-stats"></div></section>
+<section id="music" class="page"><div class="sectionhead"><div><h1><span>MUSIC</span> ARCHIVE</h1><p>SELECT AN ERA · 2019—2026</p></div></div><div class="grid" id="years"></div></section>
+<section id="era" class="page"><button class="back" onclick="showPage('music')">← BACK TO YEARS</button><div class="sectionhead"><div><h1><span id="era-title">2019</span> / RELEASES</h1><p id="era-sub">DISCOGRAPHY</p></div></div><div class="filters" id="filters"></div><div class="grid" id="releases"></div><div class="sectionhead"><div><h2>TRACKS / SINGLES / FEATURES</h2></div></div><div class="rows" id="songs"></div></section>
+<section id="videos" class="page"><div class="sectionhead"><div><h1><span>VIDEO</span> ARCHIVE</h1><p>MUSIC VIDEOS / VISUALS</p></div></div><div class="notice">Раздел подготовлен. Добавим сюда клипы, визуализаторы и видеоинтервью с проверенными ссылками.</div></section>
+<section id="groups" class="page"><div class="sectionhead"><div><h1><span>GROUPS</span> / COLLECTIVES</h1><p>CREATIVE CONNECTIONS</p></div></div><div class="notice">Раздел подготовлен для музыкальных объединений. Здесь будут описания, участники и статусы: «Нынешний участник» / «Бывший участник».</div></section>
+</main>
+<div class="player"><button id="toggle" aria-label="Play">▶</button><div class="now"><strong id="now-title">Lil Free — выбери трек</strong><small id="now-artist">OFFICIAL PLAYER</small></div><audio id="audio" controls preload="none"></audio></div>
+<script>
+const SHEET='1sTsOAYhRZPGscsrzeo0UjdSj2200WehO3vI9g8d6CFw';
+const TABS={albums:'Album',singles:'Singles',features:'Features'};
+const YEARS=[2019,2020,2021,2022,2023,2024,2025,2026];
+let data={albums:[],singles:[],features:[]},era=2019,filter='all',queue=[];
+const $=id=>document.getElementById(id);
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS'})[id]||'LIL FREE';window.scrollTo(0,0)}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
+function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
+function parseRows(raw){const json=JSON.parse(raw.slice(raw.indexOf('{'),raw.lastIndexOf('}')+1));return (json.table.rows||[]).filter(r=>r.c&&r.c.some(c=>c&&c.v!==null)).map(r=>Array.from({length:9},(_,i)=>String(cell(r,i)??'').trim())).filter(r=>r.some(Boolean)).filter(r=>!/^album$/i.test(r[0]));}
+async function loadTab(name){const url='https://docs.google.com/spreadsheets/d/'+SHEET+'/gviz/tq?tqx=out:json&sheet='+encodeURIComponent(name);const res=await fetch(url);if(!res.ok)throw Error(name+' HTTP '+res.status);return parseRows(await res.text())}
+function normalize(rows){return rows.map(r=>({album:r[0],number:r[1],title:r[2],artists:r[3],producer:r[4],info:r[5],date:r[6],status:r[7],link:r[8],year:dateYear(r[6])})).filter(x=>x.title||x.album)}
+function yearCount(y){return [...data.albums,...data.singles,...data.features].filter(x=>x.year===y).length}
+function renderYears(){$('years').innerHTML=YEARS.map(y=>'<button class="tile" onclick="openEra('+y+')"><strong>'+y+'</strong><small>'+({2019:'THE BEGINNING',2020:'EARLY RELEASES',2021:'EXPERIMENTS',2022:'A NEW CHAPTER',2023:'CONTINUING THE STORY',2024:'TRANSITION',2025:'TURNING POINT',2026:'NEW CHAPTER'}[y])+'</small><div class="count">'+yearCount(y)+' TRACK ENTRIES</div></button>').join('');$('home-stats').innerHTML='<div class="tile"><strong>'+data.albums.length+'</strong><small>ALBUM TRACK ROWS</small></div><div class="tile"><strong>'+data.singles.length+'</strong><small>SINGLES</small></div><div class="tile"><strong>'+data.features.length+'</strong><small>FEATURES</small></div><div class="tile"><strong>8</strong><small>YEARS ARCHIVED</small></div>'}
+function openEra(y){era=y;filter='all';$('era-title').textContent=y;$('era-sub').textContent='DISCOGRAPHY / '+yearCount(y)+' ENTRIES';showPage('era');renderEra()}
+function renderEra(){const fs=[['all','ALL'],['album','ALBUMS'],['ep','EP'],['single','SINGLES'],['feature','FEATURES']];$('filters').innerHTML=fs.map(([k,v])=>'<button class="'+(filter===k?'active':'')+'" onclick="setFilter(\''+k+'\')">'+v+'</button>').join('');let albums=data.albums.filter(x=>x.year===era);let groups=new Map();albums.forEach(x=>{let k=x.album||'Untitled release';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(x)});let cards=[];if(filter==='all'||filter==='album'||filter==='ep')for(const [name,tracks] of groups){const isep=/\b(ep|mixtape)\b/i.test(name);if(filter==='ep'&&!isep||filter==='album'&&isep)continue;cards.push('<article class="release" onclick="this.classList.toggle(\'open\')"><div class="cover">L/F</div><div class="releasebody"><h3>'+esc(name)+'</h3><small>'+esc(tracks[0].date||era)+' · '+tracks.length+' TRACKS</small></div><div class="tracklist">'+tracks.map(t=>'<div class="track"><span>'+esc(t.number)+' · '+esc(t.title)+' — '+esc(t.artists)+'</span><button onclick="event.stopPropagation();playItem(\''+esc(t.link)+'\',\''+esc(t.title)+'\',\''+esc(t.artists)+'\')">▶</button></div>').join('')+'</div></article>')}
+$('releases').innerHTML=cards.join('')||((filter==='all'||filter==='album'||filter==='ep')?'<div class="notice">Нет альбомных релизов за этот год.</div>':'');
+let rows=[];if(filter==='all'||filter==='single')rows=rows.concat(data.singles.filter(x=>x.year===era).map(x=>({...x,kind:'SINGLE'})));if(filter==='all'||filter==='feature')rows=rows.concat(data.features.filter(x=>x.year===era).map(x=>({...x,kind:'FEATURE'})));$('songs').innerHTML=rows.length?rows.map(x=>'<div class="songrow"><div>'+esc(x.title)+'<small>'+esc(x.kind+' · '+x.artists+' · '+x.date)</small></div><button onclick="playItem(\''+esc(x.link)+'\',\''+esc(x.title)+'\',\''+esc(x.artists)+'\')">▶</button></div>').join(''):'<div class="notice">Нет отдельных треков в выбранной категории.</div>'}
+function setFilter(k){filter=k;renderEra()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function playItem(url,title,artist){if(!url||!/^https?:\/\//i.test(url)){ $('now-title').textContent=title+' — ссылка на аудио не указана';return}$('audio').src=url;$('now-title').textContent=title;$('now-artist').textContent=artist||'Lil Free';$('audio').play().catch(()=>{});$('toggle').textContent='Ⅱ'}
+$('toggle').onclick=()=>{if($('audio').paused){$('audio').play().catch(()=>{})}else $('audio').pause()};$('audio').onplay=()=>$('toggle').textContent='Ⅱ';$('audio').onpause=()=>$('toggle').textContent='▶';
+(async()=>{try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears()}catch(e){$('years').innerHTML='<div class="notice">Не удалось загрузить Google Sheets: '+esc(e.message)+'. Проверьте, что таблица опубликована для просмотра.</div>';$('home-stats').innerHTML='<div class="notice">Архив ожидает подключения таблицы.</div>'}})();
+</script>
+</body></html>
