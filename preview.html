@@ -1169,6 +1169,25 @@ html body aside.sidebar nav button{
   pointer-events:none!important;
 }
 
+
+/* HOME cards: clean, borderless surfaces; remove temporary floral accents */
+#home .home-select>.home-select-item{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+#home .home-select>.home-select-item::before,
+#home .home-select>.home-select-item::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#home .home-select>.home-select-item:hover{
+  box-shadow:none!important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
