@@ -349,6 +349,39 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
   border-color:transparent!important;
 }
 
+/* HARD RESET: sidebar must never paint a panel during page transitions */
+html body aside.sidebar,
+html body aside.sidebar *,
+html body aside.sidebar:hover,
+html body aside.sidebar:focus-within,
+html body aside.sidebar nav button,
+html body aside.sidebar nav button:hover,
+html body aside.sidebar nav button:active,
+html body aside.sidebar nav button.active,
+html body aside.sidebar nav button:focus,
+html body aside.sidebar nav button:focus-visible,
+html body aside.sidebar .sidebar-toggle,
+html body aside.sidebar .sidebar-toggle:hover,
+html body aside.sidebar .sidebar-toggle:focus-visible{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body aside.sidebar{
+  border:0!important;
+  transition:none!important;
+  animation:none!important;
+  transform:translateZ(0)!important;
+  will-change:transform;
+}
+html body aside.sidebar nav button{
+  border-color:transparent!important;
+  transition:color .2s ease,border-color .2s ease!important;
+}
+
 /* Remove the solid panel and the toggle button fill from the navigation */
 .sidebar,
 .sidebar-top,
