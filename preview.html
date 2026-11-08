@@ -204,6 +204,38 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 }
 
 
+/* HOME background fills the entire viewport, matching MUSIC ARCHIVE */
+body.home-view #home{
+  isolation:auto!important;
+  overflow:visible!important;
+  background:transparent!important;
+}
+body.home-view #home .home-bg-video{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100vh!important;
+  min-height:100vh!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  z-index:0!important;
+}
+body.home-view #home:before{
+  position:fixed!important;
+  inset:0!important;
+  z-index:1!important;
+}
+body.home-view #home>.hero,
+body.home-view #home>.sectionhead,
+body.home-view #home>.grid{
+  position:relative!important;
+  z-index:2!important;
+}
+body.home-view main,
+body.home-view main.home-view{
+  background:transparent!important;
+}
+
 /* MUSIC background continues behind the transparent navigation */
 body.music-view #music{
   isolation:auto!important;
@@ -584,7 +616,7 @@ function toggleSidebar(){
   button.querySelector(".toggle-label").textContent=collapsed?"ОТКРЫТЬ":"СВЕРНУТЬ";
  }
 }
-function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS','artist-bio':'006 — ARTIST BIOGRAPHY'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
+function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));$('counter').textContent=({home:'001 — HOME',music:'002 — MUSIC',era:'003 — '+era,videos:'004 — VIDEOS',groups:'005 — GROUPS','artist-bio':'006 — ARTIST BIOGRAPHY'})[id]||'LIL FREE';window.scrollTo(0,0);if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}}
 function cell(row,i){const c=row.c?.[i];return c?(c.f??c.v??''):''}
 function dateYear(s){const m=String(s).match(/20\d{2}/);return m?+m[0]:0}
 function parseRows(raw){const json=JSON.parse(raw.slice(raw.indexOf('{'),raw.lastIndexOf('}')+1));return (json.table.rows||[]).filter(r=>r.c&&r.c.some(c=>c&&c.v!==null)).map(r=>Array.from({length:11},(_,i)=>String(cell(r,i)??'').trim())).filter(r=>r.some(Boolean)).filter(r=>!/^album$/i.test(r[0]));}
