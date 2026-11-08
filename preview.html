@@ -377,7 +377,7 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
 }
 
 
-/* CONSISTENT VECTOR-LIKE PLAY ICONS ON TOUCH SCREENS */
+/* CONSISTENT, CENTERED PLAY ICONS ON TOUCH SCREENS */
 .release .playtrack,
 .release .track button,
 .songrow button{
@@ -390,19 +390,23 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
 .release .track button::before,
 .songrow button::before{
  content:""!important;
+ position:absolute!important;
+ top:50%!important;left:50%!important;
+ transform:translate(-35%,-50%)!important;
  display:block!important;
  width:0!important;height:0!important;
+ margin:0!important;
  border-top:6px solid transparent!important;
  border-bottom:6px solid transparent!important;
  border-left:9px solid currentColor!important;
- margin-left:3px!important;
 }
 .release .playtrack::before{
  border-top-width:8px!important;
  border-bottom-width:8px!important;
  border-left-width:12px!important;
- margin-left:4px!important;
 }
+.release .track button,
+.songrow button{position:relative}
 @media(hover:none), (max-width:760px){
  .release .playtrack,
  .release .track button,
