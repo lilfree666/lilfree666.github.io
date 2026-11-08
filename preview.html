@@ -326,6 +326,29 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
 .player-left{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}.player-cover{width:56px!important;height:56px!important;flex:0 0 56px!important;overflow:hidden!important;border-radius:7px!important;background:#273128!important;color:#b8ff28!important;display:grid!important;place-items:center!important}.player-cover img{width:100%!important;height:100%!important;object-fit:cover!important}.player .now{min-width:0!important;flex:1!important}.player .now strong,.player .now small{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.player .now strong{font-size:13px!important;color:#fff!important;font-weight:600!important}.player .now small{font-size:11px!important;color:#aab4a9!important;margin-top:3px!important}.player-center{display:grid!important;gap:7px!important;min-width:0!important}.player-controls{display:flex!important;justify-content:center!important;align-items:center!important;gap:18px!important}.player button{display:grid!important;place-items:center!important;cursor:pointer!important;border:0!important}.player .player-skip{width:28px!important;height:28px!important;background:transparent!important;color:#c3cbbf!important;font-size:17px!important}.player .player-toggle{width:38px!important;height:38px!important;border-radius:50%!important;background:#f3f5ef!important;color:#111!important;font-size:17px!important}.player-timeline{display:grid!important;grid-template-columns:32px minmax(0,1fr) 32px!important;align-items:center!important;gap:8px!important}.player-time{font:10px monospace!important;color:#9ca69c!important;text-align:center!important}.player-progress,.player-volume{width:100%!important;height:4px!important;margin:0!important;accent-color:#b8ff28!important;cursor:pointer!important}.player-right{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;color:#c3cbbf!important}.player-volume{max-width:100px!important}.player audio{display:none!important}
 @media(max-width:760px){body.player-active>.player{left:50%!important;right:auto!important;bottom:9px!important;width:calc(100vw - 18px)!important;min-height:66px!important;padding:8px 9px!important;grid-template-columns:minmax(0,1fr) minmax(110px,.9fr)!important;gap:8px!important;transform:translateX(-50%)!important}.player-cover{width:46px!important;height:46px!important;flex-basis:46px!important}.player-left{gap:8px!important}.player .now strong{font-size:11px!important}.player .now small{font-size:9px!important}.player-controls{gap:10px!important}.player .player-toggle{width:32px!important;height:32px!important}.player-right{display:none!important}.player-timeline{grid-template-columns:26px minmax(0,1fr) 26px!important;gap:4px!important}.player-time{font-size:9px!important}}
 
+/* Keep the sidebar and every navigation item fully transparent during page changes */
+.sidebar,
+.sidebar:hover,
+.sidebar:focus-within,
+.sidebar nav,
+.sidebar nav button,
+.sidebar nav button:hover,
+.sidebar nav button:active,
+.sidebar nav button.active,
+.sidebar nav button:focus,
+.sidebar nav button:focus-visible{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.sidebar nav button.active,
+.sidebar nav button:hover,
+.sidebar nav button:focus-visible{
+  border-color:transparent!important;
+}
+
 /* Remove the solid panel and the toggle button fill from the navigation */
 .sidebar,
 .sidebar-top,
