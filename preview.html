@@ -1428,6 +1428,18 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #spotify-now-playing.open{display:flex;flex-direction:column}
 #spotify-now-playing .snp-top{display:flex;align-items:center;justify-content:space-between;padding:22px 28px}
 #spotify-now-playing .snp-label{font:11px monospace;letter-spacing:.2em;color:#c1c8bd}
+#spotify-now-playing .snp-album-trigger{display:inline-flex;align-items:center;gap:10px;border:1px solid #ffffff1c;border-radius:999px;background:#ffffff08;padding:9px 13px;color:#e0e5dc;cursor:pointer;text-align:left;max-width:min(70vw,520px)}
+#spotify-now-playing .snp-album-trigger span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#spotify-now-playing .snp-album-trigger svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;transition:transform .2s}
+#spotify-now-playing .snp-album-trigger[aria-expanded="true"] svg{transform:rotate(180deg)}
+#spotify-now-playing .snp-album-list{position:absolute;z-index:5;top:78px;left:32px;width:min(390px,calc(100vw - 64px));max-height:min(60vh,520px);overflow:auto;padding:9px;border:1px solid #ffffff20;border-radius:15px;background:rgba(17,19,20,.94);box-shadow:0 18px 60px #0009;backdrop-filter:blur(24px)}
+#spotify-now-playing .snp-album-list[hidden]{display:none}
+#spotify-now-playing .snp-album-track{display:flex;align-items:center;gap:12px;width:100%;padding:11px 12px;border:0;border-radius:9px;background:transparent;color:#e8ece6;text-align:left;cursor:pointer;font:13px Arial,sans-serif}
+#spotify-now-playing .snp-album-track:hover{background:#ffffff12}
+#spotify-now-playing .snp-album-track.is-current{background:color-mix(in srgb,var(--track-accent,#87917f) 22%,transparent);color:#fff}
+#spotify-now-playing .snp-album-track-num{width:22px;flex:none;color:#aeb7aa;font:11px monospace}
+#spotify-now-playing .snp-album-track-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#spotify-now-playing .snp-album-track-artists{margin-left:auto;max-width:38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9da69a;font-size:11px}
 #spotify-now-playing .snp-close{width:42px;height:42px;border:0;border-radius:50%;background:#ffffff16;color:white;font-size:25px;cursor:pointer}
 #spotify-now-playing .snp-main{width:min(920px,calc(100% - 48px));margin:auto;display:grid;grid-template-columns:minmax(240px, min(42vw,390px)) minmax(0,1fr);gap:clamp(28px,6vw,68px);align-items:center;padding:12px 0 54px}
 #spotify-now-playing .snp-art{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;box-shadow:0 22px 70px #0009;background:#222}
@@ -1453,7 +1465,7 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #now-cover{cursor:pointer;transition:transform .2s ease,filter .2s ease}
 #now-cover:hover{transform:scale(1.045);filter:brightness(1.12)}
 #now-cover:focus-visible{outline:2px solid var(--track-accent,#bfc5bd);outline-offset:4px}
-@media(max-width:680px){#spotify-now-playing .snp-top{padding:14px 16px}#spotify-now-playing .snp-main{width:min(440px,calc(100% - 36px));grid-template-columns:1fr;gap:24px;padding:8px 0 34px}#spotify-now-playing .snp-art{width:min(100%, min(360px,76vw));justify-self:center}#spotify-now-playing .snp-info{width:100%}#spotify-now-playing .snp-title{font-size:clamp(28px,8vw,42px)}#spotify-now-playing .snp-artist{margin-bottom:22px}#spotify-now-playing .snp-controls{justify-content:center;gap:26px;margin-bottom:22px}#spotify-now-playing .snp-controls .snp-skip{width:48px;height:48px;padding:12px}#spotify-now-playing .snp-controls .snp-play{width:58px;height:58px}#spotify-now-playing .snp-line{grid-template-columns:34px minmax(0,1fr) 34px;gap:7px}#spotify-now-playing .snp-volume{margin:22px auto 0;width:100%}}
+@media(max-width:680px){#spotify-now-playing .snp-album-list{top:68px;left:16px;width:calc(100vw - 32px);max-height:55vh}#spotify-now-playing .snp-top{padding:14px 16px}#spotify-now-playing .snp-main{width:min(440px,calc(100% - 36px));grid-template-columns:1fr;gap:24px;padding:8px 0 34px}#spotify-now-playing .snp-art{width:min(100%, min(360px,76vw));justify-self:center}#spotify-now-playing .snp-info{width:100%}#spotify-now-playing .snp-title{font-size:clamp(28px,8vw,42px)}#spotify-now-playing .snp-artist{margin-bottom:22px}#spotify-now-playing .snp-controls{justify-content:center;gap:26px;margin-bottom:22px}#spotify-now-playing .snp-controls .snp-skip{width:48px;height:48px;padding:12px}#spotify-now-playing .snp-controls .snp-play{width:58px;height:58px}#spotify-now-playing .snp-line{grid-template-columns:34px minmax(0,1fr) 34px;gap:7px}#spotify-now-playing .snp-volume{margin:22px auto 0;width:100%}}
 
 /* Modern player visual refresh */
 .player{
@@ -1479,6 +1491,7 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 }
 #spotify-now-playing:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background:radial-gradient(circle at 15% 80%,var(--track-accent,#788476),transparent 36%),radial-gradient(circle at 90% 20%,#8b789b,transparent 32%);filter:blur(70px)}
 #spotify-now-playing .snp-top{position:relative;z-index:1;padding:24px 32px!important}
+#spotify-now-playing .snp-album-list{position:fixed;top:82px;left:32px}
 #spotify-now-playing .snp-label{padding:9px 13px;border:1px solid #ffffff1c;border-radius:999px;background:#ffffff08;color:#d2d8d0!important;font-size:10px!important;letter-spacing:.22em!important}
 #spotify-now-playing .snp-close{border:1px solid #ffffff1c!important;background:#ffffff0b!important;backdrop-filter:blur(12px);transition:background .2s,transform .2s}
 #spotify-now-playing .snp-close:hover{background:#ffffff20!important;transform:rotate(90deg)}
@@ -1550,7 +1563,7 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 </main>
 
 <div id="spotify-now-playing" aria-hidden="true">
- <div class="snp-top"><span class="snp-label">LIL FREE · NOW PLAYING</span><button class="snp-close" id="snp-close" type="button" aria-label="Закрыть">×</button></div>
+ <div class="snp-top"><button class="snp-label snp-album-trigger" id="snp-album-trigger" type="button" aria-expanded="false" aria-controls="snp-album-list"><span id="snp-album-name">АЛЬБОМ</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 6 5 5 5-5"/></svg></button><button class="snp-close" id="snp-close" type="button" aria-label="Закрыть">×</button></div><div class="snp-album-list" id="snp-album-list" hidden></div>
  <div class="snp-main">
   <img class="snp-art" id="snp-art" alt="Обложка релиза">
   <div class="snp-info">
@@ -1830,6 +1843,31 @@ $('audio').addEventListener('loadedmetadata',()=>{
  if(event==='timeupdate'||event==='seeked'||event==='ended')savePlayerSession();
 }));
 
+function getSnpAlbumQueue(){
+ const title=$('now-title').textContent;
+ const audioUrl=$('audio').currentSrc||$('audio').src;
+ const current=data.albums.find(x=>x.title===title&&(x.link===audioUrl||audioUrl.endsWith(encodeURI(String(x.link||'')).split('/').pop())))||data.albums.find(x=>x.title===title);
+ if(current){
+  const tracks=data.albums.filter(x=>String(x.album||'').trim()===String(current.album||'').trim()).filter(x=>x.title&&x.link);
+  const cover=releaseCoverFile(current.album,current.coverFile)||current.coverFile||'';
+  return {name:current.album||'Альбом',tracks:tracks.map(x=>({link:x.link,title:x.title,artists:x.artists,cover}))};
+ }
+ const singles=[...data.singles,...data.features].filter(x=>x.title&&x.link);
+ return {name:'СИНГЛЫ И ФИТЫ',tracks:singles.map(x=>({link:x.link,title:x.title,artists:x.artists,cover:releaseCoverFile(x.title,x.coverFile)||x.coverFile||''}))};
+}
+function renderSnpAlbumList(){
+ const info=getSnpAlbumQueue(),box=$('snp-album-list'),trigger=$('snp-album-trigger');
+ $('snp-album-name').textContent=info.name;
+ const currentTitle=$('now-title').textContent;
+ box.innerHTML=info.tracks.length?info.tracks.map((x,i)=>'<button type="button" class="snp-album-track'+(x.title===currentTitle?' is-current':'')+'" data-track-index="'+i+'"><span class="snp-album-track-num">'+String(i+1).padStart(2,'0')+'</span><span class="snp-album-track-title">'+esc(x.title)+'</span><span class="snp-album-track-artists">'+esc(x.artists||'Lil Free')+'</span></button>').join(''):'<div class="snp-album-track">Трек-лист пока недоступен</div>';
+ box.querySelectorAll('[data-track-index]').forEach(button=>button.addEventListener('click',()=>{
+  const index=Number(button.dataset.trackIndex),item=info.tracks[index];
+  if(!item)return;
+  playItem(item.link,item.title,item.artists,item.cover,info.tracks,index);
+  renderSnpAlbumList();
+ }));
+ trigger.setAttribute('aria-label','Открыть трек-лист: '+info.name);
+}
 function syncSpotifyPlayer(){
  const audio=$('audio'),art=$('now-cover').querySelector('img');
  $('snp-title').textContent=$('now-title').textContent;
@@ -1841,6 +1879,7 @@ function syncSpotifyPlayer(){
  $('snp-current').textContent=formatTime(audio.currentTime);
  $('snp-duration').textContent=formatTime(audio.duration);
  $('snp-volume').value=audio.volume;
+ renderSnpAlbumList();
 }
 function openSpotifyPlayer(){
  syncSpotifyPlayer();
@@ -1859,6 +1898,17 @@ $('now-cover').setAttribute('aria-label','Открыть большой плее
 $('now-cover').addEventListener('click',openSpotifyPlayer);
 $('now-cover').addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();openSpotifyPlayer()}});
 $('snp-close').onclick=closeSpotifyPlayer;
+$('snp-album-trigger').onclick=()=>{
+ const box=$('snp-album-list'),button=$('snp-album-trigger'),opening=box.hidden;
+ box.hidden=!opening;
+ button.setAttribute('aria-expanded',String(opening));
+};
+document.addEventListener('click',event=>{
+ if(!$('snp-album-list').hidden&&!event.target.closest('#snp-album-list')&&!event.target.closest('#snp-album-trigger')){
+  $('snp-album-list').hidden=true;
+  $('snp-album-trigger').setAttribute('aria-expanded','false');
+ }
+});
 $('spotify-now-playing').addEventListener('click',event=>{if(event.target===$('spotify-now-playing'))closeSpotifyPlayer()});
 document.addEventListener('keydown',event=>{if(event.key==='Escape')closeSpotifyPlayer()});
 $('snp-play').onclick=()=>{const audio=$('audio');if(audio.paused)audio.play().catch(()=>{});else audio.pause();syncSpotifyPlayer()};
