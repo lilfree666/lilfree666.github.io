@@ -1732,6 +1732,14 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 .home-empty-state h2{margin:24px 0 12px;font-size:clamp(22px,4vw,38px);letter-spacing:.04em}
 .home-empty-state p{max-width:620px;color:#aeb5ac;line-height:1.7}
 @media(max-width:600px){.home-select{width:calc(100% - 28px);gap:10px;margin:28px auto 48px}.home-select-item{grid-template-columns:32px minmax(0,1fr) 22px;gap:10px;min-height:90px;padding:15px 13px;border-radius:18px}.home-select-copy strong{font-size:14px;letter-spacing:.025em}.home-select-copy small{font-size:8px;letter-spacing:.14em}.home-select-arrow{font-size:20px}.home-empty-state{width:calc(100% - 28px);margin:28px auto}}
+
+/* HOME spacing + taller poster panels */
+#home>.hero{min-height:50vh!important;padding-top:8px!important;padding-bottom:24px!important}
+#home .home-select>.home-select-item{min-height:540px!important;height:clamp(450px,44vw,590px)!important}
+@media(max-width:760px){
+  #home>.hero{min-height:48vh!important;padding-top:6px!important;padding-bottom:18px!important}
+  #home .home-select>.home-select-item{min-height:340px!important;height:360px!important}
+}
 </style>
 </head>
 <body class="home-view">
