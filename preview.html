@@ -67,6 +67,34 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 @keyframes lf-archive-sub{0%,100%{color:#aebbd2;text-shadow:0 0 8px #aebbd244}50%{color:#dfb2ca;text-shadow:0 0 16px #dfb2ca66}}
 @media(max-width:760px){#music .sectionhead.music-archive-heading{min-height:220px!important;margin:14px auto 24px!important}#music .music-archive-heading h1{font-size:clamp(42px,11vw,66px)!important}#music .music-archive-heading p{letter-spacing:.16em!important}}
 
+/* BRIGHT NEON GLOW FOR MUSIC ARCHIVE TITLE */
+#music .music-archive-heading h1{
+ background:linear-gradient(100deg,#b9f7ff 0%,#ffb8ee 18%,#c8b8ff 38%,#fff0ad 58%,#a9fff0 78%,#ffb8ee 100%)!important;
+ background-size:400% 100%!important;
+ -webkit-background-clip:text!important;background-clip:text!important;
+ -webkit-text-fill-color:transparent!important;
+ filter:brightness(1.45) saturate(1.65)!important;
+ text-shadow:0 0 5px #fff9,0 0 12px #e6caff,0 0 26px #d99cff,0 0 48px #a66bff,0 0 76px #8c55ff99!important;
+ animation:lf-neon-title 5s linear infinite!important;
+}
+#music .music-archive-heading h1 span{-webkit-text-fill-color:transparent!important}
+#music .music-archive-heading p{
+ color:#f1d9ff!important;
+ text-shadow:0 0 5px #fff,0 0 12px #e4aaff,0 0 24px #b96cff,0 0 38px #a45cff!important;
+ animation:lf-neon-sub 3.8s ease-in-out infinite!important;
+}
+@keyframes lf-neon-title{
+ 0%{background-position:0% 50%;filter:brightness(1.35) saturate(1.5)}
+ 50%{background-position:100% 50%;filter:brightness(1.8) saturate(2)}
+ 100%{background-position:200% 50%;filter:brightness(1.35) saturate(1.5)}
+}
+@keyframes lf-neon-sub{
+ 0%,100%{opacity:.88;text-shadow:0 0 5px #fff,0 0 12px #e4aaff,0 0 24px #b96cff}
+ 50%{opacity:1;text-shadow:0 0 7px #fff,0 0 18px #f0baff,0 0 34px #bd68ff,0 0 48px #a45cff}
+}
+@media(prefers-reduced-motion:reduce){
+ #music .music-archive-heading h1,#music .music-archive-heading p{animation:none!important}
+}
 </style>
 </head>
 <body>
