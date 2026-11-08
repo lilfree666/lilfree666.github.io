@@ -33,11 +33,11 @@ main{margin-left:var(--side);padding:22px clamp(18px,4vw,60px) 120px;max-width:1
 #years .tile .count{margin-top:9px;color:#e0e7d9}
 @media(max-width:600px){#years.grid>.tile{flex-basis:145px!important;height:145px!important;min-height:145px!important;padding:18px 12px}#years .tile strong{font-size:32px}}
 .back{background:none;border:1px solid var(--line);padding:9px 13px;color:var(--lime);font:11px monospace;margin:20px 0}#music .archive-search{position:relative;display:flex;align-items:center;justify-content:center;gap:9px;width:max-content;max-width:calc(100% - 24px);margin:16px auto 12px;padding:0;box-sizing:border-box}
-#music .archive-search .search-toggle{position:relative;display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:1px solid #59605d88;border-radius:50%;background:radial-gradient(circle at 35% 28%,#252a29 0,#111513 58%,#090c0b 100%);color:#aeb5b1;box-shadow:inset 0 1px 5px #ffffff0b,0 3px 12px #0009,0 0 10px #8d8a9b18;transition:all .28s ease;cursor:pointer}
-#music .archive-search .search-toggle:before{content:"";position:absolute;inset:5px;border:1px dashed #8f969044;border-radius:50%;transform:rotate(-18deg);pointer-events:none}
-#music .archive-search .search-toggle svg{width:21px;height:21px;overflow:visible;filter:drop-shadow(0 0 3px #a7a1b344);transition:transform .3s ease,color .3s ease}
-#music .archive-search .search-toggle:hover,#music .archive-search.is-open .search-toggle{border-color:#aaa2b477;color:#e0dce4;box-shadow:inset 0 1px 5px #ffffff12,0 0 13px #aaa2b433,0 0 24px #77708b22}
-#music .archive-search .search-toggle:hover svg{transform:rotate(-12deg) scale(1.06)}
+#music .archive-search .search-toggle{position:relative;display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;border:0;border-radius:0;background:transparent;color:#c5cbc8;box-shadow:none;transition:color .28s ease;cursor:pointer}
+#music .archive-search .search-toggle:before{display:none}
+#music .archive-search .search-toggle svg{width:24px;height:24px;overflow:visible;filter:drop-shadow(0 0 2px #a7a1b322);transition:transform .3s ease,color .3s ease}
+#music .archive-search .search-toggle:hover,#music .archive-search.is-open .search-toggle{border:0;background:transparent;color:#fff;box-shadow:none}
+#music .archive-search .search-toggle:hover svg{transform:scale(1.08)}
 #music .archive-search input{display:block;box-sizing:border-box;width:0;min-width:0;max-width:0;height:40px;opacity:0;padding:0;border:1px solid transparent;border-radius:7px;background:#0a0d0cef;color:var(--text);outline:none;font:10px monospace;letter-spacing:.025em;pointer-events:none;box-shadow:inset 0 1px 5px #000b;transition:width .3s ease,max-width .3s ease,opacity .2s ease,padding .3s ease,border-color .3s ease}
 #music .archive-search.is-open input{width:250px;max-width:calc(100vw - 105px);opacity:1;padding:9px 12px;border-color:#777b7a66;pointer-events:auto}
 #music .archive-search input::placeholder{color:#858d88b8}
