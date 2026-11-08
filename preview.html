@@ -700,8 +700,8 @@ html body aside.sidebar nav button{
 #groups .groups-heading{align-items:center;margin-top:42px}
 #groups .groups-count{color:#aeb8b0;font:10px monospace;letter-spacing:2px;border:1px solid #ffffff24;padding:9px 12px;border-radius:3px}
 #groups .groups-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:30px auto 0;max-width:980px}
-#groups .group-card{display:flex;flex-direction:column;min-width:0;padding:10px;overflow:hidden;text-align:left;border:1px solid #ffffff35;border-radius:5px;background:linear-gradient(145deg,#1b2020,#090c0c);color:#f4f4f0;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;cursor:pointer}
-#groups .group-card:hover,#groups .group-card:focus-visible{transform:translateY(-4px);border-color:#d9c0ec;box-shadow:0 0 0 1px #d9c0ec66,0 0 25px #b68bdb38,0 14px 36px #000a;outline:none}
+#groups .group-card{--photo-glow:185,145,215;display:flex;flex-direction:column;min-width:0;padding:10px;overflow:hidden;text-align:left;border:1px solid #ffffff35;border-radius:5px;background:linear-gradient(145deg,#1b2020,#090c0c);color:#f4f4f0;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;cursor:pointer;box-shadow:0 0 16px rgba(var(--photo-glow),.12)}
+#groups .group-card:hover,#groups .group-card:focus-visible{transform:translateY(-4px);border-color:rgba(var(--photo-glow),.9);box-shadow:0 0 0 1px rgba(var(--photo-glow),.38),0 0 30px rgba(var(--photo-glow),.48),0 0 58px rgba(var(--photo-glow),.2),0 14px 36px #000a;outline:none}
 #groups .group-card-image{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:#151a1a;border:1px solid #ffffff24}
 #groups .group-card-image img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(.7);transition:transform .35s ease,filter .3s ease;image-rendering:auto}
 #groups .group-card:hover .group-card-image img{transform:scale(1.04);filter:brightness(.9) saturate(.95)}
@@ -974,6 +974,34 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
 <section id="artist-bio" class="page"><div class="sectionhead"><div><h1><span>ARTIST</span> / BIOGRAPHY</h1><p>ARTIST PROFILE</p></div></div><div class="artist-bio-panel"><div class="eyebrow">ARTIST PROFILE</div><h2 id="artist-bio-name">ARTIST</h2><p id="artist-bio-description">Биография появится здесь позже.</p><button class="cta" type="button" onclick="showPage('music')">← НАЗАД В АРХИВ</button></div></section>
 </main>
 <div class="player" aria-label="Музыкальный плеер"><div class="player-left"><div class="player-cover" id="now-cover">LF</div><div class="now"><strong id="now-title">Lil Free — выбери трек</strong><small id="now-artist">OFFICIAL PLAYER</small></div></div><div class="player-center"><div class="player-controls"><button class="player-skip" type="button" aria-label="Перемотать назад на 10 секунд" id="backward">↶</button><button class="player-toggle" id="toggle" type="button" aria-label="Play">▶</button><button class="player-skip" type="button" aria-label="Перемотать вперёд на 10 секунд" id="forward">↷</button></div><div class="player-timeline"><span class="player-time" id="current-time">0:00</span><input class="player-progress" id="progress" type="range" min="0" max="1000" value="0" aria-label="Позиция воспроизведения"><span class="player-time" id="duration">0:00</span></div></div><div class="player-right"><span aria-hidden="true">♪</span><input class="player-volume" id="volume" type="range" min="0" max="1" step="0.01" value="0.65" aria-label="Громкость"></div><audio id="audio" preload="none"></audio></div>
+
+/* Match each collective card glow to the dominant colors of its artwork */
+(function(){
+  function tintCollectiveCards(){
+    document.querySelectorAll('#groups .group-card').forEach(function(card){
+      var img=card.querySelector('.group-card-image img');
+      if(!img)return;
+      function sample(){
+        try{
+          var canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+          canvas.width=32;canvas.height=32;ctx.drawImage(img,0,0,32,32);
+          var pixels=ctx.getImageData(0,0,32,32).data,r=0,g=0,b=0,n=0;
+          for(var i=0;i<pixels.length;i+=16){
+            var rr=pixels[i],gg=pixels[i+1],bb=pixels[i+2],max=Math.max(rr,gg,bb),min=Math.min(rr,gg,bb);
+            if(max-min>18&&max>45){r+=rr;g+=gg;b+=bb;n++;}
+          }
+          if(!n)return;
+          r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+          card.style.setProperty('--photo-glow',r+','+g+','+b);
+        }catch(e){}
+      }
+      if(img.complete&&img.naturalWidth)sample();
+      else img.addEventListener('load',sample,{once:true});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tintCollectiveCards);
+  else tintCollectiveCards();
+})(); 
 <script>
 const SHEET='1xXDXpWOYpr_e--1CzASvhyI5s_l-GMNDeuc2Nrt2fLQ';
 const TABS={albums:'Album',singles:'Singles',features:'Features'};
