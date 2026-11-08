@@ -57,6 +57,16 @@ main.music-view>.topline{display:none}#music{position:relative;isolation:isolate
 /* Let the video show through year tiles without sacrificing text contrast */
 #years .tile{background-color:rgba(10,14,10,.22)!important;background-blend-mode:normal!important}
 /* Keep archive video visible even when reduced-motion is enabled; playback starts on opening MUSIC. */
+/* FORCE MUSIC ARCHIVE TITLE PRESENTATION */
+#music .sectionhead.music-archive-heading{display:flex!important;justify-content:center!important;align-items:center!important;text-align:center!important;width:100%!important;min-height:280px!important;margin:28px auto 34px!important;padding:0 16px!important}
+#music .music-archive-heading>div{width:100%!important;text-align:center!important}
+#music .music-archive-heading h1{display:block!important;width:100%!important;margin:0!important;font-family:"Bodoni 72",Didot,"Times New Roman",serif!important;font-size:clamp(54px,8vw,104px)!important;font-style:italic!important;font-weight:400!important;letter-spacing:.035em!important;line-height:1.04!important;color:#c8b1d2!important;background:linear-gradient(105deg,#9baed0 0%,#d4a9c6 24%,#b7acd9 48%,#d9b8aa 72%,#9baed0 100%)!important;background-size:300% 100%!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;animation:lf-archive-flow 9s ease-in-out infinite!important;text-shadow:0 0 26px #c7a8d044!important}
+#music .music-archive-heading h1 span{color:inherit!important;-webkit-text-fill-color:transparent!important}
+#music .music-archive-heading p{display:block!important;margin:18px 0 0!important;font-family:"Bodoni 72",Didot,Georgia,serif!important;font-size:clamp(13px,1.6vw,17px)!important;font-style:italic!important;font-weight:400!important;letter-spacing:.3em!important;color:#c5b4cf!important;animation:lf-archive-sub 7s ease-in-out infinite!important}
+@keyframes lf-archive-flow{0%,100%{background-position:0% 50%;filter:hue-rotate(0deg)}50%{background-position:100% 50%;filter:hue-rotate(30deg)}}
+@keyframes lf-archive-sub{0%,100%{color:#aebbd2;text-shadow:0 0 8px #aebbd244}50%{color:#dfb2ca;text-shadow:0 0 16px #dfb2ca66}}
+@media(max-width:760px){#music .sectionhead.music-archive-heading{min-height:220px!important;margin:14px auto 24px!important}#music .music-archive-heading h1{font-size:clamp(42px,11vw,66px)!important}#music .music-archive-heading p{letter-spacing:.16em!important}}
+
 </style>
 </head>
 <body>
