@@ -671,6 +671,49 @@ body #home.page .hero .hero-copy h1{
 body.home-view main>.topline,
 body:has(#home.page.active) main>.topline{display:none!important}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style id="sidebar-neon-font-final">
+html body aside.sidebar nav button{
+ font-family:"Share Tech Mono",monospace!important;
+ font-size:14px!important;
+ font-weight:400!important;
+ letter-spacing:.16em!important;
+ text-transform:uppercase!important;
+ background:transparent!important;
+ background-color:transparent!important;
+ border-color:transparent!important;
+ transition:color .22s ease,text-shadow .22s ease,filter .22s ease!important;
+}
+html body aside.sidebar nav button[data-page="home"]{
+ color:#ff83c8!important;
+ text-shadow:0 0 3px #ffb5df,0 0 9px #ff4eae,0 0 19px #ff168c99!important;
+}
+html body aside.sidebar nav button[data-page="music"]{
+ color:#72eaff!important;
+ text-shadow:0 0 3px #b9f6ff,0 0 9px #20dfff,0 0 19px #00aaff99!important;
+}
+html body aside.sidebar nav button[data-page="videos"]{
+ color:#c49aff!important;
+ text-shadow:0 0 3px #e2caff,0 0 9px #a66bff,0 0 19px #793bff99!important;
+}
+html body aside.sidebar nav button[data-page="groups"]{
+ color:#ffd27b!important;
+ text-shadow:0 0 3px #fff0c5,0 0 9px #ffb12e,0 0 19px #ff851099!important;
+}
+html body aside.sidebar nav button[data-page="home"]:hover,
+html body aside.sidebar nav button[data-page="home"].active{filter:brightness(1.35);text-shadow:0 0 4px #fff,0 0 12px #ff83c8,0 0 25px #ff168c,0 0 42px #ff168c99!important}
+html body aside.sidebar nav button[data-page="music"]:hover,
+html body aside.sidebar nav button[data-page="music"].active{filter:brightness(1.35);text-shadow:0 0 4px #fff,0 0 12px #72eaff,0 0 25px #00cfff,0 0 42px #00aaff99!important}
+html body aside.sidebar nav button[data-page="videos"]:hover,
+html body aside.sidebar nav button[data-page="videos"].active{filter:brightness(1.35);text-shadow:0 0 4px #fff,0 0 12px #c49aff,0 0 25px #a66bff,0 0 42px #793bff99!important}
+html body aside.sidebar nav button[data-page="groups"]:hover,
+html body aside.sidebar nav button[data-page="groups"].active{filter:brightness(1.35);text-shadow:0 0 4px #fff,0 0 12px #ffd27b,0 0 25px #ffb12e,0 0 42px #ff851099!important}
+@media(max-width:760px){
+ html body aside.sidebar nav button{font-size:13px!important;letter-spacing:.11em!important}
+}
+</style>
 </head>
 <body class="home-view">
 <aside class="sidebar"><div class="sidebar-top"><div class="sidebar-brand"><div class="brand">LIL FREE</div><div class="tag">OFFICIAL ARCHIVE / EST. 2019</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebar()" aria-label="Свернуть меню" aria-expanded="true" title="Свернуть меню"><span class="toggle-glyph">«</span><span class="toggle-label">СВЕРНУТЬ</span></button></div>
