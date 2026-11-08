@@ -426,6 +426,44 @@ body.player-active>.player{display:grid!important;position:fixed!important;z-ind
  }
 }
 
+
+/* MOBILE LAYOUT: KEEP EVERY PAGE CENTERED LIKE DESKTOP */
+@media(max-width:760px){
+ html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}
+ main{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  padding:14px 16px 110px!important;
+  transform:none!important;
+ }
+ main>.page:not(#music){
+  width:100%!important;
+  max-width:1200px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+ }
+ main>.page:not(#music)>*{max-width:100%}
+ #music{
+  margin-left:-16px!important;
+  margin-right:-16px!important;
+  width:calc(100% + 32px)!important;
+  max-width:none!important;
+ }
+ #music>*:not(.music-archive-video),
+ #music .music-topline,
+ #music .music-archive-heading,
+ #music #years.grid{
+  width:calc(100% - 32px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+ }
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
