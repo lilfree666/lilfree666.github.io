@@ -1950,6 +1950,15 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #now-cover:focus-visible{outline:2px solid var(--track-accent,#bfc5bd);outline-offset:4px}
 @media(max-width:680px){#spotify-now-playing .snp-album-list{top:68px;left:16px;width:calc(100vw - 32px);max-height:55vh}#spotify-now-playing .snp-top{padding:14px 16px}#spotify-now-playing .snp-main{width:min(440px,calc(100% - 36px));grid-template-columns:1fr;gap:24px;padding:8px 0 34px}#spotify-now-playing .snp-art{width:min(100%, min(360px,76vw));justify-self:center}#spotify-now-playing .snp-info{width:100%}#spotify-now-playing .snp-title{font-size:clamp(28px,8vw,42px)}#spotify-now-playing .snp-artist{margin-bottom:22px}#spotify-now-playing .snp-controls{justify-content:center;gap:26px;margin-bottom:22px}#spotify-now-playing .snp-controls .snp-skip{width:48px;height:48px;padding:12px}#spotify-now-playing .snp-controls .snp-play{width:58px;height:58px}#spotify-now-playing .snp-line{grid-template-columns:34px minmax(0,1fr) 34px;gap:7px}#spotify-now-playing .snp-volume{margin:22px auto 0;width:100%}}
 
+
+/* Keep the lyrics control visible in the compact mobile player */
+@media(max-width:760px){
+ body.player-active>.player{grid-template-columns:minmax(0,1fr) minmax(100px,.9fr) 30px!important;gap:7px!important}
+ body.player-active>.player .player-right{display:flex!important;grid-column:3!important;grid-row:1!important;position:static!important;align-self:center!important;justify-content:center!important;gap:0!important;min-width:30px!important}
+ body.player-active>.player .player-right>span,body.player-active>.player .player-volume{display:none!important}
+ body.player-active>.player .player-lyrics{display:grid!important;width:29px!important;height:29px!important;flex:0 0 29px!important}
+}
+
 /* Modern player visual refresh */
 .player{
   min-height:92px!important;padding:13px 20px!important;gap:20px!important;
