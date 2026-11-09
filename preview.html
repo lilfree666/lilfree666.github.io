@@ -1231,7 +1231,18 @@ html body aside.sidebar nav button{
   z-index:2!important;
 }
 
-\n/* NEWS background: fixed across the entire viewport, like HOME */\nbody.news-view #news{position:relative!important;isolation:auto!important;overflow:visible!important;background:transparent!important;min-height:100vh!important}\nbody.news-view #news>.news-page-bg-video{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;object-fit:cover!important;object-position:center center!important;display:block!important;pointer-events:none!important}\nbody.news-view #news>.news-page-bg-overlay{position:fixed!important;inset:0!important;z-index:1!important;display:block!important;background:linear-gradient(180deg,rgba(3,5,9,.28) 0%,rgba(3,5,9,.34) 48%,rgba(3,5,9,.82) 100%)!important;pointer-events:none!important}\nbody.news-view #news>*:not(.news-page-bg-video):not(.news-page-bg-overlay){position:relative!important;z-index:2!important}\nbody.news-view main{background:transparent!important}\nbody.news-view .sidebar{z-index:20!important}\n@media(max-width:760px){body.news-view #news>.news-page-bg-video{width:100vw!important;height:100dvh!important;min-height:100vh!important;object-fit:cover!important}}\n</style>
+\n/* NEWS: erroree video is the page canvas, not a section/card background */
+html:has(body.news-view),body.news-view{background:transparent!important;background-color:transparent!important}
+body.news-view main{background:transparent!important;background-color:transparent!important;position:relative!important;isolation:auto!important}
+body.news-view #news{position:static!important;isolation:auto!important;overflow:visible!important;background:transparent!important;background-color:transparent!important;min-height:100vh!important}
+body.news-view #news>.news-page-bg-video{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;object-fit:cover!important;object-position:center center!important;display:block!important;pointer-events:none!important}
+body.news-view #news>.news-page-bg-overlay{display:none!important}
+body.news-view #news>*:not(.news-page-bg-video):not(.news-page-bg-overlay){position:relative!important;z-index:2!important}
+body.news-view .sidebar{z-index:2147483000!important;background:transparent!important}
+body.news-view .player{z-index:2147482000!important}
+body.news-view:before{z-index:1!important}
+@media(max-width:760px){body.news-view #news>.news-page-bg-video{width:100vw!important;height:100dvh!important;min-height:100vh!important;object-fit:cover!important}}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
