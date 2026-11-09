@@ -1992,6 +1992,38 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #music #lilfree-year-list>.era-category-tile>.count,
 #music #artist-year-list>.era-category-tile>.count{display:block!important;color:#e0e7d9!important;font:11px monospace!important;margin-top:12px!important;text-shadow:0 2px 10px #000!important}
 @media(max-width:600px){#music #lilfree-year-list>.era-category-tile>strong,#music #artist-year-list>.era-category-tile>strong{font-size:clamp(38px,10vw,52px)!important}}
+
+/* Force era pickers to stack exactly like the artist cards */
+#music #lilfree-year-list.grid,
+#music #artist-year-list.grid{
+  display:flex!important;
+  flex-direction:column!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:16px!important;
+  width:100%!important;
+  grid-template-columns:none!important;
+}
+#music #lilfree-year-list.grid>.era-category-tile,
+#music #artist-year-list.grid>.era-category-tile{
+  display:flex!important;
+  flex:0 0 180px!important;
+  width:100%!important;
+  max-width:none!important;
+  height:180px!important;
+  min-height:180px!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+}
+@media(max-width:600px){
+  #music #lilfree-year-list.grid>.era-category-tile,
+  #music #artist-year-list.grid>.era-category-tile{
+    flex-basis:145px!important;
+    height:145px!important;
+    min-height:145px!important;
+  }
+}
 </style>
 </head>
 <body class="home-view">
