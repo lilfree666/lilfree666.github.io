@@ -287,6 +287,36 @@ body.music-view #music #years>.tile>strong{
 #home .home-bg-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none!important;opacity:0!important;}
 @media(max-width:760px){#home .home-bg-video{object-fit:cover!important;-webkit-transform:translateZ(0);transform:translateZ(0);}}
 
+/* HOME ambient videos: never show the browser's centered play control */
+#home .home-bg-video,
+#home .home-select-news .home-select-bg-video,
+#home .home-select-social .home-select-bg-video{
+  controls:none!important;
+  pointer-events:none!important;
+  -webkit-appearance:none!important;
+}
+#home .home-bg-video::-webkit-media-controls,
+#home .home-bg-video::-webkit-media-controls-enclosure,
+#home .home-bg-video::-webkit-media-controls-panel,
+#home .home-bg-video::-webkit-media-controls-overlay-play-button,
+#home .home-bg-video::-webkit-media-controls-start-playback-button,
+#home .home-select-news .home-select-bg-video::-webkit-media-controls,
+#home .home-select-news .home-select-bg-video::-webkit-media-controls-enclosure,
+#home .home-select-news .home-select-bg-video::-webkit-media-controls-panel,
+#home .home-select-news .home-select-bg-video::-webkit-media-controls-overlay-play-button,
+#home .home-select-news .home-select-bg-video::-webkit-media-controls-start-playback-button,
+#home .home-select-social .home-select-bg-video::-webkit-media-controls,
+#home .home-select-social .home-select-bg-video::-webkit-media-controls-enclosure,
+#home .home-select-social .home-select-bg-video::-webkit-media-controls-panel,
+#home .home-select-social .home-select-bg-video::-webkit-media-controls-overlay-play-button,
+#home .home-select-social .home-select-bg-video::-webkit-media-controls-start-playback-button{
+  display:none!important;
+  -webkit-appearance:none!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+}
+
 /* HOME background fills the entire viewport, matching MUSIC ARCHIVE */
 body.home-view #home{
   isolation:auto!important;
@@ -2319,7 +2349,7 @@ function startHomeBackground(){
  videos.forEach(video=>{
   video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.controls=false;
   ['muted','autoplay','loop','playsinline','webkit-playsinline','disablepictureinpicture'].forEach(attr=>video.setAttribute(attr,''));
-  video.setAttribute('preload','auto');video.removeAttribute('controls');video.disablePictureInPicture=true;
+  video.setAttribute('preload','auto');video.setAttribute('controlslist','nodownload noplaybackrate noremoteplayback');video.removeAttribute('controls');video.controls=false;video.disablePictureInPicture=true;
   if(!video.dataset.homePlaybackRecovery){
    video.dataset.homePlaybackRecovery='1';
    ['loadedmetadata','loadeddata','canplay','canplaythrough','pause','ended','stalled','waiting'].forEach(eventName=>{
