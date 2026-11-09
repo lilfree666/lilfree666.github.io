@@ -2482,7 +2482,7 @@ function setFilter(k){filter=k;renderEra()}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function jsArg(s){return JSON.stringify(String(s??'')).replace(/&/g,'\\u0026').replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/"/g,'&quot;')}
 
-function hasLyrics(title,artists){return /^bloody\\s+leaves$/i.test(String(title||'').trim())&&(!artists||/lil\\s*free/i.test(String(artists)))}
+function hasLyrics(title,artists){return /^bloody\s+leaves$/i.test(String(title||'').trim())&&(!artists||/lil\s*free/i.test(String(artists)))}
 function lyricsButtonMarkup(title,artists,extraClass=''){return hasLyrics(title,artists)?'<button type="button" class="lyrics-button '+extraClass+'" onclick="event.stopPropagation();openLyrics('+jsArg(title)+')">LYRICS</button>':''}
 function openLyrics(title){if(!hasLyrics(title,'Lil Free'))return;$('lyrics-overlay').hidden=false;document.body.style.overflow='hidden';$('lyrics-overlay').querySelector('.lyrics-close').focus()}
 function closeLyrics(){$('lyrics-overlay').hidden=true;document.body.style.overflow=''}
