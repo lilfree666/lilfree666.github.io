@@ -2158,39 +2158,40 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #groups .group-card.group-swa{position:relative!important;overflow:visible!important;border-color:transparent!important;isolation:isolate}
 #groups .group-card.group-swa::before{content:""!important;position:absolute!important;inset:-18px!important;display:block!important;z-index:30!important;pointer-events:none!important;background-image:url("https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/%D1%84%D0%BE%D0%BD.webp")!important;background-position:center!important;background-size:100% 100%!important;background-repeat:no-repeat!important}
 
-/* Nicotine coma hover artwork: wrapper keeps the image outside the clipped card */
+/* Nicotine coma: animated frame appears around the full member card on hover */
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap{
- position:relative;
+ position:relative!important;
  min-width:0;
  z-index:1;
+ isolation:isolate;
 }
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap:has(.swa-select-card:hover),
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap:has(.swa-select-card:focus-visible){
- z-index:30;
+ z-index:30!important;
 }
-#group-sexually-transmitted-disease .swa-nicotine-hover-wrap>.swa-select-card{width:100%}
+#group-sexually-transmitted-disease .swa-nicotine-hover-wrap>.swa-select-card{
+ position:relative!important;
+ width:100%;
+ z-index:2;
+}
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap::after{
  content:"";
  position:absolute;
- left:50%;
- top:calc(100% - 2px);
- width:100%;
- height:150px;
- transform:translate(-50%,-14px) scale(.88);
- transform-origin:top center;
+ inset:-18px;
  opacity:0;
  pointer-events:none;
- z-index:40;
+ z-index:1;
  background-image:url("https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/%D1%84%D0%BE%D0%BD%20%D0%B4%D0%BB%D1%8F%20%D0%BD%D0%B8%D0%BA%D0%BE%D1%82%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%20%D0%BA%D0%BE%D0%BC%D0%B0.webp");
- background-position:center top;
+ background-position:center;
  background-repeat:no-repeat;
- background-size:contain;
- transition:opacity .28s ease,transform .38s cubic-bezier(.2,.8,.2,1);
+ background-size:100% 100%;
+ transform:scale(.96);
+ transition:opacity .25s ease,transform .3s ease;
 }
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap:has(.swa-select-card:hover)::after,
 #group-sexually-transmitted-disease .swa-nicotine-hover-wrap:has(.swa-select-card:focus-visible)::after{
  opacity:1;
- transform:translate(-50%,0) scale(1);
+ transform:scale(1);
 }
 
 </style>
