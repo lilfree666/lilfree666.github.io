@@ -1959,6 +1959,28 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
   background-position:center!important;
   background-repeat:no-repeat!important;
 }
+
+/* Era cards: match the artist-tab hover glow */
+#music #lilfree-year-list>.tile,
+#music #artist-year-list>.tile{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important}
+#music #lilfree-year-list>.tile:after,
+#music #artist-year-list>.tile:after{content:""!important;position:absolute!important;inset:-5px!important;z-index:0!important;background-image:var(--year-cover)!important;background-size:cover!important;background-position:center!important;filter:blur(0)!important;opacity:0!important;transition:filter .22s ease,opacity .22s ease!important;pointer-events:none!important}
+#music #lilfree-year-list>.tile:before,
+#music #artist-year-list>.tile:before{z-index:1!important;transition:background .22s ease!important}
+#music #lilfree-year-list>.tile>*,
+#music #artist-year-list>.tile>*{position:relative!important;z-index:2!important}
+#music #lilfree-year-list>.tile:hover,
+#music #lilfree-year-list>.tile:focus-visible,
+#music #artist-year-list>.tile:hover,
+#music #artist-year-list>.tile:focus-visible{border-color:var(--year-glow)!important;transform:translateY(-2px)!important;box-shadow:inset 0 0 26px color-mix(in srgb,var(--year-glow) 16%,transparent),0 0 0 1px var(--year-glow),0 0 12px color-mix(in srgb,var(--year-glow) 78%,transparent),0 0 30px color-mix(in srgb,var(--year-glow) 48%,transparent),0 0 54px color-mix(in srgb,var(--year-glow) 24%,transparent)!important}
+#music #lilfree-year-list>.tile:hover:after,
+#music #lilfree-year-list>.tile:focus-visible:after,
+#music #artist-year-list>.tile:hover:after,
+#music #artist-year-list>.tile:focus-visible:after{filter:blur(3px)!important;opacity:.32!important}
+#music #lilfree-year-list>.tile:hover:before,
+#music #lilfree-year-list>.tile:focus-visible:before,
+#music #artist-year-list>.tile:hover:before,
+#music #artist-year-list>.tile:focus-visible:before{background:linear-gradient(90deg,#05080588 0%,color-mix(in srgb,var(--year-glow) 14%,transparent) 50%,#05080588 100%)!important}
 </style>
 </head>
 <body class="home-view">
