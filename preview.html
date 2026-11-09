@@ -1231,9 +1231,10 @@ html body aside.sidebar nav button{
   z-index:2!important;
 }
 
-\n/* NEWS background video lives at BODY level, behind every page element */
+\n/* NEWS background video: hidden on every other tab; fixed full-screen only on NEWS */
+body>.news-page-bg-video{display:none!important}
 html:has(body.news-view),body.news-view{background:transparent!important;background-color:transparent!important}
-body.news-view>.news-page-bg-video{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;object-fit:cover!important;object-position:center center!important;display:block!important;pointer-events:none!important}
+body.news-view>.news-page-bg-video{display:block!important;position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;object-fit:cover!important;object-position:center center!important;display:block!important;pointer-events:none!important}
 body.news-view>main{position:relative!important;z-index:1!important;background:transparent!important;background-color:transparent!important}
 body.news-view>aside.sidebar{z-index:2147483000!important;background:transparent!important}
 body.news-view .player{z-index:2147482000!important}
