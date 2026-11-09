@@ -317,6 +317,34 @@ body.music-view #music #years>.tile>strong{
   height:0!important;
 }
 
+/* Suppress Safari's reload-time tap-to-play overlay on HOME ambient videos */
+#home video.home-bg-video,
+#home video.home-select-bg-video{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  pointer-events:none!important;
+}
+#home video.home-bg-video::-webkit-media-controls,
+#home video.home-bg-video::-webkit-media-controls-enclosure,
+#home video.home-bg-video::-webkit-media-controls-overlay-enclosure,
+#home video.home-bg-video::-webkit-media-controls-overlay-play-button,
+#home video.home-bg-video::-webkit-media-controls-start-playback-button,
+#home video.home-bg-video::-webkit-media-controls-play-button,
+#home video.home-select-bg-video::-webkit-media-controls,
+#home video.home-select-bg-video::-webkit-media-controls-enclosure,
+#home video.home-select-bg-video::-webkit-media-controls-overlay-enclosure,
+#home video.home-select-bg-video::-webkit-media-controls-overlay-play-button,
+#home video.home-select-bg-video::-webkit-media-controls-start-playback-button,
+#home video.home-select-bg-video::-webkit-media-controls-play-button{
+  display:none!important;
+  -webkit-appearance:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
 /* HOME background fills the entire viewport, matching MUSIC ARCHIVE */
 body.home-view #home{
   isolation:auto!important;
@@ -2370,7 +2398,8 @@ function selectSwaMember(card){const grid=card.closest('.swa-member-grid');if(!g
 function openGroup(slug){const id='group-'+slug;showPage(id);if(slug==='start-walking-away'){const video=document.querySelector('#group-start-walking-away .swa-bg-video');if(video){video.muted=true;video.play().catch(()=>{});}}}
 function startAmbientBackground(id){const video=document.querySelector('#'+id+' video');if(!video)return;video.muted=true;video.defaultMuted=true;video.loop=true;video.playsInline=true;video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');const play=()=>{if(document.body.classList.contains(id+'-view')&&!document.hidden){const p=video.play();if(p&&typeof p.catch==='function')p.catch(()=>{})}};if(!video.dataset.ambientRecovery){video.dataset.ambientRecovery='1';['loadedmetadata','loadeddata','canplay','canplaythrough'].forEach(event=>video.addEventListener(event,play));}play();requestAnimationFrame(play);setTimeout(play,180)}
 function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.body.classList.toggle('era-view',id==='era');document.body.classList.toggle('news-view',id==='news');if(id==='news'){const video=document.querySelector('#news>.news-page-bg-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,180)}}document.body.classList.toggle('videos-view',id==='videos');document.body.classList.toggle('groups-view',id==='groups');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='home')startHomeBackground();if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}if(id==='videos'||id==='groups')startAmbientBackground(id)}
-window.addEventListener('pageshow',startHomeBackground);
+window.addEventListener('pageshow',()=>{startHomeBackground();setTimeout(startHomeBackground,250);setTimeout(startHomeBackground,900);});
+window.addEventListener('load',()=>{startHomeBackground();setTimeout(startHomeBackground,350);});
 window.addEventListener('focus',startHomeBackground);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&document.querySelector('#home.page.active'))startHomeBackground();});
 ['touchstart','touchend','pointerdown','pointerup','click','scroll'].forEach(eventName=>document.addEventListener(eventName,()=>{if(document.querySelector('#home.page.active'))startHomeBackground();},{passive:true}));
@@ -2661,6 +2690,7 @@ $('audio').volume=.65;$('prev-track').onclick=()=>stepPlayerTrack(-1);$('next-tr
 $('archive-search').addEventListener('input',renderSearch);
 restorePlayerSession();
 startHomeBackground();
+requestAnimationFrame(startHomeBackground);setTimeout(startHomeBackground,300);setTimeout(startHomeBackground,1000);
 renderYears();$('home-stats').innerHTML='<div class="notice">Подключаем базу релизов…</div>';
 let archiveLoading=false;
 async function loadArchive(){if(archiveLoading)return;archiveLoading=true;$('years').innerHTML='<div class="notice">Подключаем музыкальный архив…</div>';$('home-stats').innerHTML='<div class="notice">Загружаем базу релизов…</div>';try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears();$('archive-load-error')?.remove();renderSearch()}catch(e){renderYears();$('archive-load-error')?.remove();$('years').insertAdjacentHTML('afterend','<div class="notice" id="archive-load-error">Не удалось обновить данные Google Sheets: '+esc(e.message)+'. Карточки годов оставлены на месте. <button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>');$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
