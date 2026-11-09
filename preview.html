@@ -1239,11 +1239,44 @@ html body aside.sidebar nav button{
 #news.active .news-page-bg-video{display:block!important}
 @media(max-width:760px){#news>.news-page-bg-video{width:100%!important;height:100%!important;min-height:100%!important;object-fit:cover!important}}
 
-/* Each archive year gets its own full-page background video, behind RELEASES and all archive cards */
-#era{position:relative!important;isolation:isolate!important;min-height:100vh;overflow:hidden!important;background:transparent!important}
-#era>.era-bg-video{position:absolute!important;inset:0!important;z-index:-2!important;display:block!important;width:100%!important;height:100%!important;min-height:100%!important;object-fit:cover!important;object-position:center!important;pointer-events:none!important}
-#era:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(4,6,9,.58),rgba(4,6,9,.76)),linear-gradient(90deg,rgba(4,6,9,.28),transparent 50%,rgba(4,6,9,.28))}
-#era>*:not(.era-bg-video){position:relative;z-index:1}
+/* YEAR ARCHIVE: fixed viewport background, using the same full-screen layer as HOME */
+body.era-view #era{
+  isolation:auto!important;
+  overflow:visible!important;
+  min-height:100vh!important;
+  background:transparent!important;
+}
+body.era-view #era>.era-bg-video{
+  position:fixed!important;
+  inset:0!important;
+  display:block!important;
+  width:100vw!important;
+  height:100vh!important;
+  min-width:100vw!important;
+  min-height:100vh!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+body.era-view #era:before{
+  content:""!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:linear-gradient(180deg,rgba(4,6,9,.42),rgba(4,6,9,.64)),linear-gradient(90deg,rgba(4,6,9,.22),transparent 50%,rgba(4,6,9,.22))!important;
+}
+body.era-view #era>*:not(.era-bg-video){
+  position:relative!important;
+  z-index:2!important;
+}
+body.era-view main,
+body.era-view main.music-view{
+  background:transparent!important;
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&display=swap" rel="stylesheet">
@@ -2006,7 +2039,7 @@ function startHomeBackground(){
 }
 function openGroup(slug){const id='group-'+slug;showPage(id);if(slug==='start-walking-away'){const video=document.querySelector('#group-start-walking-away .swa-bg-video');if(video){video.muted=true;video.play().catch(()=>{});}}}
 function startAmbientBackground(id){const video=document.querySelector('#'+id+' video');if(!video)return;video.muted=true;video.defaultMuted=true;video.loop=true;video.playsInline=true;video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');const play=()=>{if(document.body.classList.contains(id+'-view')&&!document.hidden){const p=video.play();if(p&&typeof p.catch==='function')p.catch(()=>{})}};if(!video.dataset.ambientRecovery){video.dataset.ambientRecovery='1';['loadedmetadata','loadeddata','canplay','canplaythrough'].forEach(event=>video.addEventListener(event,play));}play();requestAnimationFrame(play);setTimeout(play,180)}
-function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.body.classList.toggle('news-view',id==='news');if(id==='news'){const video=document.querySelector('#news>.news-page-bg-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,180)}}document.body.classList.toggle('videos-view',id==='videos');document.body.classList.toggle('groups-view',id==='groups');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='home')startHomeBackground();if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}if(id==='videos'||id==='groups')startAmbientBackground(id)}
+function showPage(id){document.querySelector('main').classList.toggle('music-view',id==='music');document.body.classList.toggle('music-view',id==='music');document.body.classList.toggle('home-view',id==='home');document.body.classList.toggle('era-view',id==='era');document.body.classList.toggle('news-view',id==='news');if(id==='news'){const video=document.querySelector('#news>.news-page-bg-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,180)}}document.body.classList.toggle('videos-view',id==='videos');document.body.classList.toggle('groups-view',id==='groups');document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id||(id==='era'&&x.dataset.page==='music')));window.scrollTo(0,0);if(id==='home')startHomeBackground();if(id==='music'){const video=$('music').querySelector('.music-archive-video');if(video){video.muted=true;const start=()=>video.play().catch(()=>{});requestAnimationFrame(start);setTimeout(start,250)}}if(id==='videos'||id==='groups')startAmbientBackground(id)}
 window.addEventListener('pageshow',startHomeBackground);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&document.querySelector('#home.page.active'))startHomeBackground();});
 document.addEventListener('touchstart',function resumeHomeVideo(){if(document.querySelector('#home.page.active'))startHomeBackground();},{once:true,passive:true});
