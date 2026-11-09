@@ -2369,23 +2369,46 @@ function startHomeBackground(){
  const isHome=()=>!!document.querySelector('#home.page.active')&&!document.hidden;
  const attemptPlay=video=>{
   if(!isHome())return;
-  video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.controls=false;
-  if(video.paused||video.ended){
-   try{const p=video.play();if(p&&typeof p.catch==='function')p.catch(()=>{});}catch(e){}
+  video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.webkitPlaysInline=true;video.controls=false;
+  video.setAttribute('muted','');video.setAttribute('autoplay','');video.setAttribute('loop','');video.setAttribute('playsinline','');video.setAttribute('webkit-playsinline','');
+  if(!video.paused&&!video.ended){video.dataset.homePlayRetries='0';return;}
+  try{
+   const result=video.play();
+   if(result&&typeof result.then==='function'){
+    result.then(()=>{video.dataset.homePlayRetries='0';}).catch(()=>{
+     const retries=Number(video.dataset.homePlayRetries||'0');
+     if(retries<24&&isHome()){
+      video.dataset.homePlayRetries=String(retries+1);
+      clearTimeout(video._homePlayRetryTimer);
+      video._homePlayRetryTimer=setTimeout(()=>attemptPlay(video),250);
+     }
+    });
+   }
+  }catch(e){
+   const retries=Number(video.dataset.homePlayRetries||'0');
+   if(retries<24&&isHome()){
+    video.dataset.homePlayRetries=String(retries+1);
+    clearTimeout(video._homePlayRetryTimer);
+    video._homePlayRetryTimer=setTimeout(()=>attemptPlay(video),250);
+   }
   }
  };
  videos.forEach(video=>{
-  video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.controls=false;
+  video.muted=true;video.defaultMuted=true;video.autoplay=true;video.loop=true;video.playsInline=true;video.webkitPlaysInline=true;video.controls=false;
   ['muted','autoplay','loop','playsinline','webkit-playsinline','disablepictureinpicture'].forEach(attr=>video.setAttribute(attr,''));
   video.setAttribute('preload','auto');video.setAttribute('controlslist','nodownload noplaybackrate noremoteplayback');video.removeAttribute('controls');video.controls=false;video.disablePictureInPicture=true;
   if(!video.dataset.homePlaybackRecovery){
    video.dataset.homePlaybackRecovery='1';
-   ['loadedmetadata','loadeddata','canplay','canplaythrough','pause','ended','stalled','waiting'].forEach(eventName=>{
-    video.addEventListener(eventName,()=>{if(isHome())setTimeout(()=>attemptPlay(video),eventName==='stalled'||eventName==='waiting'?500:120);},{passive:true});
+   ['loadstart','loadedmetadata','loadeddata','canplay','canplaythrough','pause','ended','stalled','waiting'].forEach(eventName=>{
+    video.addEventListener(eventName,()=>{if(isHome())setTimeout(()=>attemptPlay(video),eventName==='stalled'||eventName==='waiting'?500:80);},{passive:true});
    });
+   video.addEventListener('playing',()=>{video.dataset.homePlayRetries='0';clearTimeout(video._homePlayRetryTimer);},{passive:true});
    video.addEventListener('error',()=>{if(isHome()&&video.networkState===HTMLMediaElement.NETWORK_NO_SOURCE){try{video.load();}catch(e){}}},{passive:true});
   }
   attemptPlay(video);
+  setTimeout(()=>attemptPlay(video),180);
+  setTimeout(()=>attemptPlay(video),650);
+  setTimeout(()=>attemptPlay(video),1400);
  });
  if(!window.homeVideoVisibilityObserver&&'IntersectionObserver' in window){
   window.homeVideoVisibilityObserver=new IntersectionObserver(entries=>{
