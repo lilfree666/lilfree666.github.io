@@ -2292,18 +2292,31 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 #group-sexually-transmitted-disease .swa-skyra-hover-wrap:has(.swa-select-card:focus-visible)::after{opacity:1;transform:scale(1)}
 
 
-/* YOUNG DIPPERX: animated frame appears around the full member card on hover */
-#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap{position:relative!important;min-width:0;z-index:1;isolation:isolate}
+/* YOUNG DIPPERX: stretch the animated frame around every edge of the full card */
+#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap{
+ position:relative!important;
+ min-width:0;
+ z-index:1;
+ isolation:isolate;
+}
 #group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap:has(.swa-select-card:hover),
-#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap:has(.swa-select-card:focus-visible){z-index:30!important}
-#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap>.swa-select-card{position:relative!important;width:100%;z-index:2}
+#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap:has(.swa-select-card:focus-visible){
+ z-index:30!important;
+}
+#group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap>.swa-select-card{
+ position:relative!important;
+ width:100%;
+ z-index:2;
+}
 #group-sexually-transmitted-disease .swa-youngdipperx-hover-wrap::after{
  content:"";
  position:absolute;
  inset:-18px;
+ width:calc(100% + 36px);
+ height:calc(100% + 36px);
  opacity:0;
  pointer-events:none;
- z-index:1;
+ z-index:3;
  background-image:url("https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/redesign/lil-free-site-2026/covers/YOUNG%20DIPPERX.webp");
  background-position:center;
  background-repeat:no-repeat;
