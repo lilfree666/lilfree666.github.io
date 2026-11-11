@@ -1684,6 +1684,38 @@ html body.sidebar-collapsed aside.sidebar .sidebar-toggle{top:8px!important;marg
     min-width:36px!important;min-height:36px!important;
   }
 }
+/* Sexually Transmitted Disease — animated multicolor neon title */
+#group-sexually-transmitted-disease .swa-hero h1.swa-fire-title{
+ position:relative;
+ display:inline-block;
+ isolation:isolate;
+ color:transparent!important;
+ background:linear-gradient(100deg,#fff2b0 0%,#ffb347 12%,#ff4d35 25%,#ff3cac 39%,#a86bff 53%,#55d9ff 67%,#b5ff75 81%,#fff2b0 100%);
+ background-size:280% 100%;
+ background-position:0% 50%;
+ -webkit-background-clip:text;
+ background-clip:text;
+ -webkit-text-fill-color:transparent;
+ filter:drop-shadow(0 0 7px rgba(255,90,55,.72)) drop-shadow(0 0 18px rgba(197,73,255,.45));
+ animation:swa-spectrum-flow 7s linear infinite,swa-flame-flicker 2.8s ease-in-out infinite;
+}
+#group-sexually-transmitted-disease .swa-hero h1.swa-fire-title:after{
+ content:attr(data-text);
+ position:absolute;
+ inset:0;
+ z-index:-1;
+ color:#ff6538;
+ -webkit-text-fill-color:#ff6538;
+ filter:blur(15px);
+ opacity:.62;
+ transform:translateY(2px) scale(1.012);
+ animation:swa-fire-glow 1.8s ease-in-out infinite alternate;
+ pointer-events:none;
+}
+@media(prefers-reduced-motion:reduce){
+ #group-sexually-transmitted-disease .swa-hero h1.swa-fire-title,
+ #group-sexually-transmitted-disease .swa-hero h1.swa-fire-title:after{animation:none}
+}
 /* Start Walking Away — animated spectral flame title */
 #group-start-walking-away .swa-hero h1.swa-fire-title{
   position:relative;
