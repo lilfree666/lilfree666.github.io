@@ -2855,38 +2855,47 @@ body.spotify-player-open .player{opacity:0!important;visibility:hidden!important
 .lyrics-overlay{position:fixed;inset:0;z-index:2147482500;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.lyrics-overlay[hidden]{display:none!important}.lyrics-panel{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(180px,34%) minmax(0,1fr);width:min(980px,100%);height:min(86vh,900px);max-height:86vh;min-height:0;overflow:hidden;background:color-mix(in srgb,var(--track-accent,#b8ff28) 13%,#080a09);border:1px solid color-mix(in srgb,var(--track-accent,#b8ff28) 55%,transparent);border-radius:16px;box-shadow:0 24px 90px #000c}.lyrics-panel::before{content:"";position:absolute;z-index:-1;inset:-24px;background-image:var(--lyrics-cover-bg);background-size:cover;background-position:center;filter:blur(22px);opacity:.28;transform:scale(1.08);pointer-events:none}.lyrics-panel .lyrics-cover{background:linear-gradient(160deg,color-mix(in srgb,var(--track-accent,#b8ff28) 22%,transparent),transparent 75%)}.lyrics-panel .lyrics-kicker,.lyrics-panel .lyrics-artist,.lyrics-panel .lyrics-part small{color:var(--track-accent,#b8ff28)}.lyrics-panel .lyrics-rule{background:linear-gradient(90deg,var(--track-accent,#b8ff28),transparent)}.lyrics-close{position:absolute;z-index:3;right:14px;top:10px;width:38px;height:38px;border:1px solid #ffffff2b;border-radius:50%;background:#090b0add;color:#fff;font-size:27px;cursor:pointer}.lyrics-cover{padding:28px;display:flex;align-items:flex-start;justify-content:center;background:linear-gradient(160deg,#b8ff281c,transparent 65%)}.lyrics-cover img{width:100%;max-width:300px;aspect-ratio:1;object-fit:cover;border-radius:8px;box-shadow:0 12px 40px #0009}.lyrics-content{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:42px 48px 48px}.lyrics-kicker{font:11px monospace;letter-spacing:3px;color:#b8ff28}.lyrics-content h2{font-size:clamp(30px,5vw,52px);line-height:1.05;margin:12px 0 8px}.lyrics-artist{color:#b8ff28;font:13px monospace;letter-spacing:1px}.lyrics-rule{height:1px;background:linear-gradient(90deg,#b8ff2877,transparent);margin:24px 0}.lyrics-part{margin:0 0 30px}.lyrics-part small{display:block;margin-bottom:13px;color:#b8ff28;font:11px monospace;letter-spacing:2px}.lyrics-part p{margin:0 0 17px;color:#f0f0eb;font-size:17px;line-height:1.85;white-space:normal}.lyrics-button{flex:0 0 auto;background:color-mix(in srgb,var(--track-accent,#b8ff28) 10%,transparent)!important;border:1px solid color-mix(in srgb,var(--track-accent,#b8ff28) 45%,transparent)!important;color:var(--track-accent,#b8ff28)!important;padding:5px 9px!important;font:700 10px monospace;letter-spacing:1px;border-radius:4px;cursor:pointer}.lyrics-button:hover{background:#b8ff28!important;color:#080a08!important}.track-actions{display:flex;align-items:center;gap:7px;flex:0 0 auto}.songcard-lyrics{display:inline-block!important;visibility:visible!important;opacity:1!important;margin:12px 4px 14px!important;position:relative;z-index:3}.track-actions .lyrics-button{padding:4px 7px!important}
 @media(max-width:650px){.lyrics-overlay{padding:10px;align-items:center}.lyrics-panel{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);width:100%;height:92dvh;max-height:92dvh;min-height:0;overflow:hidden;border-radius:14px}.lyrics-cover{padding:18px 22px 8px}.lyrics-cover img{width:min(38vw,145px)}.lyrics-content{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:18px 24px 40px}.lyrics-content h2{font-size:34px}.lyrics-part p{font-size:15px;line-height:1.8}.lyrics-close{position:absolute;float:none;top:10px;right:10px;grid-column:auto;justify-self:auto}}
 
-/* Mobile STD stickers: align them to the two-column artist-card rows */
+/* Mobile STD stickers: distribute along the full roster edges.
+   Percentage-based offsets follow the actual roster height on narrow screens,
+   instead of bunching the GIFs into the first few card rows. */
 @media(max-width:760px){
- #group-sexually-transmitted-disease .std-roster{position:relative!important;overflow:visible!important}
+ #group-sexually-transmitted-disease .std-roster{
+  position:relative!important;overflow:visible!important;
+ }
+ #group-sexually-transmitted-disease .std-roster img[class*="std-roaming-sticker"]{
+  width:44px!important;max-width:15vw!important;max-height:58px!important;
+  height:auto!important;object-fit:contain!important;z-index:6!important;
+ }
  #group-sexually-transmitted-disease .std-roaming-sticker{
-  left:2%!important;right:auto!important;top:170px!important;width:54px!important;max-height:68px!important;
+  left:-15px!important;right:auto!important;top:7%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-two{
-  left:auto!important;right:1%!important;top:255px!important;width:52px!important;max-height:66px!important;
+  left:auto!important;right:-15px!important;top:17%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-three{
-  left:42%!important;right:auto!important;top:535px!important;bottom:auto!important;width:58px!important;max-height:72px!important;
+  left:-13px!important;right:auto!important;top:29%!important;bottom:auto!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-four{
-  left:0!important;right:auto!important;top:155px!important;width:48px!important;max-height:62px!important;
+  left:auto!important;right:-15px!important;top:39%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-five{
-  left:auto!important;right:0!important;top:315px!important;width:48px!important;max-height:62px!important;
+  left:-15px!important;right:auto!important;top:49%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-six{
-  left:34%!important;right:auto!important;top:430px!important;width:48px!important;max-height:62px!important;
+  left:auto!important;right:-15px!important;top:59%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-seven{
-  left:auto!important;right:2%!important;top:485px!important;width:54px!important;max-height:68px!important;
+  left:-15px!important;right:auto!important;top:69%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-eight{
-  left:3%!important;right:auto!important;top:245px!important;width:46px!important;max-height:58px!important;
+  left:auto!important;right:-15px!important;top:77%!important;
+  width:40px!important;max-height:54px!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-nine{
-  left:auto!important;right:3%!important;top:390px!important;width:48px!important;max-height:62px!important;
+  left:-15px!important;right:auto!important;top:85%!important;
  }
  #group-sexually-transmitted-disease .std-roaming-sticker-ten{
-  left:38%!important;right:auto!important;top:585px!important;width:50px!important;max-height:64px!important;
+  left:auto!important;right:-15px!important;top:93%!important;
  }
 }
 
