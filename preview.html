@@ -1404,6 +1404,25 @@ body.era-view main.music-view{
 #group-sexually-transmitted-disease .swa-member-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 #group-sexually-transmitted-disease .swa-member-card.swa-select-card{appearance:none;-webkit-appearance:none;display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0;text-align:left;cursor:pointer;color:inherit;background:linear-gradient(160deg,rgba(26,22,34,.72),rgba(7,7,10,.72));border:1px solid rgba(184,140,255,.22);border-radius:3px;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
 #group-sexually-transmitted-disease .swa-member-card.swa-select-card:hover{transform:translateY(-5px);border-color:rgba(207,170,255,.72);box-shadow:0 10px 28px rgba(0,0,0,.38),0 0 20px rgba(184,140,255,.16)}
+/* STD artist cards: rounded corners and Music Archive-style individual neon glows */
+#group-sexually-transmitted-disease .swa-member-card.swa-select-card{
+ border-radius:12px!important;
+ border:1px solid var(--std-card-neon)!important;
+ box-shadow:0 0 7px color-mix(in srgb,var(--std-card-neon) 35%,transparent),0 0 18px color-mix(in srgb,var(--std-card-neon) 22%,transparent),inset 0 0 16px color-mix(in srgb,var(--std-card-neon) 8%,transparent)!important;
+}
+#group-sexually-transmitted-disease .swa-member-card.swa-select-card:hover{
+ border-color:var(--std-card-neon)!important;
+ box-shadow:0 0 10px color-mix(in srgb,var(--std-card-neon) 65%,transparent),0 0 25px color-mix(in srgb,var(--std-card-neon) 48%,transparent),0 0 46px color-mix(in srgb,var(--std-card-neon) 25%,transparent),inset 0 0 20px color-mix(in srgb,var(--std-card-neon) 12%,transparent)!important;
+}
+#group-sexually-transmitted-disease .swa-member-grid>.swa-lilfree-hover-wrap{--std-card-neon:#baff38}
+#group-sexually-transmitted-disease .swa-member-grid>.swa-nicotine-hover-wrap{--std-card-neon:#65cfff}
+#group-sexually-transmitted-disease .swa-member-grid>.swa-youngdipperx-hover-wrap{--std-card-neon:#ff465e}
+#group-sexually-transmitted-disease .swa-member-grid>.swa-skyra-hover-wrap{--std-card-neon:#ff4d72}
+#group-sexually-transmitted-disease .swa-member-grid>.swa-damnson-hover-wrap,
+#group-sexually-transmitted-disease .swa-member-grid>.swa-hatred4you-hover-wrap,
+#group-sexually-transmitted-disease .swa-member-grid>.swa-koilake-hover-wrap{--std-card-neon:#ffd84a}
+#group-sexually-transmitted-disease .swa-member-card.swa-select-card .swa-member-photo{border-radius:11px 11px 0 0!important}
+
 #group-sexually-transmitted-disease .swa-member-photo{width:100%;height:clamp(150px,19vw,245px);border:0;border-bottom:1px solid #ffffff20;box-shadow:none;background:#111;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #group-sexually-transmitted-disease .swa-member-photo:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.4));pointer-events:none}
 #group-sexually-transmitted-disease .swa-member-photo>img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 35%;filter:saturate(.82) contrast(1.08);transition:transform .35s ease}
