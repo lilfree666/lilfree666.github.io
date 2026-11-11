@@ -1455,6 +1455,48 @@ body.era-view main.music-view{
   linear-gradient(180deg,#08080b,#030305)!important;
  gap:8px!important;
 }
+
+/* VHS blue-screen texture for the text panels beneath artist photos */
+#group-sexually-transmitted-disease .swa-member-copy{
+ isolation:isolate;
+ overflow:hidden;
+ background:
+  radial-gradient(ellipse at 18% 5%,rgba(40,93,255,.34),transparent 58%),
+  radial-gradient(ellipse at 88% 100%,rgba(118,24,82,.28),transparent 62%),
+  linear-gradient(135deg,#071b55 0%,#10102f 42%,#090711 100%)!important;
+}
+#group-sexually-transmitted-disease .swa-member-copy:before{
+ content:"";
+ position:absolute;
+ inset:0;
+ z-index:0;
+ pointer-events:none;
+ opacity:.62;
+ background:
+  repeating-linear-gradient(0deg,rgba(185,214,255,.13) 0px,rgba(185,214,255,.13) 1px,transparent 1px,transparent 3px),
+  repeating-linear-gradient(90deg,rgba(255,40,70,.055) 0px,transparent 2px,rgba(40,160,255,.06) 4px,transparent 7px),
+  radial-gradient(circle at 15% 24%,rgba(145,185,255,.24) 0 1px,transparent 1.7px),
+  radial-gradient(circle at 76% 62%,rgba(255,255,255,.14) 0 1px,transparent 1.8px),
+  linear-gradient(110deg,rgba(24,75,190,.18),transparent 45%,rgba(190,35,82,.13));
+ background-size:auto,auto,17px 19px,23px 21px,auto;
+ mix-blend-mode:screen;
+}
+#group-sexually-transmitted-disease .swa-member-copy>*{
+ position:relative;
+ z-index:1;
+}
+#group-sexually-transmitted-disease .swa-member-copy>b{
+ text-shadow:-1px 0 rgba(255,35,55,.8),1px 0 rgba(55,185,255,.7),0 0 10px rgba(70,115,255,.55)!important;
+}
+#group-sexually-transmitted-disease .swa-member-copy>span{
+ color:#e0e7ff!important;
+ text-shadow:0 0 7px rgba(70,140,255,.42),1px 0 rgba(255,40,65,.28)!important;
+}
+#group-sexually-transmitted-disease .swa-member-copy>em{
+ color:#ff8d9b!important;
+ text-shadow:0 0 8px rgba(255,35,65,.7),1px 0 rgba(55,185,255,.48)!important;
+}
+
 #group-sexually-transmitted-disease .swa-member-copy>b{
  font-family:Georgia,"Times New Roman",serif!important;
  font-style:italic!important;
