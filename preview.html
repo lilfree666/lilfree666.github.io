@@ -3363,4 +3363,28 @@ let archiveLoading=false;
 async function loadArchive(){if(archiveLoading)return;archiveLoading=true;$('years').innerHTML='<div class="notice">Подключаем музыкальный архив…</div>';$('home-stats').innerHTML='<div class="notice">Загружаем базу релизов…</div>';try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears();$('archive-load-error')?.remove();renderSearch()}catch(e){renderYears();$('archive-load-error')?.remove();$('years').insertAdjacentHTML('afterend','<div class="notice" id="archive-load-error">Не удалось обновить данные Google Sheets: '+esc(e.message)+'. Карточки годов оставлены на месте. <button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>');$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
 loadArchive();
 </script>
+
+<style id="universal-neon-back-buttons">
+/* Bright neon back navigation across every section */
+html body button.back{
+  position:relative!important;
+  color:#ff6678!important;
+  border:1px solid #ff526b!important;
+  background:linear-gradient(135deg,rgba(255,55,91,.20),rgba(255,55,91,.055))!important;
+  text-shadow:0 0 5px rgba(255,75,105,.85),0 0 13px rgba(255,55,91,.55)!important;
+  box-shadow:0 0 5px rgba(255,55,91,.55),0 0 14px rgba(255,55,91,.32),0 0 30px rgba(255,55,91,.16),inset 0 0 10px rgba(255,55,91,.10)!important;
+  transition:color .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease,transform .22s ease!important;
+}
+html body button.back:hover,html body button.back:focus-visible{
+  color:#fff!important;
+  border-color:#ff8a9b!important;
+  background:linear-gradient(135deg,rgba(255,55,91,.42),rgba(255,55,91,.15))!important;
+  text-shadow:0 0 7px #fff,0 0 16px #ff526b!important;
+  box-shadow:0 0 8px #ff526b,0 0 22px rgba(255,55,91,.75),0 0 42px rgba(255,55,91,.38),inset 0 0 14px rgba(255,55,91,.2)!important;
+  transform:translateY(-2px)!important;
+  outline:none!important;
+}
+html body button.back:focus-visible{outline:2px solid #ff9aaa!important;outline-offset:4px!important}
+</style>
+
 </body></html>
