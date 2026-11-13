@@ -3398,6 +3398,28 @@ html body button.back:hover,html body button.back:focus-visible{
   outline:none!important;
 }
 html body button.back:focus-visible{outline:2px solid #ff9aaa!important;outline-offset:4px!important}
+
+/* Start Walking Away — match STD individual neon artist-card glow */
+#group-start-walking-away .swa-member-grid>.swa-member-card.swa-select-card{
+  --swa-card-neon:#b88cff;
+  position:relative!important;
+  isolation:isolate!important;
+  border-radius:12px!important;
+  border:1px solid var(--swa-card-neon)!important;
+  box-shadow:0 0 7px color-mix(in srgb,var(--swa-card-neon) 35%,transparent),0 0 18px color-mix(in srgb,var(--swa-card-neon) 22%,transparent),inset 0 0 16px color-mix(in srgb,var(--swa-card-neon) 8%,transparent)!important;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important;
+}
+#group-start-walking-away .swa-member-grid>.swa-member-card.swa-select-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--swa-card-neon)!important;
+  box-shadow:0 0 10px color-mix(in srgb,var(--swa-card-neon) 65%,transparent),0 0 25px color-mix(in srgb,var(--swa-card-neon) 48%,transparent),0 0 46px color-mix(in srgb,var(--swa-card-neon) 25%,transparent),inset 0 0 20px color-mix(in srgb,var(--swa-card-neon) 12%,transparent)!important;
+}
+#group-start-walking-away .swa-member-grid>.swa-member-card:nth-child(1){--swa-card-neon:#c58cff}
+#group-start-walking-away .swa-member-grid>.swa-member-card:nth-child(2){--swa-card-neon:#b58cff}
+#group-start-walking-away .swa-member-grid>.swa-member-card:nth-child(3){--swa-card-neon:#baff38}
+#group-start-walking-away .swa-member-grid>.swa-member-card:nth-child(4){--swa-card-neon:#65cfff}
+#group-start-walking-away .swa-member-grid>.swa-member-card .swa-member-photo{border-radius:11px 11px 0 0!important}
+
 </style>
 
 </body></html>
