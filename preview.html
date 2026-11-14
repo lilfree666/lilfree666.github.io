@@ -3378,7 +3378,17 @@ startHomeBackground();
 requestAnimationFrame(startHomeBackground);setTimeout(startHomeBackground,300);setTimeout(startHomeBackground,1000);
 renderYears();$('home-stats').innerHTML='<div class="notice">Подключаем базу релизов…</div>';
 let archiveLoading=false;
-async function loadArchive(){if(archiveLoading)return;archiveLoading=true;$('years').innerHTML='<div class="notice">Подключаем музыкальный архив…</div>';$('home-stats').innerHTML='<div class="notice">Загружаем базу релизов…</div>';try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};renderYears();$('archive-load-error')?.remove();renderSearch()}catch(e){renderYears();$('archive-load-error')?.remove();$('years').insertAdjacentHTML('afterend','<div class="notice" id="archive-load-error">Не удалось обновить данные Google Sheets: '+esc(e.message)+'. Карточки годов оставлены на месте. <button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>');$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
+async function loadArchive(){if(archiveLoading)return;archiveLoading=true;$('years').innerHTML='<div class="notice">Подключаем музыкальный архив…</div>';$('home-stats').innerHTML='<div class="notice">Загружаем базу релизов…</div>';try{const [a,s,f]=await Promise.all([loadTab(TABS.albums),loadTab(TABS.singles),loadTab(TABS.features)]);data={albums:normalize(a),singles:normalize(s),features:normalize(f)};
+const angelNeverDieTracks=[
+{album:'Angel Never Die',number:'1',title:'All Alone',artists:'Lil Free, babygoth☆',date:'2024',status:'',link:'https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/main/music/Angel%20Never%20Die/Lil%20Free%2C%20babygoth%E2%98%86%20-%20All%20Alone.mp3',coverFile:'Angel Never Die.jpg',year:2024},
+{album:'Angel Never Die',number:'2',title:'Let Me Fall',artists:'Lil Free, babygoth☆',date:'2024',status:'',link:'https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/main/music/Angel%20Never%20Die/Lil%20Free%2C%20babygoth%E2%98%86%20-%20Let%20Me%20Fall.mp3',coverFile:'Angel Never Die.jpg',year:2024},
+{album:'Angel Never Die',number:'3',title:'Lights Off',artists:'Lil Free, babygoth☆',date:'2024',status:'',link:'https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/main/music/Angel%20Never%20Die/Lil%20Free%2C%20babygoth%E2%98%86%20-%20Lights%20Off.mp3',coverFile:'Angel Never Die.jpg',year:2024},
+{album:'Angel Never Die',number:'4',title:'Never Die',artists:'Lil Free, babygoth☆',date:'2024',status:'',link:'https://raw.githubusercontent.com/lilfree666/lilfree666.github.io/main/music/Angel%20Never%20Die/Lil%20Free%2C%20babygoth%E2%98%86%20-%20Never%20Die.mp3',coverFile:'Angel Never Die.jpg',year:2024}
+];
+const angelKey=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const existingAngel=new Set(data.albums.filter(x=>angelKey(x.album)==='angelneverdie').map(x=>angelKey(x.title)));
+data.albums.push(...angelNeverDieTracks.filter(x=>!existingAngel.has(angelKey(x.title))));
+renderYears();$('archive-load-error')?.remove();renderSearch()}catch(e){renderYears();$('archive-load-error')?.remove();$('years').insertAdjacentHTML('afterend','<div class="notice" id="archive-load-error">Не удалось обновить данные Google Sheets: '+esc(e.message)+'. Карточки годов оставлены на месте. <button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>');$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
 loadArchive();
 </script>
 
