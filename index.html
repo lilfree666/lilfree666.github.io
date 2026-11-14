@@ -76,10 +76,19 @@ const files={
 "Black Jeep":"Lil Free feat. Lil Cryver - Black Jeep.mp3",
 "White Light":"Lil Free ft. YOUNNG FREAK - White Light.mp3",
 "Lost Love":"Lil Free x Lil Cryver - Lost Love.mp3"
+},
+"Ugly Love":{
+"Dependence On You":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/Dependence%20On%20You.mp3",
+"I’m fine":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/I%E2%80%99m%20fine.mp3",
+"I'm fine":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/I%E2%80%99m%20fine.mp3",
+"Name":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/Name.mp3",
+"Obsession":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/Obsession.mp3",
+"Ugly Love":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/Ugly%20Love.mp3",
+"my hurt":"https://cdn.jsdelivr.net/gh/lilfree666/lilfree666.github.io@c4d30bf7cb0d0ab2efc8888f84fd1b4eab95ef10/music/Ugly%20Love/my%20hurt.mp3"
 }
 };
 const file=files[String(album||"").trim()]?.[String(title||"").trim()];
-return file?"/music/"+encodeURIComponent(String(album).trim())+"/"+encodeURIComponent(file):"";
+return file?(file.startsWith("https://")?file:"/music/"+encodeURIComponent(String(album).trim())+"/"+encodeURIComponent(file)):"";
 }
 function setFilter(k){filter=k;renderEra()}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
