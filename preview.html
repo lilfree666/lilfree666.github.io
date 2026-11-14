@@ -3388,6 +3388,7 @@ const angelNeverDieTracks=[
 const angelKey=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]/g,'');
 const existingAngel=new Set(data.albums.filter(x=>angelKey(x.album)==='angelneverdie').map(x=>angelKey(x.title)));
 data.albums.push(...angelNeverDieTracks.filter(x=>!existingAngel.has(angelKey(x.title))));
+data.albums=data.albums.filter(x=>!(angelKey(x.album)==='angelneverdie'&&angelKey(x.title)==='lightoff'));
 renderYears();$('archive-load-error')?.remove();renderSearch()}catch(e){renderYears();$('archive-load-error')?.remove();$('years').insertAdjacentHTML('afterend','<div class="notice" id="archive-load-error">Не удалось обновить данные Google Sheets: '+esc(e.message)+'. Карточки годов оставлены на месте. <button class="retry" onclick="loadArchive()">ПОВТОРИТЬ ПОДКЛЮЧЕНИЕ ↻</button></div>');$('home-stats').innerHTML='<div class="notice">Архив пока недоступен. Можно повторить подключение.</div>'}finally{archiveLoading=false}}
 loadArchive();
 </script>
